@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;background-color: var(--background-color) }
+
+// theme colors
+
+:root {
+  --background-color: #F5F7FA;
+  --background:rgba(238,239,242,1) 28%, rgba(217,217,242,1) 43%, rgba(199,229,232,1) 66%, rgba(0,212,255,1) 100% ;
+--color:#495057;
+}
+
+
+table {
+    width: 100%;
+  }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+.sub-header{
+  height: 60px!important;
+}
+
+:root{
+  ngb-popover-window{
+    z-index: 1010!important;
+  }
+}

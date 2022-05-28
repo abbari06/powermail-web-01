@@ -1,0 +1,59 @@
+.mat-list-item {
+    border-radius: 12px;
+    margin-top: 50px;
+    width: 60px !important;
+    margin-left: 17px !important;
+    cursor: pointer;
+    z-index: 9999;
+    &:hover {
+        background: white;
+        border-radius: 12px;
+        cursor: pointer;
+    }
+}
+
+.material-icons {
+
+    font-size: 35px;
+    color: var(--color);
+
+
+}
+
+::ng-deep {
+
+    .mat-list-base .mat-list-item .mat-list-item-content,
+    .mat-list-base .mat-list-option .mat-list-item-content {
+
+        padding-bottom: 12px !important;
+        padding-left: 12px !important;
+        color: none !important;
+        z-index: 9999;
+    }
+}
+
+.list-item-active {
+background: white!important;
+    border-radius: 10px;
+}
+
+.button {
+    z-index: 9999!important;
+}
+
+mat-nav-list {
+    top: 80px;
+    
+}
+
+.item{
+    position: relative;
+    z-index: 1000;
+}
+mat-nav-list{
+    z-index: 9999;
+}
+
+// ::ng-deep.cdk-overlay-pane{
+//     transform: translate(30px, 42px, 30px);
+//   }

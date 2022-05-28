@@ -1,0 +1,62 @@
+<ng-container>
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="dashboard"
+        routerLinkActive="list-item-active"
+        (mouseover)="showButton=true" (mouseout)="showButton=false"
+        [routerLinkActiveOptions]={exact:true}
+        ngbPopover="You see, I show up on hover!" triggers="mouseenter:mouseleave" placement="right"
+      >
+        <mat-icon>home</mat-icon> 
+      
+        <!-- <mat-menu   #menu="matMenu"  xPosition="after">
+          <div
+         
+          >
+            <button  mat-button  >Dashboard</button>
+          </div>
+        </mat-menu> -->
+       
+       
+      </a>
+     
+      <a
+        mat-list-item
+        routerLink="contacts"
+        routerLinkActive="list-item-active"
+      >
+        <mat-icon> contacts</mat-icon>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/home/prospect"
+        routerLinkActive="list-item-active"
+      >
+        <mat-icon>label</mat-icon>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/home/outreach"
+        routerLinkActive="list-item-active"
+      >
+        <mat-icon>signal_cellular_alt</mat-icon>
+      </a>
+      <a
+        mat-list-item
+        routerLink="/home/settings"
+        outerLinkActive="list-item-active"
+      >
+        <mat-icon>settings</mat-icon>
+      </a>
+    </mat-nav-list>
+    <!-- <div *ngIf="showButton" 
+    style="margin-left: 40px;
+    z-index: 99999;
+    "
+    >
+      <button>dashboard</button>
+    </div> -->
+  </ng-container>
+  
+  

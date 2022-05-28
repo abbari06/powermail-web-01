@@ -1,0 +1,12 @@
+<app-top-menu></app-top-menu>
+<mat-sidenav-container>
+    <mat-sidenav #sideNav align="start" mode="side" opened="true" class="mat-elevation-z1">
+      <app-sidebar></app-sidebar>
+    </mat-sidenav>
+    <!-- primary content -->
+    <div class="content">
+    
+        <router-outlet></router-outlet>
+    
+    </div>
+  </mat-sidenav-container>

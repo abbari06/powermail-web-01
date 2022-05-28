@@ -1,0 +1,37 @@
+.loginBox{
+    
+        display: grid;
+        place-items:  center;
+        font-size: 25px;
+        height : 500px;
+}
+
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+}
+mat-card{
+    width: 450px;
+}
+.header{
+    color: var(--color);
+    text-align: center;
+}
+.forgot{
+    text-decoration: none;
+    margin-left: 12px;
+    font-weight: 500;
+}
+.footer{
+    text-align: center;
+    color: var(--color);
+    .register{
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+}

@@ -1,0 +1,34 @@
+
+mat-sidenav-container {
+    &.mat-sidenav-container {
+      width: 100vw;
+      height: 100vh;
+      background: transparent;
+      position: fixed;
+      z-index: 9999;
+    }
+    &>mat-sidenav {
+        width: 100px;
+            // background: linear-gradient(to bottom,rgba(238,239,242,1) 28%, rgba(217,217,242,1) 43%, rgba(199,229,232,1) 66%, rgba(0,212,255,1) 100%);
+            background: linear-gradient(to bottom, var(--background));
+            z-index: 9999!important;
+            overflow:visible;
+    }
+    .content {
+        margin-top: 22px;
+        margin-left: 22px;
+        width: 97%;
+        padding-bottom: 200px;
+      border-radius: 5px;
+      box-shadow: 5px 10px #495057;
+    -webkit-box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+-moz-box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+// border: 4px solid red;
+    }
+  }
+  :root{
+    mat-sidenav{
+      z-index: 9999!important;
+    }
+  }
