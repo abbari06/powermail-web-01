@@ -6,17 +6,21 @@
         routerLinkActive="list-item-active"
         (mouseover)="showButton=true" (mouseout)="showButton=false"
         [routerLinkActiveOptions]={exact:true}
-        ngbPopover="You see, I show up on hover!" triggers="mouseenter:mouseleave" placement="right"
-      >
+        ngbPopover="Dashboard" triggers="mouseenter:mouseleave" placement="right"
+        (click)="menuTrigger.openMenu()"
+        
+      ><div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu" place ></div>
         <mat-icon>home</mat-icon> 
-      
-        <!-- <mat-menu   #menu="matMenu"  xPosition="after">
+        <!-- <button mat-button (click)="menuTrigger.openMenu()">Menu
+          <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu" place ></div>
+        </button> -->
+        <mat-menu   #menu="matMenu" xPosition="after" yPosition="above">
           <div
          
           >
             <button  mat-button  >Dashboard</button>
           </div>
-        </mat-menu> -->
+        </mat-menu>
        
        
       </a>
@@ -60,3 +64,11 @@
   </ng-container>
   
   
+  <!-- #enddocregion mat-menu-trigger-for -->
+  <mat-menu mat-button #menuu="matMenu"  >
+    <button mat-menu-item >Item 1</button>
+    <!-- <button mat-menu-item>Item 2</button> -->
+  
+  </mat-menu>
+  
+ 

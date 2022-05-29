@@ -57,3 +57,47 @@ mat-nav-list{
 // ::ng-deep.cdk-overlay-pane{
 //     transform: translate(30px, 42px, 30px);
 //   }
+// .mat-menu-trigger {
+//     position: absolute;
+//     top: 0;
+//     right: 50px;
+//     left: 0;
+//   }
+.mat-button {
+    float: right;
+    left: 0;
+  
+    .mat-menu-trigger {
+      position: absolute;
+      top: 0;
+      right: 50;
+      left: 0;
+    }
+  }
+  
+  
+  
+  .mat-buttonn {
+    float: left;
+    left: 50;
+  
+    .mat-menu-trigger {
+      position: absolute;
+      top: 0;
+      right: 100;
+      left: 50;
+    }
+  }
+  ::deep {
+    .mat-menu-panel {
+        min-width: 112px;
+        max-width: 280px;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: calc(100vh - 48px);
+        border-radius: 4px;
+        outline: 0;
+        min-height: 64px;
+        margin-left: 50px!important;
+    }
+  }

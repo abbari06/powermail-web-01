@@ -4,5 +4,21 @@ Dashboard
     </span>
 </div>
 <div class="container-fluid">
-    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga facere officia laudantium! Quis numquam impedit ab nulla inventore aut voluptas quisquam natus nobis aperiam mollitia provident, assumenda officiis eveniet laborum praesentium sunt itaque. At, unde dolores ipsam aperiam sint praesentium obcaecati esse suscipit explicabo itaque provident perspiciatis, voluptatum corrupti, labore ab quod! Praesentium veritatis placeat unde veniam accusamus dolorem enim itaque ullam? Nostrum velit temporibus a explicabo officia suscipit! Quae, deserunt iste necessitatibus, velit minus voluptatum a delectus omnis, magnam repellendus quisquam doloremque maxime nemo! Optio hic ducimus animi, tempora nihil dolor! Sed quos nisi atque recusandae fugit rem enim!
+      
+    <mat-menu   #menu="matMenu" 
+    
+    xPosition="after" 
+    
+    
+    [overlapTrigger]="false">
+        <div
+       
+        >
+          <button  mat-button  >Dashboard</button>
+        </div>
+      </mat-menu>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga facere officia laudantium! Quis numquam impedit ab nulla
+    
+    <button  [matMenuTriggerFor]="menu" >click</button>
+    inventore aut voluptas quisquam natus nobis aperiam mollitia provident, assumenda officiis eveniet laborum praesentium sunt itaque. At, unde dolores ipsam aperiam sint praesentium obcaecati esse suscipit explicabo itaque provident perspiciatis, voluptatum corrupti, labore ab quod! Praesentium veritatis placeat unde veniam accusamus dolorem enim itaque ullam? Nostrum velit temporibus a explicabo officia suscipit! Quae, deserunt iste necessitatibus, velit minus voluptatum a delectus omnis, magnam repellendus quisquam doloremque maxime nemo! Optio hic ducimus animi, tempora nihil dolor! Sed quos nisi atque recusandae fugit rem enim!
 </div>
