@@ -1,0 +1,13 @@
+img{ 
+    height:55px;
+    width: 55px;
+    border-radius: 30px;
+}
+.mat-toolbar-row{
+    background-image: radial-gradient(circle, #6bcdd1, #4ac5dd, #33bbea, #3eaff2, #62a0f4, #4d91df, #3783ca, #1f74b5, #005e83, #004552, #0e2b2b, #0e1110);
+     background: rgb(2,0,36);
+     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,45,121,0.8015581232492998) 34%, rgba(0,212,255,1) 100%);
+   }
+   .spacer{
+     flex: 1 1 auto!important;
+   }
