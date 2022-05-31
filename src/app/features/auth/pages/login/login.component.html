@@ -24,7 +24,7 @@
             </form>
            
             <button mat-flat-button color="primary"  style="width:100%;"(click)="signUp()">login</button><br><br>
-            <a routerLink="" style="margin-left: 35%;" class="forgot">Forgot password</a><br>
+            <a routerLink="/auth/forgot-password" style="margin-left: 35%;" class="forgot" (click)="openDialogue()">Forgot password</a><br>
             <div class="footer">
                 <p>Not a member? <a routerLink="/auth/register" class="register">Register</a></p>
             </div>
