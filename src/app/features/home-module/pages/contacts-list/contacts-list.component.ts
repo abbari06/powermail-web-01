@@ -1,22 +1,26 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
-export interface Contacts {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+import { MatTableDataSource } from '@angular/material/table';
+export interface User {
+  fName: string;
+  lName: string;
+  place: number;
+  position: string;
+  email: string;
+  labels: string;
+
 }
 
-const ELEMENT_DATA: Contacts[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+//arr of objects defining properties inside the variable Data
+const Data: User[] = [
+  { place: 1, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 2, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 3, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 4, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 5, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 6, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+
 ];
 
 
@@ -25,18 +29,46 @@ const ELEMENT_DATA: Contacts[] = [
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.scss']
 })
-export class ContactsListComponent implements OnInit {
+export class ContactsListComponent {
 
+  //define columns inside the variable displayedColumns
+  displayedColumns: string[] = [
+    'select', 'position', 'fName', 'lName', 'email', 'company', 'position', 'labels', 'actions'
+  ];
+
+  //initialise the dataSource with arr of values defined in Var Data
+  dataSource: MatTableDataSource<User> = new MatTableDataSource();
+  selection = new SelectionModel<User>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
+    }
+
+    this.selection.select(...this.dataSource.data);
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: User): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.place + 1}`;
+  }
   constructor() { }
 
   ngOnInit(): void {
+
+    this.dataSource.data = Data
   }
-
-displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-
-
-
 
 }

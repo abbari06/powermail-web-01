@@ -15,39 +15,72 @@
     <mat-icon>add</mat-icon>Import
   </button>
 </div>
+<!-- here Data is the arr of values defined in variable Data in .ts -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-<!-- contact list -->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 pb-5">
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+      </mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+        [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+      </mat-checkbox>
+    </td>
+  </ng-container>
 
-  <!-- Position Column -->
+  <!-- construct the columns -->
+  <ng-container matColumnDef="place">
+    <th mat-header-cell *matHeaderCellDef>No</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.place}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="fName">
+    <th mat-header-cell *matHeaderCellDef>First Name</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.fName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="lName">
+    <th mat-header-cell *matHeaderCellDef>Last Name</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.lName}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>Email</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.email}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="company">
+    <th mat-header-cell *matHeaderCellDef>Company</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.company}}</td>
+  </ng-container>
+
   <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <th mat-header-cell *matHeaderCellDef>Position</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.position}}</td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+
+  <ng-container matColumnDef="labels">
+    <th mat-header-cell *matHeaderCellDef>Labels</th>
+    <td mat-cell *matCellDef="let Data"> {{Data.labels}}</td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let Data">
+      <button mat-mini-fab color="primary">
+        <mat-icon>edit</mat-icon>
+      </button>&nbsp;
+      <button mat-mini-fab color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-  </ng-container>
-
+  <!-- add a table row, if not added..rows will not be rendered inside the table -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-</mat-paginator>

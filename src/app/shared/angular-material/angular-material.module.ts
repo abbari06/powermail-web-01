@@ -13,6 +13,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule } from '@angular/material/dialog';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 const MaterialComponent = [
   MatToolbarModule,
@@ -28,7 +29,8 @@ const MaterialComponent = [
   MatSnackBarModule,
   MatTableModule,
   MatPaginatorModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCheckboxModule
 ]
 
 @NgModule({
