@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-prospects-labels-add',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./prospects-labels-add.component.scss']
 })
 export class ProspectsLabelsAddComponent implements OnInit {
+  addLAbel: string;
+  addDesc:string;
+  pickColor:string;
+  
+  constructor(private formBuilder: FormBuilder) { }
 
-  constructor() { }
+  ngOnInit(): void { }
+  AddLabelForm = this.formBuilder.group({
+    addLAbel: ['', [Validators.required]],
+    addDesc: ['', [Validators.required]],
+    pickColor: ['', [Validators.required]],
 
-  ngOnInit(): void {
-  }
+  });
+
 
 }
+

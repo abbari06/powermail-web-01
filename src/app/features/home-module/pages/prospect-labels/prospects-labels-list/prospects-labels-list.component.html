@@ -1,54 +1,63 @@
+<button class="mat-elevation-z4" style="margin-left:10px; margin-top: 10px;" mat-raised-button color="primary"
+    (click)="openDialogue()">
+    <mat-icon>add</mat-icon>Add Label
+</button>
+
 <!-- here Data is the arr of values defined in variable Data in .ts -->
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="table-responsive">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-        <th mat-header-cell *matHeaderCellDef>
-            <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
-                [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-            </mat-checkbox>
-        </th>
-        <td mat-cell *matCellDef="let row">
-            <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-            </mat-checkbox>
-        </td>
-    </ng-container>
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
 
-    <!-- construct the columns -->
+        <!-- construct the columns -->
 
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Label Name</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.name}}</td>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Label Name</th>
+            <td mat-cell *matCellDef="let Data"> {{Data.name}}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="age">
-        <th mat-header-cell *matHeaderCellDef>Label Description</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.age}}</td>
-    </ng-container>
+        <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef>Label Description</th>
+            <td mat-cell *matCellDef="let Data"> {{Data.age}}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="subject">
-        <th mat-header-cell *matHeaderCellDef>Prospect Labels</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.subject}}</td>
-    </ng-container>
+        <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef>Prospect Labels</th>
+            <td mat-cell *matCellDef="let Data"> {{Data.subject}}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="country">
-        <th mat-header-cell *matHeaderCellDef>Outreach Campaigns</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.country}}</td>
-    </ng-container>
+        <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef>Outreach Campaigns</th>
+            <td mat-cell *matCellDef="let Data"> {{Data.country}}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let Data">
-            <button mat-mini-fab color="primary">
-                <mat-icon>edit</mat-icon>
-            </button>&nbsp;
-            <button mat-mini-fab color="warn">
-                <mat-icon>delete</mat-icon>
-            </button>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let Data">
+                <button mat-button>
+                    <mat-icon class="edit">edit</mat-icon>
+                </button>
+                <button mat-button>
+                    <mat-icon color="warn">delete</mat-icon>
+                </button>
+            </td>
 
-    </ng-container>
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+        </ng-container>
+        <!-- add a table row, if not added..rows will not be rendered inside the table -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

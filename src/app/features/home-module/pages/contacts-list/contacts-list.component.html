@@ -16,6 +16,7 @@
   </button>
 </div>
 <!-- here Data is the arr of values defined in variable Data in .ts -->
+<div class="table-responsive">
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Checkbox Column -->
@@ -72,11 +73,11 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Actions</th>
     <td mat-cell *matCellDef="let Data">
-      <button mat-mini-fab color="primary">
-        <mat-icon>edit</mat-icon>
+      <button mat-button>
+        <mat-icon class="edit">edit</mat-icon>
       </button>&nbsp;
-      <button mat-mini-fab color="warn">
-        <mat-icon>delete</mat-icon>
+      <button mat-button>
+        <mat-icon color="warn">delete</mat-icon>
       </button>
   </ng-container>
 
@@ -84,3 +85,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+</div>

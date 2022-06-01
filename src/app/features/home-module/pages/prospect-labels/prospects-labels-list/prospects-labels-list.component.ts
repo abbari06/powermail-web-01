@@ -1,6 +1,8 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProspectsLabelsAddComponent } from '../prospects-labels-add/prospects-labels-add.component';
 
 //make an interface class to define the properties
 //that goes inside the table
@@ -9,7 +11,7 @@ export interface User {
   age: number;
   subject: string;
   country: string;
- 
+
 
 }
 
@@ -17,9 +19,9 @@ export interface User {
 const Data: User[] = [
   { name: 'John', age: 20, subject: 'Maths', country: 'England' },
   { name: 'Roe', age: 25, subject: 'English', country: 'America' },
-  { name: 'Mac', age: 30, subject: 'Computers', country: 'Europe'},
+  { name: 'Mac', age: 30, subject: 'Computers', country: 'Europe' },
   { name: 'Anderson', age: 29, subject: 'AI', country: 'USA' },
-  { name: 'Peter', age: 19, subject: 'ML', country: 'Canada'},
+  { name: 'Peter', age: 19, subject: 'ML', country: 'Canada' },
   { name: 'Harry', age: 31, subject: 'Literature', country: 'Kabul' },
 
 ];
@@ -30,10 +32,15 @@ const Data: User[] = [
   styleUrls: ['./prospects-labels-list.component.scss']
 })
 export class ProspectsLabelsListComponent {
+  addLabel: string;
+  labelDesc: string;
+  pickColor: string;
+
+
 
   //define columns inside the variable displayedColumns
   displayedColumns: string[] = [
-    'select', 'name', 'age', 'subject', 'country','actions'
+    'select', 'name', 'age', 'subject', 'country', 'actions'
   ];
 
   //initialise the dataSource with arr of values defined in Var Data
@@ -64,11 +71,28 @@ export class ProspectsLabelsListComponent {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} `;
   }
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
     this.dataSource.data = Data
   }
+  openDialogue(): void {
+    const dialogRef = this.dialog.open(ProspectsLabelsAddComponent, {
+      width: '500px',
+      height: '230px',
+      data: {
+        AddLabel: this.addLabel,
+        LabelDescription: this.labelDesc,
+        PickColor: this.pickColor
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.addLabel = result;
+    });
+  }
+
 
 }
