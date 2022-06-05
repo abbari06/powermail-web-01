@@ -1,60 +1,88 @@
-<!-- here Data is the arr of values defined in variable Data in .ts -->
-<div class="table-responsive">
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="card-header container-fluid">
+    <span class="title">
+        Outreach
+    </span>
+</div>
 
-    <!-- construct the columns -->
-    <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.status}}</td>
-    </ng-container>
+<div class="card-header sub-header mt-3">
+    <mat-form-field class="example-full-width">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Ex.John Dev">
+    </mat-form-field> &nbsp; &nbsp;
+    <mat-form-field style=" width: 10%;">
+        <mat-label>Search by</mat-label>
+        <mat-select>
+            <mat-option value="labelName">
+                Status
+            </mat-option>
+            <mat-option value="labelDesc">
+                Title
+            </mat-option>
+            <mat-option value="prospectLabels">
+                Campaign
+            </mat-option>
+            <mat-option value="outreachCampaign">
+                Email
+            </mat-option>
+            <mat-option value="outreachCampaign">
+                Progress
+            </mat-option>
+            <mat-option value="outreachCampaign">
+                Created At
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-    <ng-container matColumnDef="campaign">
-        <th mat-header-cell *matHeaderCellDef>Campaign</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.campaign}}</td>
-    </ng-container>
+    <span class="spacer">
+    </span>
 
-    <ng-container matColumnDef="title">
-        <th mat-header-cell *matHeaderCellDef>Title</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.title}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="senderEmail">
-        <th mat-header-cell *matHeaderCellDef>Sender Email</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.senderEmail}}</td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="progress">
-        <th mat-header-cell *matHeaderCellDef>Progress</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.progress}}</td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef>Created At</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.createdAt}}</td>
-    </ng-container>
-
-
-    <ng-container matColumnDef="stats">
-        <th mat-header-cell *matHeaderCellDef>Stats</th>
-        <td mat-cell *matCellDef="let Data"> {{Data.stats}}</td>
-    </ng-container>
+    <button mat-raised-button color="primary" style="float: right;">
+        <mat-icon>add</mat-icon>Add Campaign
+    </button>
+</div>
 
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let Data">
-            <button mat-button>
-                <mat-icon class="edit">edit</mat-icon>
-            </button>
-            <button mat-button>
-                <mat-icon color="warn">delete</mat-icon>
-            </button>
-        </td>
-    </ng-container>
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<div class="container-fluid">
+    <div *ngFor="let data of user" class="mt-5">
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <div [ngStyle]="{ background: getTheColor(data.status)}" class="Ccell col-sm-1"
+                        style="margin-top:2px">
+                        {{data.status}}
+                    </div>&nbsp;&nbsp;&nbsp;
+                    <div class="col-sm-2" style="margin-top:10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{data.campaigntitle}}</div>
+                    <div class="col-sm-2" style="margin-top:6px;">
+                        <img style="width: 30px; margin-top: 6px; " [src]="data.senderEmail.imgurl" />
+                        {{data.senderEmail.name}}
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-sm-1" style="margin-top:10px"> {{data.progress}}</div>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="col-sm-2" style="margin-top:10px"> {{data.createdAt}}</div>
+
+                    <div class="col-sm-2">
+                        <span class="dotSend" style="margin-top:10px;">{{data.stats.send}}</span>
+                        <span class="dotOpned">{{data.stats.opened}}</span>
+                        <span class="dotClicked">{{data.stats.clicked}}</span>
+                        <span class="dotFailed">{{data.stats.failed}}</span>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <button mat-button>
+                            <mat-icon class="edit">edit</mat-icon>
+                        </button>
+                        <button mat-button>
+                            <mat-icon color="primary">archive</mat-icon>
+                        </button>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+
+                    </div>
+                </mat-expansion-panel-header>
+                <p>I'm visible because I am open</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
 </div>

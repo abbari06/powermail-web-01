@@ -79,18 +79,14 @@ export class ProspectsLabelsListComponent {
   }
   openDialogue(): void {
     const dialogRef = this.dialog.open(ProspectsLabelsAddComponent, {
-      width: '500px',
-      height: '230px',
-      data: {
-        AddLabel: this.addLabel,
-        LabelDescription: this.labelDesc,
-        PickColor: this.pickColor
-      },
+      width: '300px',
+      height: '380px',
+  
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.addLabel = result;
+    
     });
   }
 

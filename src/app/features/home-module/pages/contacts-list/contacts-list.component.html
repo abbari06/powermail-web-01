@@ -1,20 +1,45 @@
-<div class="card-header">
+<div class="card-header container-fluid">
   <span class="title">
     Contact
   </span>
 </div>
 
 <div class="card-header sub-header mt-3">
-  <button mat-raised-button color="primary">
-    <mat-icon>add</mat-icon>New
-  </button>&nbsp;
-  <button mat-raised-button color="accent">Bulk Operations</button>
+  <mat-form-field class="example-full-width">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Ex.John Dev">
+  </mat-form-field> &nbsp; &nbsp;
+  <mat-form-field style=" width: 10%;">
+    <mat-label>Search by</mat-label>
+    <mat-select>
+      <mat-option value="email">
+        Email
+      </mat-option>
+      <mat-option value="firstname">
+        Firstname
+      </mat-option>
+      <mat-option value="lastname">
+        Lastname
+      </mat-option>
+      <mat-option value="labels">
+        Labels
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <span class="spacer">
   </span>
-  <button mat-raised-button color="primary">
-    <mat-icon>add</mat-icon>Import
-  </button>
+  
+  <button mat-raised-button color="primary" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu">
+    <mat-icon>add</mat-icon>New<mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
+  </button>&nbsp;
+  <button mat-raised-button color="accent">Bulk Operations</button>
 </div>
+<mat-menu mat-button #menuu="matMenu">
+  <button mat-menu-item>Add single prospect</button>
+  <mat-divider></mat-divider>
+  <button mat-menu-item>Import from CSV</button>
+</mat-menu>
 <!-- here Data is the arr of values defined in variable Data in .ts -->
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

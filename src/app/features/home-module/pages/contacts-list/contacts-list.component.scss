@@ -3,17 +3,6 @@
 .spacer{
     flex: 1 1 auto;
 }
-
-
-
-
-
-body {
-    font-family: 'Covered By Your Grace', cursive;
-    line-height: 1.25;
-    
-  }
-  
   
   @media screen and (max-width: 960px) {
     .mat-table {
@@ -21,8 +10,4 @@ body {
       vertical-align: middle
     }
   
- 
-
- 
- 
-  }
+}
