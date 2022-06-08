@@ -20,6 +20,19 @@ const Data: User[] = [
   { place: 5, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
   { place: 6, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
   { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'A' },
+  { place: 7, fName: 'John', lName: 'Smith', email: 'abc@gmail.com', position: 'CEO', labels: 'B' },
 
 ];
 

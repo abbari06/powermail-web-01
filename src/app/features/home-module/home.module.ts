@@ -9,6 +9,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { ProspectsLabelsListComponent } from './pages/prospect-labels/prospects-labels-list/prospects-labels-list.component';
 import { ProspectsLabelsAddComponent } from './pages/prospect-labels/prospects-labels-add/prospects-labels-add.component';
 import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-list.component';
+import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wizard-stepper/wizard-stepper.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-l
     ProspectsLabelsListComponent,
     ProspectsLabelsAddComponent,
     OutreachListComponent,
+    WizardStepperComponent,
   ],
   imports: [
     CommonModule,

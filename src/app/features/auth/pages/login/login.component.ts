@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -18,13 +19,13 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private http:HttpClient
   ) {}
 
   ngOnInit(): void {}
-  // emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
   openSnackBar() {
@@ -48,6 +49,13 @@ export class LoginComponent implements OnInit {
     }
 
   signUp() {
-    this.openSnackBar();
+    // this.openSnackBar();
+    this.http.post('https://app.alfamindstech.com/powermail-dev/admin/login', this.loginForm.value , {observe: 'response'}).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        console.log(res.headers.get('authorization'));
+      },
+      error:(err)=>{}
+    })
   }
 }
