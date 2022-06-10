@@ -71,6 +71,15 @@ export class ProspectsLabelsListComponent {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} `;
   }
+
+  menuItems = [
+    {
+      label: 'Add Label',
+      icon: 'add'
+    },
+
+  ];
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -81,12 +90,12 @@ export class ProspectsLabelsListComponent {
     const dialogRef = this.dialog.open(ProspectsLabelsAddComponent, {
       width: '300px',
       height: '380px',
-  
+
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-    
+
     });
   }
 

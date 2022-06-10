@@ -1,49 +1,65 @@
-<div class="card-header container-fluid">
-    <span class="title">
-        Outreach
+
+
+
+
+<!-- <mat-toolbar fxLayout="row" class="toolbar">
+    <span style="font-size:medium;" fxFlex>Outreach:&nbsp;&nbsp;&nbsp;
+        <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Ex.John Dev">
+        </mat-form-field> &nbsp; &nbsp;
+        <mat-form-field style=" width: 10%;">
+            <mat-label>Search by</mat-label>
+            <mat-select>
+                <mat-option value="labelName">
+                    Status
+                </mat-option>
+                <mat-option value="labelDesc">
+                    Title
+                </mat-option>
+                <mat-option value="prospectLabels">
+                    Campaign
+                </mat-option>
+                <mat-option value="outreachCampaign">
+                    Email
+                </mat-option>
+                <mat-option value="outreachCampaign">
+                    Progress
+                </mat-option>
+                <mat-option value="outreachCampaign">
+                    Created At
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </span>
-</div>
-<!-- here Data is the arr of values defined in variable Data in .ts -->
-
-
-<div class="card-header sub-header mt-3">
-    <mat-form-field class="example-full-width">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Ex.John Dev">
-    </mat-form-field> &nbsp; &nbsp;
-    <mat-form-field style=" width: 10%;">
-        <mat-label>Search by</mat-label>
-        <mat-select>
-            <mat-option value="labelName">
-                Status
-            </mat-option>
-            <mat-option value="labelDesc">
-                Title
-            </mat-option>
-            <mat-option value="prospectLabels">
-                Campaign
-            </mat-option>
-            <mat-option value="outreachCampaign">
-                Email
-            </mat-option>
-            <mat-option value="outreachCampaign">
-                Progress
-            </mat-option>
-            <mat-option value="outreachCampaign">
-                Created At
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <span class="spacer">
-    </span>
-
-    <button routerLink="addcampaign" mat-raised-button color="primary" style="float: right;">
-        <mat-icon>add</mat-icon>Add Campaign
+    <button routerLink="addcampaign" mat-raised-button color="primary" *ngFor="let item of menuItems" fxHide.xs>
+        <mat-icon class="mr">{{item.icon}}</mat-icon>
+        {{item.label}} 
     </button>
-</div> 
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #dropMenu="matMenu">
+        <ng-container *ngFor="let item of menuItems">
+            <button mat-menu-item>
+                <mat-icon class="mr">{{item.icon}}</mat-icon>
+                {{item.label}}
+            </button>
+            <mat-divider></mat-divider>
+        </ng-container>
+    </mat-menu>
 
 
+</mat-toolbar> -->
+<mat-toolbar fxLayout="row">
+  <span fxFlex>OutReach
+    </span>
+
+    <button mat-raised-button color="primary" fxHide.xs>
+        <mat-icon>add</mat-icon>
+        New
+    </button>
+</mat-toolbar>
 <div class="container-fluid">
     <div *ngFor="let data of user" class="mt-5">
         <mat-accordion>

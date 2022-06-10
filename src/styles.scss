@@ -24,4 +24,55 @@ table {
   height: 60px!important;
 }
 
+/* Include bootstrap CSS file  */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* Include ng-wizard CSS files */
+@import '~ng-wizard/themes/ng_wizard.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_arrows.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
+@import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
+
+.mat-header-cell,
+.mat-cell {
+    min-width: 80px;
+    box-sizing: border-box;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+  padding: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  font-size: large;
+}
+
+.mat-header-row,
+.mat-row {
+    min-width: 100%;
+}
+
+@media (max-width: 1200px) {
+
+    .mat-header-row,
+    .mat-row {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .mat-header-row,
+    .mat-row {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .mat-header-row,
+    .mat-row {
+        min-width: 100%;
+    }
+  }
+
 

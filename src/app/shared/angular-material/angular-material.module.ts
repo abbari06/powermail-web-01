@@ -16,6 +16,7 @@ import {MatDialogModule } from '@angular/material/dialog';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {FlexLayoutModule} from '@angular/flex-layout';
 const MaterialComponent = [
   MatToolbarModule,
   MatIconModule,
@@ -33,7 +34,8 @@ const MaterialComponent = [
   MatDialogModule,
   MatCheckboxModule,
   MatSelectModule,
-  MatExpansionModule
+  MatExpansionModule,
+  FlexLayoutModule,
 ]
 
 @NgModule({

@@ -98,7 +98,13 @@ export class OutreachListComponent {
     return this.colors.filter((item) => item.status === status)[0].color;
   }
 
+  menuItems = [
+    {
+      label: 'Add New',
+      icon: 'add',
+    },
 
+  ]
 }
 
 

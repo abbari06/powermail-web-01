@@ -1,42 +1,39 @@
-<div class="card-header container-fluid">
-    <span class="title">
-        Prospect Labels
-    </span>
-</div>
+<mat-toolbar fxLayout="row">
 
-<div class="card-header sub-header mt-3">
-    <mat-form-field class="example-full-width">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Ex.John Dev">
-    </mat-form-field> &nbsp; &nbsp;
-    <mat-form-field style=" width: 10%;">
-        <mat-label>Search by</mat-label>
-        <mat-select>
-            <mat-option value="labelName">
-                Label Name
-            </mat-option>
-            <mat-option value="labelDesc">
-                Label Description
-            </mat-option>
-            <mat-option value="prospectLabels">
-                Prospect Labels
-            </mat-option>
-            <mat-option value="outreachCampaign">
-                Outreach Campaign
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-
-  <span class="spacer">
+    <span style="font-size:medium;" fxFlex>Prospect Labels:&nbsp;&nbsp;
+        <mat-form-field class="example-full-width">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Ex.John Dev">
+        </mat-form-field> &nbsp; &nbsp;
+        <mat-form-field style=" width: 10%;">
+            <mat-label>Search by</mat-label>
+            <mat-select>
+                <mat-option value="labelName">
+                    Label Name
+                </mat-option>
+                <mat-option value="labelDesc">
+                    Label Description
+                </mat-option>
+                <mat-option value="prospectLabels">
+                    Prospect Labels
+                </mat-option>
+                <mat-option value="outreachCampaign">
+                    Outreach Campaign
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
     </span>
 
-    <button mat-raised-button color="primary"
-    style="float: right;"
-    (click)="openDialogue()">
-        <mat-icon>add</mat-icon>Add Label
+    <button mat-raised-button (click)="openDialogue()" color="primary" fxHide.xs>
+        <mat-icon>add</mat-icon>
+        New Label
+    </button>&nbsp;
+
+    <button mat-raised-button color="warn" fxHide.xs>
+        <mat-icon>delete</mat-icon>
+        Delete
     </button>
-</div>
-
+</mat-toolbar>
 <!-- here Data is the arr of values defined in variable Data in .ts -->
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

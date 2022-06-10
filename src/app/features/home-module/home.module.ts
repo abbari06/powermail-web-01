@@ -10,7 +10,13 @@ import { ProspectsLabelsListComponent } from './pages/prospect-labels/prospects-
 import { ProspectsLabelsAddComponent } from './pages/prospect-labels/prospects-labels-add/prospects-labels-add.component';
 import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-list.component';
 import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wizard-stepper/wizard-stepper.component';
+import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
+const ngWizardConfig: NgWizardConfig = {
+  theme: THEME.default
+};
 
 @NgModule({
   declarations: [
@@ -25,7 +31,9 @@ import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wiz
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    NgWizardModule.forRoot(ngWizardConfig),
+    NgbModule,
   ]
 })
 export class HomeModule { }
