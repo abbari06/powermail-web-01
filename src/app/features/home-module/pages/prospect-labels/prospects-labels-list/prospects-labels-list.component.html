@@ -1,38 +1,71 @@
+
 <mat-toolbar fxLayout="row">
 
-    <span style="font-size:medium;" fxFlex>Prospect Labels:&nbsp;&nbsp;
-        <mat-form-field class="example-full-width">
-            <mat-label>Search</mat-label>
-            <input matInput placeholder="Ex.John Dev">
-        </mat-form-field> &nbsp; &nbsp;
-        <mat-form-field style=" width: 10%;">
-            <mat-label>Search by</mat-label>
-            <mat-select>
-                <mat-option value="labelName">
-                    Label Name
-                </mat-option>
-                <mat-option value="labelDesc">
-                    Label Description
-                </mat-option>
-                <mat-option value="prospectLabels">
-                    Prospect Labels
-                </mat-option>
-                <mat-option value="outreachCampaign">
-                    Outreach Campaign
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </span>
+    <span style="font-size:medium;" fxFlex >Prospect Labels:&nbsp;&nbsp;
+      <mat-form-field class="example-full-width">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Ex.John Dev">
+    </mat-form-field> &nbsp; &nbsp;
+    <mat-form-field style=" width: 10%;">
+        <mat-label>Search by</mat-label>
+        <mat-select>
+            <mat-option value="labelName">
+                Label Name
+            </mat-option>
+            <mat-option value="labelDesc">
+                Label Description
+            </mat-option>
+            <mat-option value="prospectLabels">
+                Prospect Labels
+            </mat-option>
+            <mat-option value="outreachCampaign">
+                Outreach Campaign
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</span>
 
-    <button mat-raised-button (click)="openDialogue()" color="primary" fxHide.xs>
+ <button mat-raised-button  (click)="openDialogue()" color="primary" fxHide.xs>
         <mat-icon>add</mat-icon>
-        New Label
+         New
     </button>&nbsp;
 
     <button mat-raised-button color="warn" fxHide.xs>
         <mat-icon>delete</mat-icon>
         Delete
     </button>
+
+    <!-- <button mat-raised-button color="accent" fxHide.xs [matMenuTriggerFor]="userMenu">Bulk Operations<mat-icon>
+            keyboard_arrow_down</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+    </button>
+
+    <mat-menu #dropMenu="matMenu">
+        <ng-container>
+            <button mat-menu-item>Add Prospects Label</button>
+            <button mat-menu-item>Import From CVS</button>
+            
+            <button mat-menu-item [matMenuTriggerFor]="userMenu">
+                Bulk Operations
+            </button>
+            <mat-divider></mat-divider>
+        </ng-container>
+    </mat-menu>
+</mat-toolbar>
+<mat-menu #userMenu="matMenu">
+
+    <button mat-menu-item>
+        <mat-icon class="icoColor">add</mat-icon>Add Prospects Label
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-menu-item>
+        <mat-icon class="icoColor">toc</mat-icon>Import From CVS
+    </button>
+</mat-menu> -->
 </mat-toolbar>
 <!-- here Data is the arr of values defined in variable Data in .ts -->
 

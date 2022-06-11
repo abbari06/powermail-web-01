@@ -12,10 +12,6 @@ export interface User {
 
 }
 
-// export interface MenuItem {
-//   label: string;
-//   icon: string;
-// }
 
 //arr of objects defining properties inside the variable Data
 const Data: User[] = [
@@ -83,33 +79,6 @@ export class ContactsListComponent {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.place + 1}`;
   }
-
- menuItems = [
-    {
-      label: 'Add New',
-      icon: 'add',
-    },
-    {
-      label: 'Bulk Operations',
-      icon: 'toc',
-      more: [
-        {label:'Add Prospects Label',icon:'add'},
-        {label:'Import From CVS',icon:'login'}
-      ]
-    },
-
-    // {
-    //   label: 'Add Prospect Labels',
-    //   icon: 'add',
-    // },
-
-    // {
-    //   label: 'Import From CVS',
-    //   icon: 'login',
-    // }
-
-
-  ];
 
   constructor() { }
 

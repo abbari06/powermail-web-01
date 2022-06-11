@@ -1,23 +1,11 @@
-.example-headers-align .mat-expansion-panel-header-title,
-.example-headers-align .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
 
-.example-headers-align .mat-expansion-panel-header-description {
-  justify-content: space-between;
-  align-items: center;
-}
-
-.example-headers-align .mat-form-field+.mat-form-field {
-  margin-left: 8px;
-}
 
 .Ccell {
   width: 70px;
   background: rgb(63, 81, 181);
   text-align: center;
-  height: 37px;
-  padding: 9px;
+  height: 35px;
+  padding: 7px;
   color: white;
   border-radius: 20px;
   // margin-left: -4px;
@@ -70,13 +58,13 @@
   display: inline-block;
 }
 
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 55px;
-  height: 28px;
+// .switch {
+//   position: relative;
+//   display: inline-block;
+//   width: 55px;
+//   height: 28px;
 
-  }
+//   }
 
   .switch input {
   opacity: 0;
@@ -88,24 +76,24 @@
   .slider {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-  font-size:19px;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // background-color: #ccc;
+  // -webkit-transition: .4s;
+  // transition: .4s;
+  // font-size:19px;
 
   }
 
   .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  // height: 26px;
+  // width: 26px;
+  left: 2px;
+  bottom: 3px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
@@ -128,8 +116,8 @@
 
   .slider.round {
   border-radius: 34px;
-  height:25px;
-  width:55px;
+  height:22px;
+  width:50px;
   }
 
   .slider.round:before {
@@ -142,9 +130,12 @@
   .mat-button , .mat-icon{
     padding: 0;
     min-width: 0;
-    width: 40px;
-    height: 40px;
+    // width: 40px;
+    // height: 40px;
     flex-shrink: 0;
-    line-height: 40px;
+    // line-height: 40px;
     border-radius: 50%;
+}
+.mat-expansion-panel-header{
+  height:60%;
 }

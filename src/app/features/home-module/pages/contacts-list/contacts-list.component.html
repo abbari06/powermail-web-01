@@ -41,8 +41,8 @@
   <button mat-menu-item>Import from CSV</button>
 </mat-menu> -->
 
-<mat-toolbar fxLayout="row" class="toolbar" style="max-width:100%;">
-  <span style="font-size:medium;" fxFlex>Contacts:&nbsp;&nbsp;&nbsp;
+<mat-toolbar fxLayout="row">
+  <span style="font-size:medium;" fxFlex>Contacts:&nbsp;&nbsp;
     <mat-form-field class="example-full-width">
       <mat-label>Search</mat-label>
       <input matInput placeholder="Ex.John Dev">
@@ -65,26 +65,64 @@
       </mat-select>
     </mat-form-field>
   </span>
-  <button mat-raised-button color="primary" *ngFor="let item of menuItems" fxHide.xs>
-      <mat-icon class="mr">{{item.icon}}</mat-icon>
-      {{item.label}}
-      <!-- need to add dropdown under bulk operations button here for 1. Add Prospects Label 2. Import From CVS -->
+
+  <button mat-raised-button color="primary" fxHide.xs [matMenuTriggerFor]="userMenu">
+    <mat-icon>add</mat-icon>
+    New<mat-icon>keyboard_arrow_down</mat-icon>
+  </button>&nbsp;
+
+  <button  mat-raised-button color="accent" fxHide.xs  [matMenuTriggerFor]="userMenu1">
+    <mat-icon>toc</mat-icon>
+    Bulk Operations<mat-icon>keyboard_arrow_down</mat-icon>
   </button>
+
   <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-      <mat-icon>more_vert</mat-icon>
+    <mat-icon>more_vert</mat-icon>
   </button>
+
   <mat-menu #dropMenu="matMenu">
-      <ng-container *ngFor="let item of menuItems">
-          <button mat-menu-item>
-              <mat-icon class="mr">{{item.icon}}</mat-icon>
-              {{item.label}}
-          </button>
-          <mat-divider></mat-divider>
-      </ng-container>
+    <ng-container>
+      <button mat-menu-item [matMenuTriggerFor]="userMenu"><mat-icon>add</mat-icon>New Contact</button>
+      <button mat-menu-item [matMenuTriggerFor]="userMenu1"> <mat-icon>toc</mat-icon>Bulk Operations</button>
+
+      <mat-divider></mat-divider>
+    </ng-container>
   </mat-menu>
-
-
 </mat-toolbar>
+<mat-menu #userMenu="matMenu">
+
+  <button mat-menu-item >
+    <mat-icon>add</mat-icon>Add Singles
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item >
+    <mat-icon>login</mat-icon>Import from CSV
+  </button>
+
+</mat-menu>
+
+<mat-menu #userMenu1="matMenu">
+
+  <button mat-menu-item >
+    <mat-icon>add</mat-icon>Add Labels
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item >
+    <mat-icon>remove</mat-icon>Remove Labels
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item >
+    <mat-icon>delete</mat-icon>Delete Contact
+  </button>
+
+</mat-menu>
+ 
 <!-- here Data is the arr of values defined in variable Data in .ts -->
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">

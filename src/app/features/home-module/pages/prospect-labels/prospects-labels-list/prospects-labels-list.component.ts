@@ -72,14 +72,6 @@ export class ProspectsLabelsListComponent {
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} `;
   }
 
-  menuItems = [
-    {
-      label: 'Add Label',
-      icon: 'add'
-    },
-
-  ];
-
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
