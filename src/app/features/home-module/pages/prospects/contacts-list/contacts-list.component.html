@@ -42,15 +42,15 @@
 </mat-menu> -->
 
 <mat-toolbar fxLayout="row">
-  <span style="font-size:medium;" fxFlex>Contacts:&nbsp;&nbsp;
+  <span  class="searchbar"style="font-size:medium;" fxFlex>Contacts:
     <mat-form-field class="example-full-width">
       <mat-label>Search</mat-label>
-      <input matInput placeholder="Ex.John Dev">
-    </mat-form-field> &nbsp; &nbsp;
-    <mat-form-field style=" width: 10%;">
+      <input matInput>
+    </mat-form-field> &nbsp;
+    <mat-form-field>
       <mat-label>Search by</mat-label>
-      <mat-select>
-        <mat-option value="email">
+      <mat-select   [(ngModel)]="selectedOption">
+        <mat-option value="email" >
           Email
         </mat-option>
         <mat-option value="firstname">
@@ -71,7 +71,7 @@
     New<mat-icon>keyboard_arrow_down</mat-icon>
   </button>&nbsp;
 
-  <button  mat-raised-button color="accent" fxHide.xs  [matMenuTriggerFor]="userMenu1">
+  <button  mat-raised-button disabled color="accent" fxHide.xs  [matMenuTriggerFor]="userMenu1">
     <mat-icon>toc</mat-icon>
     Bulk Operations<mat-icon>keyboard_arrow_down</mat-icon>
   </button>
