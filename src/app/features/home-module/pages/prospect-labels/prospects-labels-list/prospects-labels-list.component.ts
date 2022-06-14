@@ -32,11 +32,12 @@ const Data: User[] = [
   styleUrls: ['./prospects-labels-list.component.scss']
 })
 export class ProspectsLabelsListComponent {
+
+  selectedOption = 'labelName';
+
   addLabel: string;
   labelDesc: string;
   pickColor: string;
-
-
 
   //define columns inside the variable displayedColumns
   displayedColumns: string[] = [

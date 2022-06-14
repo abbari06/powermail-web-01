@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { ContactsListComponent } from './pages/contacts-list/contacts-list.component';
+import { ContactsListComponent } from './pages/prospects/contacts-list/contacts-list.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ProspectsLabelsListComponent } from './pages/prospect-labels/prospects-labels-list/prospects-labels-list.component';
 import { ProspectsLabelsAddComponent } from './pages/prospect-labels/prospects-labels-add/prospects-labels-add.component';
@@ -12,6 +12,11 @@ import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-l
 import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wizard-stepper/wizard-stepper.component';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AddSingleProspectComponent } from './pages/prospects/add-single-prospect/add-single-prospect.component';
+import { StepOneComponent } from './pages/outreach/add-campaign-wizard/step-one/step-one.component';
+import { StepTwoComponent } from './pages/outreach/add-campaign-wizard/step-two/step-two.component';
+import { StepThreeComponent } from './pages/outreach/add-campaign-wizard/step-three/step-three.component';
+import { StepFourComponent } from './pages/outreach/add-campaign-wizard/step-four/step-four.component';
 
 
 const ngWizardConfig: NgWizardConfig = {
@@ -27,6 +32,12 @@ const ngWizardConfig: NgWizardConfig = {
     ProspectsLabelsAddComponent,
     OutreachListComponent,
     WizardStepperComponent,
+    AddSingleProspectComponent,
+    StepOneComponent,
+    StepTwoComponent,
+    StepThreeComponent,
+    StepFourComponent
+   
   ],
   imports: [
     CommonModule,

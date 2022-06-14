@@ -26,7 +26,7 @@
   text-align: center;
   padding-top: 3.2px;
   color: white;
-  margin-left: 4.5px;
+  // margin-left: 4.5px;
   height: 25px;
   width: 25px;
   background-color: green;
@@ -38,7 +38,7 @@
   text-align: center;
   padding-top: 3.2px;
   color: rgb(91, 91, 91);
-  margin-left: 4.5px;
+  // margin-left: 4.5px;
   height: 25px;
   width: 25px;
   background-color: #FDDA0D;
@@ -50,7 +50,7 @@
   text-align: center;
   padding-top: 3.2px;
   color: white;
-  margin-left: 4.5px;
+  // margin-left: 4.5px;
   height: 25px;
   width: 25px;
   background-color: #df0031;
@@ -58,13 +58,13 @@
   display: inline-block;
 }
 
-// .switch {
-//   position: relative;
-//   display: inline-block;
-//   width: 55px;
-//   height: 28px;
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 28px;
 
-//   }
+  }
 
   .switch input {
   opacity: 0;
@@ -76,22 +76,22 @@
   .slider {
   position: absolute;
   cursor: pointer;
-  // top: 0;
-  // left: 0;
-  // right: 0;
-  // bottom: 0;
-  // background-color: #ccc;
-  // -webkit-transition: .4s;
-  // transition: .4s;
-  // font-size:19px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  font-size:19px;
 
   }
 
   .slider:before {
   position: absolute;
   content: "";
-  // height: 26px;
-  // width: 26px;
+  height: 26px;
+  width: 26px;
   left: 2px;
   bottom: 3px;
   background-color: white;
@@ -130,12 +130,46 @@
   .mat-button , .mat-icon{
     padding: 0;
     min-width: 0;
-    // width: 40px;
-    // height: 40px;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    // line-height: 40px;
+    line-height: 40px;
     border-radius: 50%;
 }
 .mat-expansion-panel-header{
-  height:60%;
+  height: 75px;
 }
+
+.mat-accordion,
+.mat-expansion-panel,
+    .mat-expansion-panel-header {
+    min-width: 100%;
+}
+
+@media (max-width: 1200px) {
+
+  .mat-accordion,
+  .mat-expansion-panel,
+      .mat-expansion-panel-header  {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 992px) {
+
+  .mat-accordion,
+.mat-expansion-panel,
+    .mat-expansion-panel-header  {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+
+  .mat-accordion,
+  .mat-expansion-panel,
+      .mat-expansion-panel-header  {
+        min-width: 100%;
+    }
+  }
+

@@ -22,6 +22,7 @@ table {
 @import '~bootstrap/scss/bootstrap';
 .sub-header{
   height: 60px!important;
+  
 }
 
 /* Include bootstrap CSS file  */
@@ -33,17 +34,21 @@ table {
 @import '~ng-wizard/themes/ng_wizard_theme_circles.min.css';
 @import '~ng-wizard/themes/ng_wizard_theme_dots.min.css';
 
+
 .mat-header-cell,
 .mat-cell {
     min-width: 80px;
     box-sizing: border-box;
+    
+   
 }
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   padding: 0;
   border-bottom-width: 1px;
   border-bottom-style: solid;
-  font-size: large;
+  font-size: small;
+ 
 }
 
 .mat-header-row,
@@ -75,4 +80,5 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     }
   }
 
+ 
 

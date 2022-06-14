@@ -1,4 +1,18 @@
-<ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
+<mat-toolbar fxLayout class=" mt-5">
+  <div class="container">
+    <div class="row">
+      <nav class="nav nav-pills nav-justified">
+        <a class="nav-link"  routerLink="stepone" routerLinkActive="active">Let's Start<mat-icon>start</mat-icon></a>
+        <a class="nav-link"  routerLink="steptwo" routerLinkActive="active">Schedule & Prospects<mat-icon>schedule</mat-icon></a>
+        <a class="nav-link"  routerLink="stepthree" routerLinkActive="active">Message Steps <mat-icon>message</mat-icon></a>
+        <a class="nav-link"  routerLink="stepfour" routerLinkActive="active">Preview & Launch<mat-icon>preview</mat-icon></a>
+      </nav>
+    </div>
+    
+  </div>
+</mat-toolbar>
+<router-outlet></router-outlet>
+<!-- <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
 
   <ng-wizard-step [title]="'Step 1'" [description]="'Lets Start '" [canEnter]="isValidTypeBoolean"
     [canExit]="isValidFunctionReturnsBoolean.bind(this)">
@@ -63,7 +77,7 @@
         <div class="card">
           <div class="card-body">
             <button class="btn btn-primary" style="margin-left:40%;">Add New Message</button>
-            <!-- <ul class="pagination">
+            <ul class="pagination">
                     <li class="page-item">
                       <a class="page-link" href="#">Prev</a>
                     </li>
@@ -83,7 +97,7 @@
                       <a class="page-link" href="#">Next</a>
                     </li>
                   </ul> -->
-          </div>
+<!-- </div>
         </div>
       </div>
     </div>
@@ -93,4 +107,4 @@
     <span>Yor Are Done</span>
   </ng-wizard-step>
 
-</ng-wizard>
+</ng-wizard>  -->
