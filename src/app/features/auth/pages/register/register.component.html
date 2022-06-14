@@ -1,12 +1,12 @@
 <div class="authBox">
 
-    <mat-card class="pb-3" >
+    <mat-card class="pb-3">
         <div class="header">
             <mat-card-title>Welcome</mat-card-title>
             <mat-card-subtitle>Register to Powermail</mat-card-subtitle>
         </div>
         <mat-card-content>
-            <form  [formGroup]="registerForm">
+            <form [formGroup]="registerForm">
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com" autofocus>
@@ -41,7 +41,7 @@
 
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Company Name:</mat-label>
-                    <input type="text" matInput  formControlName="company" placeholder="Ex. Alpha Minds" autofocus>
+                    <input type="text" matInput formControlName="company" placeholder="Ex. Alpha Minds" autofocus>
                     <mat-error>
                         Please enter a valid Company Name.
                     </mat-error>
@@ -54,15 +54,16 @@
                         Minimum six characters are required.
                     </mat-error>
                 </mat-form-field>
+                <mat-checkbox (change)="onChangeEventFunc($event)">
+                    Are You An
+                    Agency?
+                </mat-checkbox>
             </form>
-            <input type="checkbox" [(ngModel)]="accountType"><span style="margin-left:5px;">Are You An Agency?</span><br><br>
-           <button mat-flat-button color="primary" style="width:100%;">Register</button><br><br>
+            <button mat-flat-button color="primary" style="width:100%;"
+                (click)="registerUserOrAgency()">Register</button><br><br>
             <div class="footer">
                 <p>Already Registered? <a routerLink="/auth/login" class="login">Login</a></p>
-                
             </div>
         </mat-card-content>
-
-
     </mat-card>
 </div>

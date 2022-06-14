@@ -1,17 +1,10 @@
-<!-- <div class="text-center">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div> -->
 <div class="authBox">
-    <!-- <div class="alert alert-danger" role="alert">
-        A simple danger alert—check it out!
-      </div> -->
     <mat-card>
         <div class="header">
             <mat-card-title></mat-card-title>
             <mat-card-subtitle>Login to powermail</mat-card-subtitle>
         </div>
+
         <mat-card-content>
             <form [formGroup]="loginForm">
                 <mat-form-field class="example-full-width" appearance="outline">
@@ -29,9 +22,10 @@
                     </mat-error>
                 </mat-form-field>
             </form>
-           
-            <button mat-flat-button color="primary"  style="width:100%;"(click)="signUp()">login</button><br><br>
-            <a routerLink="/auth/forgot-password" style="margin-left: 35%;" class="forgot" (click)="openDialogue()">Forgot password</a><br>
+
+            <button mat-flat-button color="primary" style="width:100%;" (click)="loginUser()">login</button><br><br>
+            <a routerLink="/auth/forgot-password" style="margin-left: 35%;" class="forgot"
+                (click)="openDialogue()">Forgot password</a><br>
             <div class="footer">
                 <p>Not a member? <a routerLink="/auth/register" class="register">Register</a></p>
             </div>

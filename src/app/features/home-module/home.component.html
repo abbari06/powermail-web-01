@@ -9,46 +9,44 @@
     
     </div>
   </mat-sidenav-container> -->
-  <div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-    <mat-toolbar color="primary" class="example-toolbar">
-      <button  mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-      <h1 class="example-app-name"> <img class="logo" src="../../../assets/powermail.svg" alt=""> Powermail-web</h1>
-      <span class="spacer"></span>
-      <span  class="profile-container">
-        <button
-        mat-button
-        [matMenuTriggerFor]="menu"
-        class="2 d-flex align-items-center"
-      >
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name"> <img class="logo" src="../../../assets/powermail.svg" alt=""> Powermail-web</h1>
+    <span class="spacer"></span>
+    <span class="profile-container">
+      <button mat-button [matMenuTriggerFor]="menu" class="2 d-flex align-items-center">
         <mat-icon>person</mat-icon> AB Bari
         <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
       </button>
-      </span>
-    
+    </span>
+
     <mat-menu #menu="matMenu" xPosition="after">
-      <button mat-menu-item routerLink="/auth" >
+      <button (click)="logOut()">
         <mat-icon>exit_to_app</mat-icon>
         Logout
       </button>
-    </mat-menu>    </mat-toolbar>
-  
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                  [opened]="!mobileQuery.matches" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-        <mat-nav-list>
-          <app-sidebar></app-sidebar>
+    </mat-menu>
+  </mat-toolbar>
 
-        </mat-nav-list>
-      </mat-sidenav>
-  <!-- <div class="container">
+  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
+      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <app-sidebar></app-sidebar>
+
+      </mat-nav-list>
+    </mat-sidenav>
+    <!-- <div class="container">
     
   </div> -->
-      <mat-sidenav-content>
-        <div class=" container mt-4 p-0">
-          <router-outlet></router-outlet>
+    <mat-sidenav-content>
+      <div class=" container mt-4 p-0">
+        <router-outlet></router-outlet>
 
-        </div>
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-  </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
