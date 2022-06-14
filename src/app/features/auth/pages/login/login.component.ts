@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -8,6 +7,8 @@ import {
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,25 +16,42 @@ import { ForgotPasswordComponent } from '../forgot-password/forgot-password.comp
 })
 export class LoginComponent implements OnInit {
   email:string;
-
+  token: any;
+  status:any;
+  message:string = null;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private http:HttpClient
+    private authService:AuthService,
+    private router:Router
   ) {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.message = `${history.state.data.status}!!  ${history.state.data.message}`
+    if(this.message != null){
+      this.openSnackBar()
+    }
+  }
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
   openSnackBar() {
-    this._snackBar.open('Email or Password are incorrect', 'Close', {
+    this._snackBar.open(this.message, 'Close', {
       horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
     });
   
+  }
+  loginUser(){
+    this.authService.login(this.loginForm.value);
+    if(this.authService.loginError){
+      this._snackBar.open("Invalid Credentials", 'Close', {
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+        panelClass: ['warning']
+      });
+    }
   }
     openDialogue(): void {
       const dialogRef = this.dialog.open(ForgotPasswordComponent, {
@@ -47,15 +65,4 @@ export class LoginComponent implements OnInit {
         this.email = result;
       });
     }
-
-  signUp() {
-    // this.openSnackBar();
-    this.http.post('https://app.alfamindstech.com/powermail-dev/admin/login', this.loginForm.value , {observe: 'response'}).subscribe({
-      next:(res:any)=>{
-        console.log(res);
-        console.log(res.headers.get('authorization'));
-      },
-      error:(err)=>{}
-    })
-  }
 }
