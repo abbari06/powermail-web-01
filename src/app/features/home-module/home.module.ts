@@ -11,14 +11,13 @@ import { ProspectsLabelsAddComponent } from './pages/prospect-labels/prospects-l
 import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-list.component';
 import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wizard-stepper/wizard-stepper.component';
 import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddSingleProspectComponent } from './pages/prospects/add-single-prospect/add-single-prospect.component';
 import { StepOneComponent } from './pages/outreach/add-campaign-wizard/step-one/step-one.component';
 import { StepTwoComponent } from './pages/outreach/add-campaign-wizard/step-two/step-two.component';
 import { StepThreeComponent } from './pages/outreach/add-campaign-wizard/step-three/step-three.component';
 import { StepFourComponent } from './pages/outreach/add-campaign-wizard/step-four/step-four.component';
-
-
+import { UsersComponent } from './pages/choose_profile/users/users.component';
+import { AddUsersComponent } from './pages/choose_profile/add-users/add-users.component';
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default
 };
@@ -36,7 +35,9 @@ const ngWizardConfig: NgWizardConfig = {
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,
-    StepFourComponent
+    StepFourComponent,
+    UsersComponent,
+    AddUsersComponent
    
   ],
   imports: [
@@ -44,7 +45,6 @@ const ngWizardConfig: NgWizardConfig = {
     HomeRoutingModule,
     SharedModule,
     NgWizardModule.forRoot(ngWizardConfig),
-    NgbModule,
   ]
 })
 export class HomeModule { }

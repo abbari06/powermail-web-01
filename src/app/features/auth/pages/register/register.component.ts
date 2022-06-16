@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     phone: ['',Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")],
     company: [''],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    accounttype: ['user'],
+    accounttype: ['client'],
     creationId:["order_page"]
   });
   onChangeEventFunc(event){
@@ -30,6 +30,7 @@ export class RegisterComponent implements OnInit {
   }
   registerUserOrAgency(){
     this.authService.register(this.registerForm.value);
+    console.log(this.registerForm.value)
 }
 
 }

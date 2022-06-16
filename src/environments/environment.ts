@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  const:"https://app.alfamindstech.com/",
-  body:"powermail-dev/"
+  API_BASE_URL:"https://app.alfamindstech.com/powermail-dev/",
+  //body:"powermail-dev/"
 };
 
 /*

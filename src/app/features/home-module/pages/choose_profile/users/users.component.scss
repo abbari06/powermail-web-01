@@ -1,0 +1,104 @@
+// .example-card {
+//     width: 300px;
+//     margin-left: auto;
+//     margin-right: auto;
+//     margin-top: 10px;
+//     background-color:whitesmoke;
+//     border-radius: 10px;
+//     ;
+
+// }
+// .mat-card-content{
+//     text-align: center;
+//     font-family:Roboto,Helvetica Neue,sans-serif;
+//     font-weight: 500;
+//     font-size: 18px;
+//     color:#3f51b5
+
+// }
+// .btn{
+//     // border-radius: 50%;
+//     height: 45px;
+//     margin-bottom: 15px;
+//     margin-left: 35%;
+  
+    
+   
+// }
+img{
+    height: 30px;
+    width: 30px;
+    border-radius: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.mat-toolbar {
+    background: #df0031;
+  }
+  
+  .close{
+    color: #df0031;
+    
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: all 0.3s ease-in-out
+   
+  }
+  
+  .card:hover {
+    box-shadow:  0 0 10px rgba(226,28,28,0.84), 0 10px 10px rgba(0,0,0,0.22);
+    
+  }
+  
+  .background {
+    //background-image: url("../../../../assets/images/abstract-background-made-halftone-dots-white-gray-colors_444390-4058.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  mat-toolbar {
+    justify-content: space-between;
+  }
+  
+  .content {
+    padding: 30px;
+  }
+  
+  .content > mat-card {
+    width: 200px;
+  }
+  
+  .cardP {
+    border-radius: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .block {
+    width: 100%;
+    height: 80px;
+    border-radius: 6px;
+    border-style: dashed;
+    border-color: gray;
+  }
+  
+  .add{
+    text-align: center;
+    margin-top: 9px;
+  }
+  
+  
+  .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+    font-family: "Poppins", sans-serif;
+  }
+  
+  

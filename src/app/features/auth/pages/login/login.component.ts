@@ -27,10 +27,13 @@ export class LoginComponent implements OnInit {
     private router:Router
   ) {}
   ngOnInit(): void {
+    if(history.state.data){
     this.message = `${history.state.data.status}!!  ${history.state.data.message}`
     if(this.message != null){
       this.openSnackBar()
     }
+    }
+  
   }
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required]],
@@ -45,14 +48,16 @@ export class LoginComponent implements OnInit {
   }
   loginUser(){
     this.authService.login(this.loginForm.value);
-    if(this.authService.loginError){
-      this._snackBar.open("Invalid Credentials", 'Close', {
-        horizontalPosition: 'center',
-        verticalPosition: 'top',
-        panelClass: ['warning']
-      });
-    }
+    // if(this.authService.loginError==false){
+    //   console.log( this.authService.button) ;
+    //   this._snackBar.open("Invalid Credentials", 'Close', {
+    //     horizontalPosition: 'center',
+    //     verticalPosition: 'top',
+    //   });
+    // }
+ 
   }
+  
     openDialogue(): void {
       const dialogRef = this.dialog.open(ForgotPasswordComponent, {
         width: '400px',
