@@ -18,6 +18,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 const MaterialComponent = [
   MatToolbarModule,
   MatIconModule,
@@ -37,7 +38,8 @@ const MaterialComponent = [
   MatSelectModule,
   MatExpansionModule,
   FlexLayoutModule,
-  MatTabsModule
+  MatTabsModule,
+  MatSlideToggleModule
 ]
 
 @NgModule({

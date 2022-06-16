@@ -18,6 +18,12 @@ import { StepThreeComponent } from './pages/outreach/add-campaign-wizard/step-th
 import { StepFourComponent } from './pages/outreach/add-campaign-wizard/step-four/step-four.component';
 import { UsersComponent } from './pages/choose_profile/users/users.component';
 import { AddUsersComponent } from './pages/choose_profile/add-users/add-users.component';
+import { EditCampaignComponent } from './pages/outreach/edit-campaign/edit-campaign.component';
+import { CampaignSettingsComponent } from './pages/outreach/edit-campaign/pages/campaign-settings/campaign-settings.component';
+import { CampaignStatsComponent } from './pages/outreach/edit-campaign/pages/campaign-stats/campaign-stats.component';
+import { CampaignMessagesComponent } from './pages/outreach/edit-campaign/pages/campaign-messages/campaign-messages.component';
+
+
 const ngWizardConfig: NgWizardConfig = {
   theme: THEME.default
 };
@@ -37,7 +43,11 @@ const ngWizardConfig: NgWizardConfig = {
     StepThreeComponent,
     StepFourComponent,
     UsersComponent,
-    AddUsersComponent
+    AddUsersComponent,
+    EditCampaignComponent,
+    CampaignSettingsComponent,
+    CampaignStatsComponent,
+    CampaignMessagesComponent
    
   ],
   imports: [
