@@ -17,6 +17,10 @@ import { StepOneComponent } from './pages/outreach/add-campaign-wizard/step-one/
 import { StepTwoComponent } from './pages/outreach/add-campaign-wizard/step-two/step-two.component';
 import { StepThreeComponent } from './pages/outreach/add-campaign-wizard/step-three/step-three.component';
 import { StepFourComponent } from './pages/outreach/add-campaign-wizard/step-four/step-four.component';
+import { EditCampaignComponent } from './pages/outreach/edit-campaign/edit-campaign.component';
+import { CampaignSettingsComponent } from './pages/outreach/edit-campaign/pages/campaign-settings/campaign-settings.component';
+import { CampaignStatsComponent } from './pages/outreach/edit-campaign/pages/campaign-stats/campaign-stats.component';
+import { CampaignMessagesComponent } from './pages/outreach/edit-campaign/pages/campaign-messages/campaign-messages.component';
 
 
 const ngWizardConfig: NgWizardConfig = {
@@ -36,7 +40,11 @@ const ngWizardConfig: NgWizardConfig = {
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,
-    StepFourComponent
+    StepFourComponent,
+    EditCampaignComponent,
+    CampaignSettingsComponent,
+    CampaignStatsComponent,
+    CampaignMessagesComponent
    
   ],
   imports: [
