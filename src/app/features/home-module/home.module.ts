@@ -22,6 +22,7 @@ import { EditCampaignComponent } from './pages/outreach/edit-campaign/edit-campa
 import { CampaignSettingsComponent } from './pages/outreach/edit-campaign/pages/campaign-settings/campaign-settings.component';
 import { CampaignStatsComponent } from './pages/outreach/edit-campaign/pages/campaign-stats/campaign-stats.component';
 import { CampaignMessagesComponent } from './pages/outreach/edit-campaign/pages/campaign-messages/campaign-messages.component';
+import { CsvMappingComponent } from './pages/prospects/csv-importer/csv-mapping/csv-mapping.component';
 
 
 const ngWizardConfig: NgWizardConfig = {
@@ -47,7 +48,8 @@ const ngWizardConfig: NgWizardConfig = {
     EditCampaignComponent,
     CampaignSettingsComponent,
     CampaignStatsComponent,
-    CampaignMessagesComponent
+    CampaignMessagesComponent,
+    CsvMappingComponent
    
   ],
   imports: [

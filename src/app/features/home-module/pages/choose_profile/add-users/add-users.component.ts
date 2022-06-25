@@ -31,7 +31,6 @@ AddProfileForm: FormGroup
       company: ['', [Validators.required]],
     });
     console.log(this.parentUserEmail);
-    
   }
   getId(){
     this.totalAccounts=this.authservice.userModel.useraccounts;

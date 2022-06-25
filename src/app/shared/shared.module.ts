@@ -6,14 +6,10 @@ import { AngularMaterialModule } from './angular-material/angular-material.modul
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
-  declarations: [
-    SidebarComponent,
-    TopMenuComponent
-  ],
+  declarations: [SidebarComponent, TopMenuComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -21,9 +17,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
-    
+    MatStepperModule,
   ],
-  exports:[
+  exports: [
     SidebarComponent,
     TopMenuComponent,
     AngularMaterialModule,
@@ -31,8 +27,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     RouterModule,
     NgbModule,
-
-
-  ]
+    MatStepperModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

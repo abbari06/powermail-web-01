@@ -1,1 +1,48 @@
-<p>add-single-prospect works!</p>
+<div>
+    <div class="center">
+        <p> Add New Contact</p>
+    </div>
+    <mat-card-content>
+        <form [formGroup]="addContact">
+            <div class="col-sm-6">
+                <mat-form-field>
+                    <mat-label>FirstName</mat-label>
+                    <input type="email" matInput formControlName="firstname" autofocus>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="text" matInput formControlName="email" autofocus>
+                    <mat-error>
+                        Please enter a valid email.
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Company</mat-label>
+                    <input type="text" matInput formControlName="company" autofocus>
+                </mat-form-field>
+            </div>
+            <div class="col-sm-6">
+                <mat-form-field>
+                    <mat-label> LastName</mat-label>
+                    <input type="text" matInput formControlName="lastname" autofocus>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-select formControlName="labels" autofocus></mat-select>
+                    <mat-label>Select Labels</mat-label>
+                </mat-form-field>
+
+                <mat-form-field>
+
+                    <mat-label>Position</mat-label>
+                    <input type="text" matInput formControlName="position">
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="footer">
+            <button mat-flat-button color="primary" style="float:right">Save</button>
+            <button mat-flat-button [mat-dialog-close]="true" color="warn" style="float:left">Cancel</button>
+        </div>
+    </mat-card-content>
+</div>

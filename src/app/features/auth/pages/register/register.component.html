@@ -2,8 +2,8 @@
 
     <mat-card class="pb-3">
         <div class="header">
-            <mat-card-title>Welcome</mat-card-title>
-            <mat-card-subtitle>Register to Powermail</mat-card-subtitle>
+            <mat-card-title>Register to Powermail</mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
         </div>
         <mat-card-content>
             <form [formGroup]="registerForm">
@@ -14,7 +14,6 @@
                         Please enter a valid email address.
                     </mat-error>
                 </mat-form-field>
-
                 <mat-form-field class="example-full-width" appearance="outline">
                     <mat-label>Firstname:</mat-label>
                     <input type="text" matInput formControlName="firstname" placeholder="Ex. John" autofocus>
