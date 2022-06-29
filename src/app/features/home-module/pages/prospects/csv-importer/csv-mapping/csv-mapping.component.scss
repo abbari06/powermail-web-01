@@ -1,5 +1,5 @@
 .nextbtn {
-  margin-top: 12px;
+  margin-top: 20px;
   position: relative;
   float: right;
 }
@@ -58,4 +58,11 @@
   font-weight: 600;
   text-transform: capitalize;
   text-align: center;
+}
+.backbtn {
+  margin-top: 12px;
+  position: relative;
+}
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
 }

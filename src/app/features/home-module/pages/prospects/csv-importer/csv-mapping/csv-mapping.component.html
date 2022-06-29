@@ -37,23 +37,26 @@
             <mat-horizontal-stepper (selectionChange)="onSelection($event)">
                 <mat-step label="Import">
                     <div class="container">
-                        <div class="col-md-6">
-                            <form method="post" action="#" id="#">
+                        <div class="row mt-5 pt-3">
+                            <div class="col-md-6 offset-3">
+                                <form method="post" action="#" id="#">
 
 
 
 
-                                <div class="form-group files color">
-                                    <label>Upload Your File </label>
-                                    <input type="file" class="form-control" (change)="uploadListener($event)"
-                                        accept=".xlsx,.xls,.csv">
-                                </div>
+                                    <div class="form-group files color">
+                                        <label>Upload Your File </label>
+                                        <input type="file" class="form-control" (change)="uploadListener($event)"
+                                            accept=".xlsx,.xls,.csv">
+                                    </div>
 
 
-                            </form>
+                                </form>
 
 
+                            </div>
                         </div>
+
                     </div>
                     <!-- <div>
                         <label for="formFileLg" class="form-label">Import Your Contacts File</label>
@@ -63,7 +66,7 @@
                     <!-- <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)"
                         accept=".xlsx,.xls,.csv" /> -->
                     <div>
-                        <button class="nextbtn" (click)="mapping()" [disabled]="!imported" mat-raised-button
+                        <button class="nextbtn mt-5" (click)="mapping()" [disabled]="!imported" mat-raised-button
                             color="primary" matStepperNext>Next</button>
                     </div>
                 </mat-step>
@@ -114,6 +117,8 @@
                         <div>
                             <button class="nextbtn" (click)="next()" mat-raised-button color="primary"
                                 matStepperNext>Next</button>
+                            <button class="backbtn" mat-button matStepperPrevious mat-raised-button
+                                color="warn">Back</button>
                         </div>
                     </div>
 
@@ -121,10 +126,38 @@
 
                 <mat-step label="Preview And Submit">
                     <div>
-                        <h2 class="text-center"> Total success contacts {{successData.length}} and error contacts
-                            {{errorData.length}}
+                        <h2> Total success contacts {{successData.length}} and <button mat-button mat-raised-button
+                                color="warn" (click)="displayErrorContacts()">error
+                                contacts
+                                {{errorData.length}}</button>
                         </h2>
-                        <div>
+                        <div *ngIf="displayError">
+                            <h3 style="Color:rgb(233, 113, 14)">Eroor Contacts</h3>
+                            <table class="table table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Firstname</th>
+                                        <th scope="col">Lastname</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Company</th>
+                                        <th scope="col">Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let data of errorData">
+                                        <td>{{ data.firstname }}</td>
+                                        <td>{{ data.lastname }}</td>
+                                        <td>{{ data.email }}</td>
+                                        <td>{{ data.company }}</td>
+                                        <td>{{ data.position }}</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="displaySuccess">
+                            <h3 style="Color:rgba(18, 223, 238, 0.993)">Success Contacts</h3>
                             <table class="table table table-striped">
                                 <thead>
                                     <tr>
@@ -148,8 +181,9 @@
                                 <tbody></tbody>
                             </table>
                         </div>
-                        <button mat-button matStepperPrevious (click)="back()">Back</button>
-                        <button (click)="saveData()" mat-raised-button color="primary"
+                        <button mat-button matStepperPrevious mat-raised-button color="warn"
+                            (click)="back()">Back</button>
+                        <button [disabled]="submitContacts" (click)="saveData()" mat-raised-button color="primary"
                             style="float:right">Submit</button>
 
                         <!-- <button mat-button matStepperNext>Next</button> -->

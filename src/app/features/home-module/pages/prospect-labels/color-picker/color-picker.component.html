@@ -1,0 +1,18 @@
+<div class="color-picker">
+    <div class="summary-info" (click)="toggleColors()">
+        <div class="info">
+            <p class="style">{{ heading }} </p>
+            <p class="style-value">{{ color }}</p>
+        </div>
+
+        <div class="circle" [ngStyle]="{'border-color': color}"></div>
+    </div>
+
+    <div *ngIf="show" class="opened">
+        <div class="colors">
+            <div (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle"
+                [ngStyle]="{'background': paint}"></div>
+        </div>
+
+    </div>
+</div>

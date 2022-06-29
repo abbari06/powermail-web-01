@@ -1,9 +1,7 @@
-
-
 <div class="p-3">
     <div class="header">
         <mat-card-title>Add Label</mat-card-title>
-      
+
     </div>
     <mat-card-content class="mt-4">
         <form [formGroup]="AddLabelForm">
@@ -11,31 +9,29 @@
                 <div class="col-sm-4"> -->
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Add Label</mat-label>
-                <input type="text" matInput formControlName="addLabel"  autofocus>
+                <input type="text" matInput formControlName="name" autofocus>
             </mat-form-field>
             <!-- </div> -->
-<!-- 
+            <!-- 
             <div class="col-sm-4"> -->
             <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Label Description</mat-label>
-                <input type="text" matInput formControlName="labelDesc"  autofocus>
+                <input type="text" matInput formControlName="description" autofocus>
             </mat-form-field>
             <!-- </div> -->
 
             <!-- <div class="col-sm-4"> -->
-            <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Pick Color</mat-label>
-                <input type="color" matInput formControlName="pickColor"  autofocus>
-            </mat-form-field>
+            <!-- <mat-label>Pick Color</mat-label> -->
+            <app-color-picker [color]="backgroundColor" [heading]="'Select Label Color'"
+                (event)="setColor('background', $event)"></app-color-picker>
+
+
             <!-- </div> -->
             <!-- </div> -->
         </form>
-       
-        <button class="mat-raised-button mat-warn">Cancel</button>
-        <button class="mat-raised-button  mat-primary">Save</button>
+
+        <button class="mat-raised-button mat-warn" [mat-dialog-close]="true">Cancel</button>
+        <button class="mat-raised-button  mat-primary" (click)="setLabels()" [mat-dialog-close]="true"
+            [disabled]="AddLabelForm.invalid">{{actionButton}}</button>
     </mat-card-content>
 </div>
-       
-
-
-

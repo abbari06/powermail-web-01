@@ -13,7 +13,6 @@ import {
 } from '@angular/material/dialog';
 import { CsvMappingComponent } from '../csv-importer/csv-mapping/csv-mapping.component';
 import { AddSingleProspectComponent } from '../add-single-prospect/add-single-prospect.component';
-import { CsvService } from 'src/app/core/services/prospectus-services/csv.service';
 export interface User {
   fName: string;
   lName: string;
@@ -94,10 +93,9 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   payload = new payload();
   constructor(
     private prospectesService: ProspectesService,
-    public dialog: MatDialog,
-    // private modalService: NgbModal,
-    private csvService: CsvService
-  ) {}
+    public dialog: MatDialog
+  ) // private modalService: NgbModal,
+  {}
   ngAfterViewInit(): void {
     this.getAllProspectes();
     this.dataSource.paginator = this.paginator;

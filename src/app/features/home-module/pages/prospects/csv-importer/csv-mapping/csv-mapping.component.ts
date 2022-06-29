@@ -43,7 +43,9 @@ export class CsvMappingComponent implements OnInit {
   viewPreview: any;
   viewCsvMap: any;
   actionBtn: string = 'Submit';
-
+  displayError: boolean = false;
+  displaySuccess: boolean = true;
+  submitContacts: boolean = false;
   constructor(
     private fb: FormBuilder,
     private csvImport: CsvService,
@@ -264,8 +266,13 @@ export class CsvMappingComponent implements OnInit {
 
   next(): void {
     this.processData();
-    // this.viewPreview = true;
-    // this.viewCsvMap = true;
+    if (this.successData.length == 0) {
+      this.displaySuccess = false;
+      this.submitContacts = true;
+    } else {
+      this.displaySuccess = true;
+      this.submitContacts = false;
+    }
   }
   /**
    * Process the data based on the fields mapped
@@ -370,6 +377,7 @@ export class CsvMappingComponent implements OnInit {
       });
   }
   back() {
+    this.displayError = false;
     this.successData = [];
     this.errorData = [];
     this.fieldMapForm.reset();
@@ -393,5 +401,14 @@ export class CsvMappingComponent implements OnInit {
       //this.next();
     }
     console.log(event);
+  }
+  displayErrorContacts() {
+    if (this.errorData.length > 0) {
+      if (this.displayError == false) {
+        this.displayError = true;
+      } else {
+        this.displayError = false;
+      }
+    }
   }
 }
