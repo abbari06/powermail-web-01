@@ -7,7 +7,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatStepperModule } from '@angular/material/stepper';
-
+import { MomentTimezonePickerModule } from 'moment-timezone-picker';
+import { AvatarModule } from 'ngx-avatar';
 @NgModule({
   declarations: [SidebarComponent, TopMenuComponent],
   imports: [
@@ -18,6 +19,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     RouterModule,
     NgbModule,
     MatStepperModule,
+    MomentTimezonePickerModule,
   ],
   exports: [
     SidebarComponent,
@@ -28,6 +30,8 @@ import { MatStepperModule } from '@angular/material/stepper';
     RouterModule,
     NgbModule,
     MatStepperModule,
+    MomentTimezonePickerModule,
+    AvatarModule,
   ],
 })
 export class SharedModule {}

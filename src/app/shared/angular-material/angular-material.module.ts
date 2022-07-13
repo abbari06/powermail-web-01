@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const MaterialComponent = [
   MatToolbarModule,
   MatIconModule,
@@ -44,6 +45,7 @@ const MaterialComponent = [
   MatSlideToggleModule,
   MatSortModule,
   MatChipsModule,
+  NgbModule,
 ];
 
 @NgModule({

@@ -1,13 +1,17 @@
 // @import "../dashboard/dashboard.component.scss";
 @import "../../dashboard/dashboard.component.scss";
-.spacer{
-    flex: 1 1 auto;
+.spacer {
+  flex: 1 1 auto;
 }
-.mat-header-cell{
-    background-color: #FBEAFF;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+.mat-header-cell {
+  background-color: #fbeaff;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
+.example-box.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
 
-  
-
+.example-chip .cdk-drop-list-dragging {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

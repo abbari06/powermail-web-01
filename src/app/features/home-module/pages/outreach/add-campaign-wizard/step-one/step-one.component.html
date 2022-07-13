@@ -1,26 +1,31 @@
 <div class="container">
-<div class="row">
- <mat-card>
-  <mat-card-title>Component 1</mat-card-title>
-  <mat-card-content class="mt-4">
-    <form>
-      <mat-form-field appearance="outline">
-        <mat-label>Campaign Title:</mat-label>
-        <input matInput placeholder="Enter Campaign Title" />
-      </mat-form-field>
+  <div class="row">
+    <mat-card>
+      <mat-card-title>Component 1</mat-card-title>
+      <mat-card-content class="mt-4">
+        <form [formGroup]="AddCampaignFormOne">
+          <mat-form-field appearance="outline">
+            <mat-label>Campaign Title:</mat-label>
+            <input matInput placeholder="Enter Campaign Title" formControlName="title" />
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Description:</mat-label>
-        <input matInput placeholder="Enter Campaign Description" />
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Description:</mat-label>
+            <input matInput placeholder="Enter Campaign Description" formControlName="description" />
+          </mat-form-field>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Google Email:</mat-label>
-        <input matInput placeholder="Enter Your Google Email" />
-      </mat-form-field>
-    </form>
-    <button class="mat-raised-button  mat-primary" routerLink="/home/outreach/addcampaign/steptwo">Next</button>
-  </mat-card-content>
-  </mat-card>
-</div>
+          <mat-form-field appearance="outline">
+            <mat-label>Google Email:</mat-label>
+            <mat-select formControlName="mailAccount" selected>
+              <mat-option *ngFor="let email of allMailAccounts" [value]="email.email">
+                {{email.email}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </form>
+        <button (click)="next()" class="mat-raised-button  mat-primary"
+          routerLink="/home/outreach/addcampaign/steptwo">Next</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

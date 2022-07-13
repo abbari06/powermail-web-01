@@ -1,0 +1,56 @@
+<div class="content">
+
+    <div fxLayout="row wrap" fxLayoutGap="16px grid">
+        <div [fxFlex]="(100/gridColumn) + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
+            <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
+                <div class="text-center">
+                    <img src="https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg"
+                        style="width: 100px; height:100px;">
+                </div>
+                <div class="mt-5 pt-4">
+                    <mat-card-actions>
+                        <button class="hover" mat-flat-button color="warn" (click)="connectGoogleAccount()">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                        <span style="padding-left: 10px; font-size: 18px; font-weight: 700;">Add New Google
+                            Account</span>
+                    </mat-card-actions>
+                </div>
+            </mat-card>
+        </div>
+
+        <div [fxFlex]="(100/gridColumn) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let account of mailAccounts">
+
+
+            <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
+
+                <div class="row">
+                    <mat-card-title><img mat-card-image [src]="account.pictureurl" class="mt-2"
+                            style="height:80px;width: 80px;border-radius: 50%;">
+                    </mat-card-title>
+                    <mat-card-subtitle>{{account.name}} &nbsp; <b>{{account.email}}</b></mat-card-subtitle>
+                    <mat-card-subtitle>Connected At:&nbsp;<b>{{account.connected_at|date}}</b></mat-card-subtitle>
+                    <mat-footer>
+                        <div class="row" style="padding-top: 15px;">
+                            <div class="col-sm-6">
+                                <button style="float: left ;" mat-flat-button color="warn" title="Disconnect">
+                                    <mat-icon>clear </mat-icon>
+                                </button>
+                            </div>
+                            <div class="col-sm-6">
+                                <button style="float: right ;" mat-flat-button color="primary" title="Reconnect">
+                                    <mat-icon>replay</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </mat-footer>
+
+
+                </div>
+
+            </mat-card>
+
+        </div>
+    </div>
+
+</div>

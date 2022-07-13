@@ -24,10 +24,18 @@ import { CampaignStatsComponent } from './pages/outreach/edit-campaign/pages/cam
 import { CampaignMessagesComponent } from './pages/outreach/edit-campaign/pages/campaign-messages/campaign-messages.component';
 import { CsvMappingComponent } from './pages/prospects/csv-importer/csv-mapping/csv-mapping.component';
 import { ColorPickerComponent } from './pages/prospect-labels/color-picker/color-picker.component';
-
+import { MailAccountsComponent } from './pages/settings/mail-accounts/mail-accounts.component';
+import { AllSchedulesComponent } from './pages/settings/all-schedules/all-schedules.component';
+import { ProfileComponent } from './pages/settings/profile/profile.component';
+import { BillingComponent } from './pages/settings/billing/billing.component';
+import {
+  AddScheduleComponent,
+  NgbTimeStringAdapter,
+} from './pages/settings/all-schedules/add-schedule/add-schedule.component';
+import { NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
 
 const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.default
+  theme: THEME.default,
 };
 
 @NgModule({
@@ -51,14 +59,19 @@ const ngWizardConfig: NgWizardConfig = {
     CampaignStatsComponent,
     CampaignMessagesComponent,
     CsvMappingComponent,
-    ColorPickerComponent
-   
+    ColorPickerComponent,
+    MailAccountsComponent,
+    AllSchedulesComponent,
+    ProfileComponent,
+    BillingComponent,
+    AddScheduleComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule,
     NgWizardModule.forRoot(ngWizardConfig),
-  ]
+  ],
+  providers: [{ provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter }],
 })
-export class HomeModule { }
+export class HomeModule {}

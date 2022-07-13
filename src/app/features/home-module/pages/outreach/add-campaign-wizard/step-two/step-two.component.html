@@ -1,38 +1,39 @@
 <div class="container">
   <div class="row">
-  <mat-card>
-    <mat-card-title>Component 2</mat-card-title>
-    <mat-card-content>
-      <form> <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Choose Calender Schedule:</mat-label>
-          <select matNativeControl>
-            <option value="" selected>1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
-          </select>
-        </mat-form-field>
-        </div>
-        <div class="row">
-        <mat-form-field appearance="outline">
-          <mat-label>Select Labels:</mat-label>
-          <select matNativeControl>
-            <option value="" selected>1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-          </select>
-        </mat-form-field>
-        </div>
-        <!-- Application Prospects -->
-      </form>
-      <mat-card-actions>
-        <button class="mat-raised-button  mat-accent" routerLink="/home/outreach/addcampaign/stepone">Back</button>
-        <button class="mat-raised-button  mat-primary" routerLink="/home/outreach/addcampaign/stepthree">Next</button>
-      </mat-card-actions>
-    </mat-card-content>
-  </mat-card>
+    <mat-card>
+      <mat-card-title>Component 2</mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="AddCampaignFormTwo">
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Choose Calender Schedule:</mat-label>
+              <select matNativeControl formControlName="schedule">
+                <option value="" selected>1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+                <option value="">5</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field appearance="outline">
+              <mat-label>Select Labels:</mat-label>
+              <select matNativeControl formControlName="labels">
+                <option value="" selected>1</option>
+                <option value="">2</option>
+                <option value="">3</option>
+                <option value="">4</option>
+              </select>
+            </mat-form-field>
+          </div>
+          <!-- Application Prospects -->
+        </form>
+        <mat-card-actions>
+          <button class="mat-raised-button  mat-accent" routerLink="/home/outreach/addcampaign/stepone">Back</button>
+          <button class="mat-raised-button  mat-primary" routerLink="/home/outreach/addcampaign/stepthree">Next</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
   </div>
 </div>

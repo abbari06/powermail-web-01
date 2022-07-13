@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { ContactsListComponent } from './pages/prospects/contacts-list/contacts-list.component';
@@ -14,42 +14,71 @@ import { EditCampaignComponent } from './pages/outreach/edit-campaign/edit-campa
 import { CampaignSettingsComponent } from './pages/outreach/edit-campaign/pages/campaign-settings/campaign-settings.component';
 import { CampaignMessagesComponent } from './pages/outreach/edit-campaign/pages/campaign-messages/campaign-messages.component';
 import { CampaignStatsComponent } from './pages/outreach/edit-campaign/pages/campaign-stats/campaign-stats.component';
+import { MailAccountsComponent } from './pages/settings/mail-accounts/mail-accounts.component';
+import { AllSchedulesComponent } from './pages/settings/all-schedules/all-schedules.component';
+import { ProfileComponent } from './pages/settings/profile/profile.component';
+import { BillingComponent } from './pages/settings/billing/billing.component';
 const routes: Routes = [
   {
-    path: '', component: HomeComponent, children:
-      [
-        { path: 'dashboard', component: DashboardComponent },
-        { path: 'contacts', component: ContactsListComponent },
-        { path: 'prospects', component: ProspectsLabelsListComponent },
-        {
-          path: 'outreach', children: [
-            { path: '', component: OutreachListComponent },
-            {path:'editcampaign', component:EditCampaignComponent, children:[
-              {path:'settings', component:CampaignSettingsComponent},
-              {path:'messages', component:CampaignMessagesComponent},
-              {path:'stats', component:CampaignStatsComponent},
-              {path:'', redirectTo:'messages', pathMatch:'full'}
-            ]},
+    path: '',
+    component: HomeComponent,
+    children: [
+      { path: 'dashboard', component: DashboardComponent },
+      { path: 'contacts', component: ContactsListComponent },
+      { path: 'prospects', component: ProspectsLabelsListComponent },
+      {
+        path: 'outreach',
+        children: [
+          { path: '', component: OutreachListComponent },
+          {
+            path: 'editcampaign',
+            component: EditCampaignComponent,
+            children: [
+              { path: 'settings', component: CampaignSettingsComponent },
+              { path: 'messages', component: CampaignMessagesComponent },
+              { path: 'stats', component: CampaignStatsComponent },
+              { path: '', redirectTo: 'messages', pathMatch: 'full' },
+            ],
+          },
 
-            {
-              path: 'addcampaign', component: WizardStepperComponent, children: [
-                { path: 'stepone', component: StepOneComponent },
-                { path: 'steptwo', component: StepTwoComponent },
-                { path: 'stepthree', component: StepThreeComponent },
-                { path: 'stepfour', component: StepFourComponent },
-                { path: '', redirectTo: 'stepone', pathMatch: 'full' }
-              ]
-            },
-
-          ]
-        },
-        { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
-      ]
-  }
+          {
+            path: 'addcampaign',
+            component: WizardStepperComponent,
+            children: [
+              { path: 'stepone', component: StepOneComponent },
+              { path: 'steptwo', component: StepTwoComponent },
+              { path: 'stepthree', component: StepThreeComponent },
+              { path: 'stepfour', component: StepFourComponent },
+              { path: '', redirectTo: 'stepone', pathMatch: 'full' },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'settings',
+        children: [
+          { path: 'mailaccounts', component: MailAccountsComponent },
+          {
+            path: 'schedules',
+            component: AllSchedulesComponent,
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent,
+          },
+          {
+            path: 'billing',
+            component: BillingComponent,
+          },
+        ],
+      },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class HomeRoutingModule { }
+export class HomeRoutingModule {}

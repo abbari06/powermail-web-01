@@ -1,17 +1,17 @@
 <div>
     <div class="center">
-        <p> Add New Contact</p>
+        <p> {{heading}}</p>
     </div>
     <mat-card-content>
         <form [formGroup]="addContact">
             <div class="col-sm-6">
                 <mat-form-field>
                     <mat-label>FirstName</mat-label>
-                    <input type="email" matInput formControlName="firstname" autofocus>
+                    <input type="text" matInput formControlName="firstName" autofocus>
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>Email</mat-label>
-                    <input type="text" matInput formControlName="email" autofocus>
+                    <input type="email" matInput formControlName="email">
                     <mat-error>
                         Please enter a valid email.
                     </mat-error>
@@ -19,19 +19,59 @@
 
                 <mat-form-field>
                     <mat-label>Company</mat-label>
-                    <input type="text" matInput formControlName="company" autofocus>
+                    <input type="text" matInput formControlName="company">
                 </mat-form-field>
             </div>
             <div class="col-sm-6">
                 <mat-form-field>
                     <mat-label> LastName</mat-label>
-                    <input type="text" matInput formControlName="lastname" autofocus>
+                    <input type="text" matInput formControlName="lastName">
                 </mat-form-field>
+                <div *ngIf="setSelect">
 
-                <mat-form-field>
-                    <mat-select formControlName="labels" autofocus></mat-select>
-                    <mat-label>Select Labels</mat-label>
-                </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Select Labels</mat-label>
+                        <mat-select [formControl]="previousLabels" multiple>
+                            <mat-select-trigger>
+                                <mat-chip-list>
+                                    <mat-chip *ngFor="let label of previousLabels.value " [removable]="true"
+                                        (removed)="onPreviousLabelRemoved(label)"
+                                        [ngStyle]="{ 'background': label.colorHex }" selected>
+                                        {{ label.name}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let label of allLabels"
+                                [value]="{id:label.id,name:label.name,colorHex:label.colorHex}">
+                                <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{ label.name }}</mat-chip>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <ng-container *ngIf="!setSelect">
+                    <mat-form-field class="example-chip-list">
+                        <mat-select [compareWith]="compareFn" [formControl]="previousLabels" multiple
+                            (selectionChange)="changeClient($event.value)">
+
+                            <mat-select-trigger>
+                                <mat-chip-list>
+                                    <mat-chip *ngFor="let label of previousLabels.value " [removable]="true"
+                                        (removed)="onPreviousLabelRemoved(label)"
+                                        [ngStyle]="{ 'background': label.colorHex }" selected appearance="fill">
+                                        {{ label.name}}
+                                        <mat-icon matChipRemove>cancel</mat-icon>
+                                    </mat-chip>
+                                </mat-chip-list>
+                            </mat-select-trigger>
+                            <mat-option *ngFor="let label of allLabels"
+                                [value]="{name:label.name,id:label.id,colorHex:label.colorHex}">
+                                <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{ label.name }}</mat-chip>
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </ng-container>
 
                 <mat-form-field>
 
@@ -41,7 +81,8 @@
             </div>
         </form>
         <div class="footer">
-            <button mat-flat-button color="primary" style="float:right">Save</button>
+            <button mat-flat-button color="primary" style="float:right" (click)="addSingleContact()"
+                [mat-dialog-close]="true" [disabled]="!addContact.valid">{{actionButton}}</button>
             <button mat-flat-button [mat-dialog-close]="true" color="warn" style="float:left">Cancel</button>
         </div>
     </mat-card-content>

@@ -13,6 +13,9 @@ import {
 } from '@angular/material/dialog';
 import { CsvMappingComponent } from '../csv-importer/csv-mapping/csv-mapping.component';
 import { AddSingleProspectComponent } from '../add-single-prospect/add-single-prospect.component';
+import Swal from 'sweetalert2';
+import { ProspectLabelService } from 'src/app/core/services/prospect-label/prospect-label.service';
+import { FormControl } from '@angular/forms';
 export interface User {
   fName: string;
   lName: string;
@@ -28,6 +31,13 @@ export interface User {
   styleUrls: ['./contacts-list.component.scss'],
 })
 export class ContactsListComponent implements OnInit, AfterViewInit {
+  addBulklabelsForm = new FormControl('');
+  user = {
+    id: undefined,
+  };
+  userAccount = {
+    id: undefined,
+  };
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   @ViewChild(MatSort) set matSort(sort: MatSort) {
@@ -93,28 +103,39 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   payload = new payload();
   constructor(
     private prospectesService: ProspectesService,
-    public dialog: MatDialog
-  ) // private modalService: NgbModal,
-  {}
+    public dialog: MatDialog,
+    private prospectLabelService: ProspectLabelService
+  ) {}
   ngAfterViewInit(): void {
     this.getAllProspectes();
     this.dataSource.paginator = this.paginator;
   }
 
   displayStyle = 'none';
+  displayStyleRemoveLabels = 'none';
 
   openPopup() {
+    this.fetchLabels();
     this.displayStyle = 'block';
   }
   closePopup() {
+    this.getAllProspectes();
     this.displayStyle = 'none';
+  }
+  openRemovePopup() {
+    this.showSelectedLabels();
+    this.displayStyleRemoveLabels = 'block';
+  }
+  closeRemovePopup() {
+    this.getAllProspectes();
+    this.displayStyleRemoveLabels = 'none';
   }
   ngOnInit(): void {}
   getAllProspectes() {
     this.payload.limit = this.pageSize;
     this.payload.page = this.currentPage;
-    if (this.payload.orderBy == undefined) {
-      this.payload.orderBy = '-modifiedBy';
+    if (this.payload.orderBy === undefined) {
+      this.payload.orderBy = '-modifiedAt';
     }
     var user = JSON.parse(localStorage.getItem('user'));
     var userAccount = JSON.parse(localStorage.getItem('userprofile'));
@@ -126,6 +147,7 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
       next: (res: any) => {
         console.log(res);
         this.dataSource.data = res.content;
+        console.log(this.dataSource);
         setTimeout(() => {
           this.paginator.pageIndex = this.currentPage;
           this.paginator.length = res.totalElements;
@@ -136,6 +158,28 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
       },
     });
   }
+  allLabels = [];
+  fetchLabels() {
+    this.payload.limit = 50;
+    this.payload.page = 0;
+    this.payload.orderBy = '-modifiedAt';
+    var user = JSON.parse(localStorage.getItem('user'));
+    var userAccount = JSON.parse(localStorage.getItem('userprofile'));
+    var userId = user.id;
+    var userAccountId = userAccount.id;
+    this.payload.userId = userId;
+    this.payload.userAccountId = userAccountId;
+    this.prospectLabelService.getLabels(this.payload).subscribe({
+      next: (res: any) => {
+        this.allLabels = res.content;
+        console.log(this.allLabels);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
+
   pageChanged(event: PageEvent) {
     console.log({ event });
     this.pageSize = event.pageSize;
@@ -159,7 +203,7 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
     } else if (event.direction === 'desc') {
       this.payload.orderBy = '-' + event.active;
     } else {
-      this.payload.orderBy = '-modifiedBy';
+      this.payload.orderBy = '-modifiedAt';
     }
     this.getAllProspectes();
   }
@@ -177,12 +221,177 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
       });
   }
   openContactDialogue() {
-    const dialogRef = this.dialog
-      .open(AddSingleProspectComponent, {
-        width: '50%',
-        height: '50%',
-      })
-      .afterClosed()
-      .subscribe((val) => {});
+    const dialogRef = this.dialog.open(AddSingleProspectComponent, {
+      width: '50%',
+      height: '45%',
+    });
+    dialogRef.afterClosed().subscribe((val) => {
+      if (val === 'submit') {
+        this.getAllProspectes();
+      }
+    });
+  }
+  editProspect(row) {
+    console.log(row);
+    const dialogRef = this.dialog.open(AddSingleProspectComponent, {
+      width: '50%',
+      height: '45%',
+      data: row,
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.getAllProspectes();
+    });
+  }
+  deleteSingleProspect(row) {
+    console.log(row);
+    var userId = row.userId;
+    var userAccountId = row.userAccountId;
+    var prospects = [
+      {
+        id: row.id,
+      },
+    ];
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.prospectesService
+          .deleteProspects(userId, userAccountId, prospects)
+          .subscribe({
+            next: (res: any) => {
+              console.log(res);
+              Swal.fire('Deleted!', 'Your Label has been deleted.', 'success');
+              this.getAllProspectes();
+            },
+            error: (error: any) => {
+              console.log(error);
+            },
+          });
+      }
+    });
+  }
+  addBulkLabels() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.userAccount = JSON.parse(localStorage.getItem('userprofile'));
+    this.prospectesService
+      .addBulkLabels(
+        this.user.id,
+        this.userAccount.id,
+        this.addBulklabelsForm.value,
+        this.selection.selected
+      )
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          Swal.fire('Added!', 'Labels Added Successfully!', 'success');
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
+    this.closePopup();
+  }
+  deleteBulkProspects() {
+    console.log(this.selection.selected);
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.userAccount = JSON.parse(localStorage.getItem('userprofile'));
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.prospectesService
+          .deleteProspects(
+            this.user.id,
+            this.userAccount.id,
+            this.selection.selected
+          )
+          .subscribe({
+            next: (res: any) => {
+              console.log(res);
+              Swal.fire(
+                'Deleted!',
+                'Your Labels Have Been Deleted.',
+                'success'
+              );
+              this.getAllProspectes();
+            },
+            error: (error: any) => {
+              console.log(error);
+            },
+          });
+      }
+    });
+  }
+  onLabelRemoved(label) {
+    const categories = this.addBulklabelsForm.value as string[];
+    this.removeFirst(categories, label);
+    // To trigger change detection
+    // this.selectedProspectLabels
+  }
+  private removeFirst(categories, cat): void {
+    const index = categories.indexOf(cat);
+    if (index !== -1) {
+      categories.splice(index, 1);
+      this.addBulklabelsForm.setValue(categories);
+    }
+  }
+  selectedLabelsForm = new FormControl();
+  selectedLabels = [];
+  showSelectedLabels() {
+    console.log(this.selection.selected);
+    var labels = [];
+    for (let label of this.selection.selected) {
+      labels.push(...label.labels);
+    }
+    var filterLabels = Array.from(
+      labels.reduce((m, t) => m.set(t.name, t), new Map()).values()
+    );
+
+    this.selectedLabels = filterLabels;
+    this.selectedLabelsForm.setValue(this.selectedLabels);
+  }
+  labelsRemoved = [];
+  onBulkLabelRemove(label) {
+    console.log(label);
+    this.labelsRemoved.push(label);
+    const index = this.selectedLabels.indexOf(label);
+    if (index !== -1) {
+      this.selectedLabels.splice(index, 1);
+      this.selectedLabelsForm.setValue(this.selectedLabels);
+    }
+    console.log(this.selectedLabelsForm.value);
+  }
+  removeBulkLabels() {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.userAccount = JSON.parse(localStorage.getItem('userprofile'));
+    this.prospectesService
+      .removeBulkLabels(
+        this.user.id,
+        this.userAccount.id,
+        this.labelsRemoved,
+        this.selection.selected
+      )
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          Swal.fire('Removed!', 'Labels Removed Successfully!', 'success');
+        },
+        error: (error: any) => {
+          console.log(error);
+        },
+      });
+    this.closeRemovePopup();
   }
 }

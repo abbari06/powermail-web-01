@@ -48,6 +48,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
   pageSize = 10;
   currentPage = 0;
   pageSizeOptions: number[] = [10, 20, 30, 50];
+  disableBtn: boolean = true;
 
   addLabel: string;
   labelDesc: string;
@@ -70,10 +71,17 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
+    if (numSelected > 0) {
+      this.disableBtn = false;
+    } else {
+      this.disableBtn = true;
+    }
     const numRows = this.dataSource.data.length;
-    // console.log(numSelected);
-
-    return numSelected === numRows;
+    if (numSelected === numRows) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
@@ -215,7 +223,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
           .subscribe({
             next: (res: any) => {
               console.log(res);
-              Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+              Swal.fire('Deleted!', 'Your Label has been deleted.', 'success');
               this.fetchAllLabels();
             },
             error: (error: any) => {
@@ -254,7 +262,11 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
           .subscribe({
             next: (res: any) => {
               console.log(res);
-              Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+              Swal.fire(
+                'Deleted!',
+                'Your Labels Have Been Deleted.',
+                'success'
+              );
               this.fetchAllLabels();
             },
             error: (error: any) => {

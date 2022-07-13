@@ -1,0 +1,150 @@
+<!-- <div class="container">
+    <mat-card class="mat-elevation-z4 card" class="mt-3" style="width: 100%">
+        <div class="row">
+            <label class="lbsetting">Add Schedule</label>
+        </div>
+
+        <mat-divider class="mt-3"></mat-divider>
+
+        <div class="row mt-5">
+            <div class="col-sm-6" style="padding-left: 5px">
+                <mat-form-field appearance="outline">
+                    <mat-label>Schedule Name</mat-label>
+                    <input [(ngModel)]="calender.name" matInput />
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 mt-2">
+                <ng-moment-timezone-picker class="timezone" [getUserZone]="true" [customPlaceholderText]="'Timezone'"
+                    [(ngModel)]="timezone">
+                </ng-moment-timezone-picker>
+            </div>
+        </div>
+
+        <div style="padding-top: 10px"></div>
+
+        <div>
+            <button mat-flat-button color="warn" mat-dialog-close>
+                Cancel
+            </button>
+            <button style="float: right" mat-flat-button color="primary" (click)="addNewSchedule()" mat-dialog-close>
+                Save
+            </button>
+        </div>
+
+        <br />
+
+        <div *ngFor="let schedule of calender.schedules">
+            <br />
+            <mat-card class="mat-elevation-z4 card" style="
+            width: 100%;
+            padding-top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 0px;
+          ">
+                <div class="row">
+                    <div class="col-sm-2 mt-3" style="padding-top: 6px">
+                        <mat-checkbox (change)="checkbox(schedule)" color="warn" class="mt-4 labelstyle"
+                            [(ngModel)]="schedule.active">&nbsp;&nbsp;{{ schedule.day | uppercase }}
+                        </mat-checkbox>
+                    </div>
+
+                    <div class="col-sm-1" style="padding-top: 42px">
+                        <mat-icon style="font-size: 32px" color="warn">east</mat-icon>
+                    </div>
+
+                    <div class="col-sm-1 mt-5 labelstyle">FROM</div>
+
+                    <div class="col-sm-3" *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.from"></ngb-timepicker>
+                    </div>
+
+                    <div class="col-sm-1 mt-5 labelstyle">TO</div>
+
+                    <div class="col-sm-3" *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.to"></ngb-timepicker>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </mat-card>
+
+    <br />
+    <br />
+</div> -->
+<div>
+    <mat-card class="mat-elevation-z4 card" class="mt-3" style="width: 100%">
+        <div class="row">
+            <label class="lbsetting">{{heading}}</label>
+        </div>
+
+        <mat-divider class="mt-3"></mat-divider>
+
+        <div class="row mt-5">
+            <div class="col-sm-6" style="padding-left: 5px">
+                <mat-form-field appearance="outline">
+                    <mat-label>Schedule Name</mat-label>
+                    <input [(ngModel)]="calender.name" matInput />
+                </mat-form-field>
+            </div>
+
+            <div class="col-sm-6 mt-2">
+                <ng-moment-timezone-picker class="timezone" [getUserZone]="true" [customPlaceholderText]="'Timezone'"
+                    [(ngModel)]="timezone">
+                </ng-moment-timezone-picker>
+            </div>
+        </div>
+
+        <div style="padding-top: 10px"></div>
+
+        <div>
+            <button mat-flat-button mat-dialog-close color="warn">
+                Cancel
+            </button>
+            <button style="float: right" mat-flat-button color="primary" (click)="addNewSchedule()" mat-dialog-close>
+                {{btn}}
+            </button>
+        </div>
+
+        <br />
+
+        <div *ngFor="let schedule of calender.schedules">
+            <br />
+            <mat-card class="mat-elevation-z4 card" style="
+            width: 100%;
+            padding-top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 0px;
+          ">
+                <div class="row">
+                    <div class="col-sm-2 mt-3" style="padding-top: 6px">
+                        <mat-checkbox (change)="checkbox(schedule)" color="warn" class="mt-4 labelstyle"
+                            [(ngModel)]="schedule.active">&nbsp;&nbsp;{{ schedule.day | uppercase }}
+                        </mat-checkbox>
+                    </div>&nbsp;&nbsp;
+
+                    <div class="col-sm-1" style="padding-top: 30px">
+                        <mat-icon style="font-size: 32px" color="warn">east</mat-icon>
+                    </div>
+
+                    <div class="col-sm-1 mt-5 labelstyle">FROM</div>
+
+                    <div class="col-sm-3" *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.from"></ngb-timepicker>
+                    </div>
+
+                    <div class="col-sm-1 mt-5 labelstyle">TO</div>
+
+                    <div class="col-sm-3" *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.to"></ngb-timepicker>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+    </mat-card>
+
+    <br />
+    <br />
+</div>

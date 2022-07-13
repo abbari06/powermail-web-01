@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value);
     setTimeout(() => {
       var isError = this.authService.loginError;
+      this.loading = false;
       var message = this.authService.getErrorMessage();
       console.log(message);
       if (isError) {

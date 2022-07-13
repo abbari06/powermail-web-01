@@ -16,6 +16,20 @@
 
   <!-- <link href="toastr.css" rel="stylesheet" />
   <script src="toastr.js"></script> -->
+  <script src="https://apis.google.com/js/platform.js?onload=start" defer></script>
+  <script>
+    function start() {
+      gapi.load("auth2", function () {
+        auth2 = gapi.auth2.init({
+          client_id:
+            "119036087693-6e08lvgseja3sl2bbb8ndpt993teog7b.apps.googleusercontent.com",
+          scope:
+            "https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile  https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/contacts.readonly",
+          approval_prompt: "force",
+        });
+      });
+    }
+  </script>
 </head>
 
 <body class="mat-typography">

@@ -1,0 +1,217 @@
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 53px;
+}
+
+// table {
+//   width: 100%;
+//   padding-right: 10px;
+// }
+
+// .mat-column-scheduleName {
+//   width: 15% !important;
+//   padding-left: 10px !important;
+// }
+
+// .mat-column-timezone {
+//   width: 11% !important;
+// }
+
+// .mat-column-actions {
+//   width: 15% !important;
+// }
+
+// .day {
+//   font-size: 11px;
+//   margin-top: 8px;
+// }
+
+// .label {
+//   font-size: 15px;
+//   font-weight: 400;
+//   padding-top: 4px;
+//   padding-right: 6px;
+//   margin-bottom: 10px;
+// }
+
+// .time {
+//   border: 1.5px solid red;
+//   border-radius: 4px;
+//   font-size: 11px;
+//   padding: 2px;
+// }
+
+// mat-row {
+//   line-height: 10px;
+// }
+
+// th.mat-header-cell,
+// td.mat-cell,
+// td.mat-footer-cell {
+//   padding: 0;
+//   border-bottom-width: 1px;
+//   border-bottom-style: solid;
+//   padding-top: 12px;
+//   padding-bottom: 10px;
+//   line-height: 50px;
+// }
+
+// .fl {
+//   float: right;
+//   padding-top: 5px;
+// }
+
+// .ufl {
+//   font-weight: 400;
+// }
+
+// .mat-card {
+//   transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+//   display: block;
+//   position: relative;
+//   padding-left: 10px;
+//   padding-right: 10px;
+//   padding-top: 0px;
+//   padding-bottom: 0px;
+//   border-radius: 4px;
+// }
+
+// .timelbl {
+//   font-weight: 500;
+//   color: #787878;
+// }
+
+// .timelbl2 {
+//   font-weight: 500;
+//   color: #787878;
+//   float: right;
+// }
+
+// .frmto {
+//   font-weight: 600;
+//   font-size: 2erm;
+// }
+
+// .mat-card-actions,
+// .mat-card-subtitle,
+// .mat-card-content,
+// .mat-card-title {
+//   margin-bottom: 0px;
+//   display: block;
+// }
+table {
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px !important;
+}
+
+.mat-row {
+  &:hover {
+    background-color: #e9f3ff;
+  }
+  a {
+    color: #3e75ff;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.mat-icon {
+  color: #3e75ff;
+}
+
+@media screen and (max-width: 960px) {
+  .mat-elevation-z8 {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .mat-header-row {
+    display: none;
+  }
+
+  tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .mat-table {
+    background: transparent;
+    * {
+      box-sizing: border-box;
+    }
+
+    .mat-row {
+      display: block;
+      overflow: hidden;
+      height: auto;
+      position: relative;
+      clear: both;
+      box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2),
+        0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12);
+      background-color: #fff;
+      border-radius: 3px;
+      + .mat-row {
+        margin-top: 24px;
+      }
+    }
+
+    .mat-cell {
+      display: block;
+      width: 100%;
+      padding: 0 16px;
+      margin: 16px 0;
+      border: 0 none;
+      &:first-child {
+        padding: 0 48px 0 16px;
+        a {
+          font-size: 20px;
+          // font-weight: 400;
+          color: inherit;
+        }
+        &:before {
+          display: none;
+        }
+      }
+      &.m-card-sub-title {
+        margin-top: -8px;
+        padding: 0 48px 0 16px;
+        color: rgba(0, 0, 0, 0.54);
+      }
+    }
+
+    .has_label_on_mobile {
+      &:before {
+        content: attr(data-label);
+        display: inline;
+        font-weight: normal;
+      }
+    }
+
+    .mat-column-star {
+      width: auto;
+      padding: 8px 0 0 !important;
+      margin: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      &:before {
+        display: none;
+      }
+    }
+  }
+
+  .mat-paginator {
+    margin-top: 24px;
+  }
+}
