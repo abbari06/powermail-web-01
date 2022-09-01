@@ -1,7 +1,7 @@
 export class payload{
     userAccountId:number;
 	userId:number;
-    filters: {}
+    filters: {};
 	page:number;
 	limit:number;
 	orderBy:string;

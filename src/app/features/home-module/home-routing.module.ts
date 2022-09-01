@@ -18,6 +18,7 @@ import { MailAccountsComponent } from './pages/settings/mail-accounts/mail-accou
 import { AllSchedulesComponent } from './pages/settings/all-schedules/all-schedules.component';
 import { ProfileComponent } from './pages/settings/profile/profile.component';
 import { BillingComponent } from './pages/settings/billing/billing.component';
+import { CampaignProspectsComponent } from './pages/outreach/edit-campaign/pages/campaign-prospects/campaign-prospects.component';
 const routes: Routes = [
   {
     path: '',
@@ -26,8 +27,8 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'contacts', component: ContactsListComponent },
       { path: 'prospects', component: ProspectsLabelsListComponent },
-      {
-        path: 'outreach',
+      { path: 'outreach',
+       
         children: [
           { path: '', component: OutreachListComponent },
           {
@@ -36,8 +37,9 @@ const routes: Routes = [
             children: [
               { path: 'settings', component: CampaignSettingsComponent },
               { path: 'messages', component: CampaignMessagesComponent },
+              { path: 'prospects', component: CampaignProspectsComponent },
               { path: 'stats', component: CampaignStatsComponent },
-              { path: '', redirectTo: 'messages', pathMatch: 'full' },
+              { path: '', redirectTo:'messages',pathMatch:'full'},
             ],
           },
 

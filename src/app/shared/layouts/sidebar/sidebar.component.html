@@ -2,17 +2,9 @@
   <mat-nav-list>
     <a mat-list-item routerLink="dashboard" routerLinkActive="list-item-active" (mouseover)="showButton=true"
       (mouseout)="showButton=false" [routerLinkActiveOptions]={exact:true} ngbPopover="Dashboard"
-      triggers="mouseenter:mouseleave" placement="right" (click)="menuTrigger.openMenu()">
-      <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu" place></div>
+      triggers="mouseenter:mouseleave" placement="right">
       <mat-icon>home</mat-icon>
-      <!-- <button mat-button (click)="menuTrigger.openMenu()">Menu
-          <div #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu" place ></div>
-        </button> -->
-      <mat-menu #menu="matMenu" xPosition="after" yPosition="above">
-        <div>
-          <button mat-button>Dashboard</button>
-        </div>
-      </mat-menu>
+   
 
 
     </a>

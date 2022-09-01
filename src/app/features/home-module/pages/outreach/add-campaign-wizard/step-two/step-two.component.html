@@ -1,39 +1,106 @@
 <div class="container">
   <div class="row">
     <mat-card>
-      <mat-card-title>Component 2</mat-card-title>
       <mat-card-content>
         <form [formGroup]="AddCampaignFormTwo">
           <div class="row">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" >
               <mat-label>Choose Calender Schedule:</mat-label>
-              <select matNativeControl formControlName="schedule">
-                <option value="" selected>1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-                <option value="">5</option>
-              </select>
+              <mat-select formControlName="schedule" [compareWith]="compareColors">
+                <mat-option *ngFor="let schedule of allSchedules" [value]="schedule">
+                  {{schedule.name}}
+                </mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
-          <div class="row">
-            <mat-form-field appearance="outline">
-              <mat-label>Select Labels:</mat-label>
-              <select matNativeControl formControlName="labels">
-                <option value="" selected>1</option>
-                <option value="">2</option>
-                <option value="">3</option>
-                <option value="">4</option>
-              </select>
-            </mat-form-field>
-          </div>
-          <!-- Application Prospects -->
         </form>
+          <div class="row">
+            <div class="col-sm-7">
+            <mat-form-field appearance="outline" style="width:100%">
+              <mat-label>Select Labels:</mat-label>
+              <mat-select [formControl]="selectedLabels" multiple (selectionChange)="onLabelSelect($event)" [compareWith]="compareFn">
+                <mat-select-trigger>
+                  <mat-chip-list>
+                      <mat-chip *ngFor="let label of selectedLabels.value" [removable]="true"
+                          (removed)="onLabelRemoved(label)"
+                          [ngStyle]="{ 'background': label.colorHex }" selected>
+                          {{ label.name}}
+                          <mat-icon matChipRemove>cancel</mat-icon>
+                      </mat-chip>
+                  </mat-chip-list>
+              </mat-select-trigger>
+                <mat-option *ngFor="let label of allLabels"
+                    [value]="{id:label.id,name:label.name,colorHex:label.colorHex}">
+                    <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{label.name}}</mat-chip><mat-chip  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</mat-chip>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+          <div class="col-sm-3 mt-4">
+            <span>Applicable Prospects:{{availableProspectes}}</span>
+          </div>
+          <div *ngIf="availableProspectes" class="col-sm-1 mt-3">
+            <button class="mat-raised-button mat-primary" (click)="open(mymodal)">View Prospects</button>
+          </div>
+          </div>
         <mat-card-actions>
-          <button class="mat-raised-button  mat-accent" routerLink="/home/outreach/addcampaign/stepone">Back</button>
-          <button class="mat-raised-button  mat-primary" routerLink="/home/outreach/addcampaign/stepthree">Next</button>
+          <button class="mat-raised-button  mat-accent" (click)="backToStepOne()">Back</button>
+          <button class="mat-raised-button  mat-primary" (click)="addCampaignStepTwo()" >Next</button>
         </mat-card-actions>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Applicable Prospects</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="example-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+      <ng-container matColumnDef="place">
+        <th mat-header-cell *matHeaderCellDef >No</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.place}}</td>
+      </ng-container>
+      <ng-container matColumnDef="firstname">
+        <th mat-header-cell *matHeaderCellDef >First Name</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</td>
+      </ng-container>
+      <ng-container matColumnDef="lastname">
+        <th mat-header-cell *matHeaderCellDef >Last Name</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</td>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef >Email</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.email}}</td>
+      </ng-container>
+      <ng-container matColumnDef="company">
+        <th mat-header-cell *matHeaderCellDef >Company</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.company}}</td>
+      </ng-container>
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef >Position</th>
+        <td mat-cell *matCellDef="let prospect"> {{ prospect.position}}</td>
+      </ng-container>
+      <ng-container matColumnDef="labels">
+        <th mat-header-cell *matHeaderCellDef >Labels</th>
+        <td mat-cell *matCellDef="let prospect">
+          <mat-chip-list>
+            <ng-container *ngFor="let label of prospect.labels">
+              <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{label.name}}&nbsp; </mat-chip>
+            </ng-container>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table> 
+  </div>
+  <div>
+    <mat-paginator #paginator [length]="availableProspectes" [pageIndex]="currentPage" [pageSize]="pageSize"
+    (page)="pageChanged($event)" aria-label="Select page">
+  </mat-paginator>
+  </div>
+</ng-template>

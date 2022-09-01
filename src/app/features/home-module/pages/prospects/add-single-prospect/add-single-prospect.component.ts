@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ProspectLabelService } from 'src/app/core/services/prospect-label/prospect-label.service';
 import { payload } from '../contacts-list/modals/payload-modal';
@@ -11,6 +11,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
   selector: 'app-add-single-prospect',
   templateUrl: './add-single-prospect.component.html',
   styleUrls: ['./add-single-prospect.component.scss'],
+  // encapsulation: ViewEncapsulation.None,
 })
 export class AddSingleProspectComponent implements OnInit {
   previousLabels = new FormControl();
@@ -106,7 +107,7 @@ export class AddSingleProspectComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500,
           });
-          this.dialogRef.close('submit');
+          this.dialogRef.close("submit");
         },
         error: (err) => {
           Swal.fire({
@@ -157,17 +158,17 @@ export class AddSingleProspectComponent implements OnInit {
       next: (res: any) => {
         // this.totalAccounts.push(res);
         console.log(res);
+        this.dialogRef.close("submit");
       },
       error: (error: any) => {
         //alert(error);
         console.log(error);
+        this.dialogRef.close("submit");
       },
     });
   }
   compareFn(o1: any, o2: any): boolean {
-    // if possible compare by object's name, and not by reference.
     return o1 && o2 ? o1.name === o2.name : o2 === o2;
-    //if (o1.name === o2.name) return true;
   }
   selectedOptions = false;
   changeClient(event) {

@@ -1,0 +1,33 @@
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+  height: 53px;
+
+}
+
+.manage_billing {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    border: 1px dotted gray;
+    padding: 10px;
+    border-radius: 3px;
+    /* background: aliceblue; */
+  }
+  .main{
+    height: 90vh;
+  }
+  .icon{
+    color: white;
+  }
+
+  .sub-title{
+    font-weight: 500;
+    font-size: 15px;
+  }
+  .example-card {
+    max-width: 400px;
+  }
+  .mat-card-title {
+    font-size: 15px;
+    font-weight: 500;
+}

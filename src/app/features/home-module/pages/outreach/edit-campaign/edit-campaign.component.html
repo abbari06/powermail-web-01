@@ -1,14 +1,104 @@
-<mat-toolbar fxLayout>
-    <div class="container">
+
+
+    <div class="row mt-2">
+        <mat-accordion>       
+                      <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <div class="col-sm-2">
+                                    {{campaignName}}
+                                </div>
+                                <div class="col-sm-3">
+                                    <!-- <span>
+                                        <mat-chip  *ngFor="let label of labels" [ngStyle]="{ 'background': label.colorHex }" style="float:none;" > {{label.name}} </mat-chip>
+                                    </span> -->
+                                    
+                                        <mat-chip-list>
+                                           
+                                             <ng-container *ngFor="let label of labels;let i=index" >
+                                                <mat-chip *ngIf="i<3"  [ngStyle]="{ 'background': label.colorHex }"> 
+                                                {{label.name}}
+                                            </mat-chip>
+                                             </ng-container>  
+                                           
+                                        </mat-chip-list>
+                                      
+                                   
+                                  
+                                </div>
+                                <div class="col-sm-6" fxHide.xs>
+                                    Schedule&nbsp;{{scheduleName}} <ng-container *ngFor="let day of previewData;let i=index">
+                              
+                                        <ng-container *ngIf="day.active">
+                                          
+                                          <ng-container *ngFor="let time of day.times">
+                                          <ng-container *ngIf="i<2">{{day.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}} &nbsp;&nbsp;</ng-container> 
+                                           </ng-container>
+                                        </ng-container>
+                                      </ng-container>
+                                </div>
+                               
+                            
+                            </mat-expansion-panel-header>
+                            <div class="example-chip-list">
+                                <mat-card>
+                                    <mat-card-title>Labels
+                                        
+                                        <button mat-button (click)="editLabels()">
+                                            <mat-icon class="edit" >edit</mat-icon>
+                                          </button>
+                                        
+                                    </mat-card-title>
+                                    
+                                <mat-chip-list>
+                                    <mat-chip  *ngFor="let label of labels" [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
+                                </mat-chip-list>
+                                </mat-card>
+                            </div>
+                           <div class="mt-2">
+                            <mat-card>
+                                <mat-card-title>
+                                    Schedule
+                                    <button mat-button (click)="editSchedule()">
+                                        <mat-icon class="edit" >edit</mat-icon>
+                                      </button>
+                                </mat-card-title>
+                                <mat-card-subtitle>
+                                    {{scheduleName}}
+                                </mat-card-subtitle>
+                                <ng-container *ngFor="let day of previewData">
+                                  
+                                    <ng-container *ngIf="day.active" >
+                                      
+                                      <ng-container *ngFor="let time of day.times">
+                                       {{day.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}}
+                                       </ng-container>
+                                    </ng-container>
+                                  </ng-container>
+                               </mat-card>
+                           </div>
+                           
+                            
+                          </mat-expansion-panel>
+                    </mat-accordion>
+    </div>
+
+
+    
+    <div class="container mt-2">
+        
         <div class="row">
+            
             <nav class="nav nav-pills nav-justified">
-                <a class="nav-link" routerLink="messages" routerLinkActive="active">Messages&nbsp;<mat-icon>message
+                <a class="nav-link" [routerLink]="['messages']" [queryParams]="{ id: id}" routerLinkActive="active">Messages&nbsp;<mat-icon>message
                     </mat-icon></a>
-                <a class="nav-link" routerLink="settings" routerLinkActive="active">Settings<mat-icon>settings
+                <a class="nav-link" [routerLink]="['settings']" [queryParams]="{ id: id}" routerLinkActive="active">Settings<mat-icon>settings
                     </mat-icon></a>
-                <a class="nav-link" routerLink="stats" routerLinkActive="active">Stats <mat-icon></mat-icon></a>
+                    <a class="nav-link" [routerLink]="['prospects']" [queryParams]="{ id: id}" routerLinkActive="active">Prospects<mat-icon>contacts
+                    </mat-icon></a>
+                <a class="nav-link"  [routerLink]="['stats']" [queryParams]="{ id: id}" routerLinkActive="active">Stats</a>
             </nav>
+      
         </div>
     </div>
-</mat-toolbar>
+
 <router-outlet></router-outlet>

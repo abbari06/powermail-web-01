@@ -8,6 +8,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { SetNewPasswordComponent } from './pages/set-new-password/set-new-password.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -16,12 +17,14 @@ import { SetNewPasswordComponent } from './pages/set-new-password/set-new-passwo
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    SetNewPasswordComponent
+    SetNewPasswordComponent,
+    
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
-    SharedModule
+    SharedModule,
+    MatDialogModule
   ]
 })
 export class AuthModule { }

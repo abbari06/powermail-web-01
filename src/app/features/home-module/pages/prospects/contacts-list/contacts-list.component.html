@@ -1,90 +1,15 @@
-<!-- <div class="card-header container-fluid">
-  <span class="title">
-    Contact
-  </span>
-</div>
-
-<div class="card-header sub-header mt-3">
-  <mat-form-field class="example-full-width">
-    <mat-label>Search</mat-label>
-    <input matInput placeholder="Ex.John Dev">
-  </mat-form-field> &nbsp; &nbsp;
-  <mat-form-field style=" width: 10%;">
-    <mat-label>Search by</mat-label>
-    <mat-select>
-      <mat-option value="email">
-        Email
-      </mat-option>
-      <mat-option value="firstname">
-        Firstname
-      </mat-option>
-      <mat-option value="lastname">
-        Lastname
-      </mat-option>
-      <mat-option value="labels">
-        Labels
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <span class="spacer">
-  </span>
-  
-  <button mat-raised-button color="primary" #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="menuu">
-    <mat-icon>add</mat-icon>New<mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
-  </button>&nbsp;
-  <button mat-raised-button color="accent">Bulk Operations</button>
-</div>
-<mat-menu mat-button #menuu="matMenu">
-  <button mat-menu-item>Add single prospect</button>
-  <mat-divider></mat-divider>
-  <button mat-menu-item>Import from CSV</button>
-</mat-menu> -->
-<!--
-<button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Open My Modal</button>
-
-<ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    This is example from ItSolutionStuff.com
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
-  </div>
-</ng-template>
--->
 
 
-<!-- <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Import Your Contacts File</h4>
-      </div>
-      <div class="modal-body">
-        <p> <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)"
-            accept=".xlsx,.xls,.csv" /></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="closePopup()">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-<mat-toolbar fxLayout="row">
+<mat-toolbar fxLayout="row" >
   <span class="searchbar" style="font-size:medium;" fxFlex>
     <mat-form-field class="example-full-width">
       <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event)">
+      <button mat-button *ngIf="searched" matSuffix mat-icon-button aria-label="clear" 
+      (click)="onSearchClear()"
+      >
+      <mat-icon>close</mat-icon>
+    </button>
+      <input matInput #search (keyup)="applyFilter($event)">
     </mat-form-field> &nbsp;
     <mat-form-field>
       <mat-label>Search by</mat-label>
@@ -124,7 +49,7 @@
       <button mat-menu-item [matMenuTriggerFor]="userMenu">
         <mat-icon>add</mat-icon>New Contact
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="userMenu1">
+      <button mat-menu-item [disabled]="disableBtn" [matMenuTriggerFor]="userMenu1">
         <mat-icon>toc</mat-icon>Bulk Operations
       </button>
 
@@ -167,79 +92,128 @@
 </mat-menu>
 
 <!-- here prospect is the arr of values defined in variable prospect in .ts -->
-<div>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="email"
+<div class="example-container">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="email"
     (matSortChange)="sort($event)" matSortDirection="asc">
 
     <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
-      <th mat-header-cell *matHeaderCellDef>
+      <mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
           [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
         </mat-checkbox>
-      </th>
-      <td mat-cell *matCellDef="let row">
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
         <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
           [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
         </mat-checkbox>
-      </td>
+      </mat-cell>
     </ng-container>
 
     <!-- construct the columns -->
     <ng-container matColumnDef="place">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>No</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.place}}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>No</mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.place}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="firstname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>First Name</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</td>
+    <ng-container matColumnDef="firstname" >
+     
+      <mat-header-cell *matHeaderCellDef mat-sort-header> First Name <div>
+        <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+      </div>
+    </mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</mat-cell>>
     </ng-container>
 
     <ng-container matColumnDef="lastname">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</mat-cell>>
     </ng-container>
 
     <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.email}}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Email
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.email}}</mat-cell>>
     </ng-container>
 
     <ng-container matColumnDef="company">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.company}}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Company
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.company}}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Position</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.position}}</td>
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Position
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.position}}</mat-cell>
     </ng-container>
 
 
     <ng-container matColumnDef="labels">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Labels</th>
-      <td mat-cell *matCellDef="let prospect">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Labels
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>>
+      <mat-cell *matCellDef="let prospect">
+
         <ng-container *ngFor="let label of prospect.labels">
-          <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
+          <mat-chip  [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
         </ng-container>
-      </td>
+          
+      </mat-cell>
     </ng-container>
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let prospect">
+      <mat-header-cell *matHeaderCellDef>Actions
+        <div>
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        </div>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let prospect">
         <button mat-button>
+          <mat-icon class="edit" (click)="editProspect(prospect)">edit
+            <div>
+              <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+            </div>
+          </mat-icon>
+        </button>
+       <button mat-button>
+        <mat-icon color="warn" (click)="deleteSingleProspect(prospect)">delete
+          <div>
+            <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+          </div>
+        </mat-icon>
+       </button>
+        
+        <!-- <button mat-button>
           <mat-icon class="edit" (click)="editProspect(prospect)">edit</mat-icon>
         </button>&nbsp;
-        <button mat-button>
+        <button mat-button class="dlt">
           <mat-icon color="warn" (click)="deleteSingleProspect(prospect)">delete</mat-icon>
-        </button>
+        </button> -->
+        </mat-cell>
     </ng-container>
 
     <!-- add a table row, if not added..rows will not be rendered inside the table -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
+  </mat-table>
+  
+</div>
+<div>
   <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
   </mat-paginator>
@@ -263,7 +237,7 @@
             </mat-chip-list>
           </mat-select-trigger>
           <mat-option *ngFor="let label of allLabels" [value]="{id:label.id,name:label.name,color:label.colorHex}">
-            <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{ label.name }}</mat-chip>
+            <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{ label.name }}</mat-chip><mat-chip  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</mat-chip>
           </mat-option>
         </mat-select>
       </div>

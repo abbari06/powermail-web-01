@@ -22,6 +22,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatChipsModule } from '@angular/material/chips';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 const MaterialComponent = [
   MatToolbarModule,
   MatIconModule,
@@ -46,6 +47,7 @@ const MaterialComponent = [
   MatSortModule,
   MatChipsModule,
   NgbModule,
+  MatProgressBarModule
 ];
 
 @NgModule({

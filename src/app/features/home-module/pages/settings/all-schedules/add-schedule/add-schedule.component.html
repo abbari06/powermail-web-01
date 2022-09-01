@@ -90,7 +90,7 @@
             </div>
 
             <div class="col-sm-6 mt-2">
-                <ng-moment-timezone-picker class="timezone" [getUserZone]="true" [customPlaceholderText]="'Timezone'"
+                <ng-moment-timezone-picker class="timezone" [getUserZone]="selectTimezone" [customPlaceholderText]="'Timezone'"
                     [(ngModel)]="timezone">
                 </ng-moment-timezone-picker>
             </div>
@@ -109,7 +109,7 @@
 
         <br />
 
-        <div *ngFor="let schedule of calender.schedules">
+        <div *ngFor="let schedule of calender.schedules" fxHide.xs>
             <br />
             <mat-card class="mat-elevation-z4 card" style="
             width: 100%;
@@ -125,8 +125,8 @@
                         </mat-checkbox>
                     </div>&nbsp;&nbsp;
 
-                    <div class="col-sm-1" style="padding-top: 30px">
-                        <mat-icon style="font-size: 32px" color="warn">east</mat-icon>
+                    <div class="col-sm-1" style="padding-top: 40px">
+                        <mat-icon style="font-size: 28px" color="warn" fxHide.xs>east</mat-icon>
                     </div>
 
                     <div class="col-sm-1 mt-5 labelstyle">FROM</div>
@@ -141,6 +141,37 @@
                         <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.to"></ngb-timepicker>
                     </div>
                 </div>
+            </mat-card>
+        </div>
+        <div *ngFor="let schedule of calender.schedules" fxHide.lg fxShow.xs>
+            <br />
+            <mat-card class="mat-elevation-z4 card" style="
+            width: 100%;
+            padding-top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-bottom: 0px;
+          " >
+                
+                        <mat-checkbox (change)="checkbox(schedule)" color="warn" class="mt-4 labelstyle"
+                            [(ngModel)]="schedule.active">&nbsp;&nbsp;{{ schedule.day | uppercase }}
+                        </mat-checkbox>
+                  
+
+                    
+
+                    <div >FROM</div>
+
+                    <div  *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.from"></ngb-timepicker>
+                    </div>
+
+                    <div>TO</div>
+
+                    <div *ngFor="let time of schedule.times">
+                        <ngb-timepicker [minuteStep]="30" [meridian]="true" [(ngModel)]="time.to"></ngb-timepicker>
+                    </div>
+                
             </mat-card>
         </div>
     </mat-card>

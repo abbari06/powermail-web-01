@@ -42,10 +42,19 @@ img {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
 }
-
-.card:hover {
-  box-shadow: 0 0 10px rgba(226, 28, 28, 0.84), 0 10px 10px rgba(0, 0, 0, 0.22);
+.close{
+  top: -50px;
+  right: -45px;
+  padding:5px;
+  line-height: 14px;
+  min-width: auto;
+  float: right;
+ // position: fixed;
 }
+
+// .card:hover {
+//   box-shadow: 0 0 10px rgba(226, 28, 28, 0.84), 0 10px 10px rgba(0, 0, 0, 0.22);
+// }
 
 .background {
   //background-image: url("../../../../assets/images/abstract-background-made-halftone-dots-white-gray-colors_444390-4058.jpg");
@@ -56,9 +65,7 @@ img {
   height: 100%;
 }
 
-mat-toolbar {
-  justify-content: space-between;
-}
+
 
 .content {
   padding: 30px;
@@ -96,4 +103,9 @@ mat-toolbar {
 }
 .hover:hover {
   background: rgb(14, 144, 219) !important;
+}
+.mat-toolbar{
+  background-color:white;
+  position: fixed;
+  width: 10%;
 }

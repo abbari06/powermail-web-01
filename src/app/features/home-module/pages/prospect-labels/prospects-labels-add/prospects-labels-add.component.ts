@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 export class ProspectsLabelsAddComponent implements OnInit {
   backgroundColor: any;
   actionButton = 'Save';
-
+  heading='Add Your Label';
   user = {
     id: undefined,
   };
@@ -41,6 +41,7 @@ export class ProspectsLabelsAddComponent implements OnInit {
   getRowData() {
     console.log(this.editData);
     if (this.editData) {
+      this.heading='Update your Label'
       this.actionButton = 'Update';
       this.AddLabelForm.controls['name'].setValue(this.editData.name);
       this.AddLabelForm.controls['description'].setValue(
@@ -66,10 +67,26 @@ export class ProspectsLabelsAddComponent implements OnInit {
         next: (res: any) => {
           // this.totalAccounts.push(res);
           console.log(res);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Label Updated successfully',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.dialogRef.close('result');
         },
         error: (error: any) => {
           //alert(error);
           console.log(error);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Label Update Failed',
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.dialogRef.close();
         },
       });
   }
@@ -113,7 +130,7 @@ export class ProspectsLabelsAddComponent implements OnInit {
               showConfirmButton: false,
               timer: 1500,
             });
-            this.dialogRef.close('result');
+            this.dialogRef.close();
           },
         });
     }

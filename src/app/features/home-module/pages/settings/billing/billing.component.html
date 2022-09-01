@@ -1,1 +1,129 @@
-<p>billing works!</p>
+<div *ngIf="loader" class="loader">
+    <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </div>
+<div class="main">
+  <mat-toolbar class="sub-navbar">
+    <div class="container">
+      <div class="row">
+        <h1>Manage Subscription and Billing</h1>
+      </div>
+    </div>
+  </mat-toolbar>
+  <div class="container mt-3">
+    <div class="row">
+        <mat-card>
+          <div class="row text-center">
+            <div class="col-sm-3">
+              <div>
+                <span class="sub-title">Active Plan:</span>
+                Default Plan
+              </div>
+
+            </div>
+            <div class="col-sm-3">
+              <div> <span  class="sub-title">Total Days Left:</span>
+              12
+              </div>
+            </div>
+           <div class="col-sm-3">
+           <div>
+           <span  class="sub-title">
+            Totol outstanding:
+            </span>
+             5$
+           </div>
+
+
+           </div>
+           <div class="col-sm-3">
+            <div>
+             <span class="sub-title"> Reneval Date: </span>
+              <span>13-08-2022</span>
+
+            </div>
+           </div>
+          </div>
+        </mat-card>
+        <mat-card class="mt-2">
+          <div class="row">
+            <div class="col-sm-4 mb-2">
+              <mat-card class="example-card">
+                <mat-card-title>Default Plan</mat-card-title>
+                <mat-card-content>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                </mat-card-content>
+                <mat-divider inset></mat-divider>
+                <mat-card-actions class="text-center">
+                  <button
+                  mat-flat-button
+                  class="custom_actn_btn"
+                  color="primary">Subscribe</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="col-sm-4 mb-2">
+              <mat-card class="example-card">
+                <mat-card-title>Primay Plan</mat-card-title>
+                <mat-card-content>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                </mat-card-content>
+                <mat-divider inset></mat-divider>
+                <mat-card-actions class="text-center">
+                  <button
+                  mat-flat-button
+                  class="custom_actn_btn"
+                  color="primary" mat-button>Subscribe</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+            <div class="col-sm-4 mb-2">
+              <mat-card class="example-card">
+                <mat-card-title>Gold Plan</mat-card-title>
+                <mat-card-content>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                  <p>This card has divider and indeterminate progress as footer</p>
+                </mat-card-content>
+                <mat-divider inset></mat-divider>
+                <mat-card-actions class="text-center">
+                  <button
+                  mat-flat-button
+                  class="custom_actn_btn"
+                  color="primary">Subscribe</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+          </div>
+
+
+        </mat-card>
+        <mat-card class=" mt-2">
+          <div class="text-center">
+            <mat-card-title class="manage_billing">
+              We are partnering with stripe to manage your billing securely and
+              safely.
+            </mat-card-title>
+          </div>
+
+          <div class="mt-3">
+            <button
+              (click)="manageBilling()"
+              style="float: right"
+              mat-flat-button
+              class="custom_actn_btn"
+              color="primary"
+            >
+              Manage my billing securely<mat-icon class="icon"
+                >arrow_right_alt</mat-icon
+              >
+            </button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>

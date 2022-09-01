@@ -1,0 +1,115 @@
+<div class="container ">
+    <mat-toolbar fxLayout="row" fxLayoutAlign="center center" >
+      <p class="user" style="font-size: 17px;">
+        You Won't be billed till {{dateToday|date}} and you can
+        cancel at any time without charges
+      </p>
+  
+    </mat-toolbar>
+    <div class="row">
+  
+      <div class="col-sm-6">
+        <mat-card class="example-card">
+          <mat-card-subtitle>All inclusive plan (Trail version) </mat-card-subtitle>
+          <mat-card-title> $19.95/month </mat-card-title>
+          <div class="user">
+            <h3>Cancel at any time</h3>
+          </div>
+          <mat-card-content>
+            <mat-list>
+             <mat-list-item >
+                <mat-icon color="warn" mat-list-icon>arrow_right_alt</mat-icon>
+                <div mat-line>Unlimited Outreachs ,  Connect one gmail account</div>
+              </mat-list-item>
+             <mat-list-item >
+                <mat-icon color="warn" mat-list-icon>arrow_right_alt</mat-icon>
+                <div mat-line>Gmail / <span style="text-decoration: line-through;">Outlook</span> / <span style="text-decoration: line-through;">SMTP</span> </div>
+              </mat-list-item>
+              <mat-list-item >
+                <mat-icon color="warn" mat-list-icon>arrow_right_alt</mat-icon>
+                <div mat-line>Automated email sequences Lead Catcher®</div>
+              </mat-list-item>
+              <mat-list-item >
+                <mat-icon color="warn" mat-list-icon>arrow_right_alt</mat-icon>
+                <div mat-line>Seven trail days</div>
+              </mat-list-item>
+  
+  
+            </mat-list>
+          </mat-card-content>
+          <!-- <mat-card-subtitle>
+            You Won't be billed till (current date plus trial days) and you can
+            cancel at any time without charges</mat-card-subtitle> -->
+          <mat-card-footer class="title">
+  
+  
+          </mat-card-footer>
+              </mat-card>
+      </div>
+      <div class="col-sm-6">
+        <mat-card>
+          <h1 for="card-info ">
+            <img
+            class="text-center"
+              src="../../../../../assets/images/card.png"
+              style="width: 100%; height: 50px;"
+              alt=""
+            />
+          </h1>
+          <form (ngSubmit)="createStripeToken()" class="checkout">
+            <div id="form-field">
+              <div id="card-info" #cardInfo></div>
+            </div>
+          </form>
+          <div class="mt-1">
+            <h2>Billing address</h2>
+            <form [formGroup]="subscriptionForm">
+              <mat-form-field>
+                <mat-label>City</mat-label>
+                <input
+                  matInput
+                  placeholder="address_city"
+                  formControlName="address_city"
+                />
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>State</mat-label
+                ><input
+                  matInput
+                  placeholder="address_state"
+                  formControlName="address_state"
+                />
+              </mat-form-field>
+  
+              <mat-form-field>
+                <mat-label>Country</mat-label
+                ><input
+                  matInput
+                  placeholder="address_country"
+                  formControlName="address_country"
+                />
+              </mat-form-field>
+            </form>
+          </div>
+  
+          <button
+            mat-raised-button
+            color="primary"
+            class="custom_actn_btn mt-1"
+            id="submit-button"
+            type="submit"
+            style="width: 100%"
+            (click)="createStripeToken()"
+          >
+            Add card
+          </button>
+          <mat-error id="card-errors" role="alert" *ngIf="cardError">
+            <mat-icon style="color: #f44336">cancel</mat-icon>
+            &nbsp;{{ cardError }}
+          </mat-error>
+        </mat-card>
+      </div>
+      <div class="col-sm-1">  </div>
+  
+    </div>
+  </div>

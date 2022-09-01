@@ -57,21 +57,15 @@ export class LoginComponent implements OnInit {
   }
   loginUser() {
     this.loading = true;
-    this.authService.login(this.loginForm.value);
+    let error=this.authService.login(this.loginForm.value)
     setTimeout(() => {
-      var isError = this.authService.loginError;
-      this.loading = false;
-      var message = this.authService.getErrorMessage();
-      console.log(message);
-      if (isError) {
-        console.log(isError);
-        this.authService.loginError = false;
-        this.openSnackBar(message);
-        this.loading = false;
+      if(error){
+        console.log(error);
+        this.loading=false;
+        
       }
-      this.authService.loginError = false;
-      console.log(message);
-    }, 2000);
+    }, 1000);
+    
   }
   openDialogue(): void {
     const dialogRef = this.dialog.open(ForgotPasswordComponent, {

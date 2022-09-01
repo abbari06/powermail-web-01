@@ -24,4 +24,13 @@ export class MailAccountSettingsService {
       userAccountId,
     });
   }
+  
+  connectOutlookAccount(auth_code,userAccountId): Observable<any>{
+   var accounttype="outlook";
+    return this.http.post(this.API_BASE_URL + 'users/account/linkmailaccount', {
+      auth_code,
+      userAccountId,
+      accounttype
+    });
+  }
 }

@@ -10,3 +10,28 @@
         width:100%;
     }
   
+    .example-chip-list {
+        width: 100%;
+        height:fit-content;
+      }
+      .mat-chip-list{
+
+        flex: 0 0 28% !important;
+        width: 28% !important;
+        overflow: auto;
+      
+      }
+      @media (min-width: 576px){
+.col-sm-6 {
+    flex: 0 0 auto;
+    width: 60%;
+}
+}
+::ng-deep.mat-chip-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: unset!important;
+    align-items: center;
+    margin: -4px;
+    overflow: auto!important;
+  }

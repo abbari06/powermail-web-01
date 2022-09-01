@@ -1,11 +1,29 @@
 // @import "../dashboard/dashboard.component.scss";
-@import "../../dashboard/dashboard.component.scss";
-.spacer {
-  flex: 1 1 auto;
-}
+// @import "../../dashboard/dashboard.component.scss";
+// .spacer {
+//   flex: 1 1 auto;
+// }
 .mat-header-cell {
   background-color: #fbeaff;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  //white-space: unset !important;
+}
+.mat-column-email{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 16% !important;
+  //width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  padding: 0 6px 0 8px;
+
 }
 
 .example-box.cdk-drag-animating {
@@ -14,4 +32,27 @@
 
 .example-chip .cdk-drop-list-dragging {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 140px;
+}
+@media  (max-width: 599px) {
+  .mat-button{
+    min-width: 39px;
+  }
+}
+// .mat-column-labels{
+// overflow-x: scroll;
+//   width: 20%;
+// }
+// .mat-icon{
+//   font-size: large;
+// }
+.tooltp{
+  width:auto;
+  //height: 25px;
 }

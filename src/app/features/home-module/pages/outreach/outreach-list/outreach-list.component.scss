@@ -16,7 +16,7 @@
   padding-top: 3.2px;
   color: white;
   height: 25px;
-  width: 25px;
+  width: 18px;
   background-color: #3f51b5;
   border-radius: 50%;
   display: inline-block;
@@ -28,7 +28,7 @@
   color: white;
   // margin-left: 4.5px;
   height: 25px;
-  width: 25px;
+  width: 18px;
   background-color: green;
   border-radius: 50%;
   display: inline-block;
@@ -40,7 +40,7 @@
   color: rgb(91, 91, 91);
   // margin-left: 4.5px;
   height: 25px;
-  width: 25px;
+  width: 18px;
   background-color: #FDDA0D;
   border-radius: 50%;
   display: inline-block;
@@ -52,7 +52,7 @@
   color: white;
   // margin-left: 4.5px;
   height: 25px;
-  width: 25px;
+  width: 18px;
   background-color: #df0031;
   border-radius: 50%;
   display: inline-block;
@@ -140,36 +140,49 @@
   height: 75px;
 }
 
-.mat-accordion,
-.mat-expansion-panel,
-    .mat-expansion-panel-header {
-    min-width: 100%;
+
+.mat-column-email{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 16% !important;
+ // width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  padding: 0 6px 0 8px;
+
 }
+.mat-column-title{
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 16% !important;
+  //width: 28% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
-@media (max-width: 1200px) {
+  word-break: break-word;
 
-  .mat-accordion,
-  .mat-expansion-panel,
-      .mat-expansion-panel-header  {
-        min-width: 100%;
-    }
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  padding: 0 6px 0 8px;
+
 }
-
-@media (max-width: 992px) {
-
-  .mat-accordion,
-.mat-expansion-panel,
-    .mat-expansion-panel-header  {
-        min-width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-
-  .mat-accordion,
-  .mat-expansion-panel,
-      .mat-expansion-panel-header  {
-        min-width: 100%;
+@media  (max-width: 599px) {
+   .mat-raised-button{
+      height: 38px;
+      text-align: center;
     }
   }
-
+  @media  (max-width: 599px) {
+    .tooltp{
+      width: -webkit-fill-available;
+     }
+   }

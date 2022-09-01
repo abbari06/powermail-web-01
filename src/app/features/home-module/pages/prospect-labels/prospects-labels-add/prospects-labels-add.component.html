@@ -1,8 +1,7 @@
 <div class="p-3">
     <div class="header">
-        <mat-card-title>Add Label</mat-card-title>
-
-    </div>
+        <mat-card-title>{{heading}}</mat-card-title>
+    </div>&nbsp;
     <mat-card-content class="mt-4">
         <form [formGroup]="AddLabelForm">
             <!-- <div class="row">
@@ -29,9 +28,10 @@
             <!-- </div> -->
             <!-- </div> -->
         </form>
-
+        <footer class="footer">
         <button class="mat-raised-button mat-warn" [mat-dialog-close]="true">Cancel</button>
         <button class="mat-raised-button  mat-primary" (click)="setLabels()" [mat-dialog-close]="true"
             [disabled]="AddLabelForm.invalid">{{actionButton}}</button>
+        </footer>    
     </mat-card-content>
 </div>

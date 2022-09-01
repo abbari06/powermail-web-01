@@ -9,11 +9,24 @@
                 </div>
                 <div class="mt-5 pt-4">
                     <mat-card-actions>
-                        <button class="hover" mat-flat-button color="warn" (click)="connectGoogleAccount()">
-                            <mat-icon>add</mat-icon>
-                        </button>
-                        <span style="padding-left: 10px; font-size: 18px; font-weight: 700;">Add New Google
-                            Account</span>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <button class="hover" mat-flat-button color="warn" (click)="connectGoogleAccount()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <span style="padding-left: 10px; font-size: 18px; font-weight: 700;">Add New Google
+                                    Account</span>
+                            </div>
+                            <div class="col-sm-6">
+                                <button class="hover" mat-flat-button color="warn" (click)="connectOutlookAccount()">
+                                    <mat-icon>add</mat-icon>
+                                </button>
+                                <span style="padding-left: 10px; font-size: 18px; font-weight: 700;">Add New Outlook
+                                    Account</span>
+                            </div>
+                        </div>
+                        
+                       
                     </mat-card-actions>
                 </div>
             </mat-card>
@@ -31,18 +44,18 @@
                     <mat-card-subtitle>{{account.name}} &nbsp; <b>{{account.email}}</b></mat-card-subtitle>
                     <mat-card-subtitle>Connected At:&nbsp;<b>{{account.connected_at|date}}</b></mat-card-subtitle>
                     <mat-footer>
-                        <div class="row" style="padding-top: 15px;">
-                            <div class="col-sm-6">
+                       
+                            <div >
                                 <button style="float: left ;" mat-flat-button color="warn" title="Disconnect">
                                     <mat-icon>clear </mat-icon>
                                 </button>
                             </div>
-                            <div class="col-sm-6">
+                            <div >
                                 <button style="float: right ;" mat-flat-button color="primary" title="Reconnect">
                                     <mat-icon>replay</mat-icon>
                                 </button>
                             </div>
-                        </div>
+                       
                     </mat-footer>
 
 

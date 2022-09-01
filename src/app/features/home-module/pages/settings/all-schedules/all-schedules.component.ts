@@ -56,10 +56,10 @@ export class AllSchedulesComponent implements OnInit {
   }
   addSchedule() {
     const dialogRef = this.dialog.open(AddScheduleComponent, {
-      width: '70%',
+      width: '99%',
       height: '90%',
     });
-    dialogRef.afterClosed().subscribe((val) => {
+    dialogRef.afterClosed().subscribe(() => {
       this.listAllSchedules();
     });
   }
@@ -91,11 +91,11 @@ export class AllSchedulesComponent implements OnInit {
   editSchedule(row) {
     console.log(row);
     const dialogRef = this.dialog.open(AddScheduleComponent, {
-      width: '70%',
-      height: '70%',
+      width: '99%',
+     height: '90%',
       data: row,
     });
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((c) => {
       this.listAllSchedules();
     });
   }
@@ -116,8 +116,18 @@ export class AllSchedulesComponent implements OnInit {
           .subscribe({
             next: (res: any) => {
               console.log(res);
-              Swal.fire('Deleted!', 'Your Label has been deleted.', 'success');
-              this.listAllSchedules();
+              
+              Swal.fire({
+                text: "Your Schedule Has Been Deleted",
+                icon: 'success',
+                showCancelButton: false,
+                showConfirmButton:false,
+              })
+              setTimeout(() => {
+                this.listAllSchedules();
+                Swal.close();
+               
+              }, 1000);
             },
             error: (error: any) => {
               console.log(error);

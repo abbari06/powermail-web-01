@@ -1,86 +1,158 @@
-<!-- <mat-toolbar fxLayout="row" class="toolbar">
-    <span style="font-size:medium;" fxFlex>Outreach:&nbsp;&nbsp;&nbsp;
-        <mat-form-field class="example-full-width">
-            <mat-label>Search</mat-label>
-            <input matInput placeholder="Ex.John Dev">
-        </mat-form-field> &nbsp; &nbsp;
-        <mat-form-field style=" width: 10%;">
-            <mat-label>Search by</mat-label>
-            <mat-select>
-                <mat-option value="labelName">
-                    Status
-                </mat-option>
-                <mat-option value="labelDesc">
-                    Title
-                </mat-option>
-                <mat-option value="prospectLabels">
-                    Campaign
-                </mat-option>
-                <mat-option value="outreachCampaign">
-                    Email
-                </mat-option>
-                <mat-option value="outreachCampaign">
-                    Progress
-                </mat-option>
-                <mat-option value="outreachCampaign">
-                    Created At
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </span>
-    <button routerLink="addcampaign" mat-raised-button color="primary" *ngFor="let item of menuItems" fxHide.xs>
-        <mat-icon class="mr">{{item.icon}}</mat-icon>
-        {{item.label}} 
-    </button>
-    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #dropMenu="matMenu">
-        <ng-container *ngFor="let item of menuItems">
-            <button mat-menu-item>
-                <mat-icon class="mr">{{item.icon}}</mat-icon>
-                {{item.label}}
-            </button>
-            <mat-divider></mat-divider>
-        </ng-container>
-    </mat-menu>
 
-
-</mat-toolbar> -->
 <mat-toolbar fxLayout="row">
   <span fxFlex>OutReach
     </span>
 
-    <button routerLink="addcampaign" mat-raised-button color="primary" fxHide.xs>
+    <button routerLink="addcampaign" mat-raised-button color="primary" >
         <mat-icon>add</mat-icon>
         New
     </button>
+    <!-- <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+      </button> -->
+   
+      <!-- <mat-menu #dropMenu="matMenu">
+        <ng-container>
+            <button mat-menu-item color="primary" routerLink="addcampaign">
+                <mat-icon>add</mat-icon>
+                Add 
+            </button>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-menu> -->
 </mat-toolbar>
-<div class="container-fluid">
-    <div *ngFor="let data of user" class="mt-5">
-        <div class="row">
+<div class="container-fluid example-container">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Checkbox Column -->
+   
+
+    <!-- construct the columns -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef >
+        Status
+        
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect"> 
+       <div class="Ccell">{{ prospect.status}}</div> 
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef >Campaign title
+        
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.title}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Sender Email
+        
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+       
+      </th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.mailAccountId}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="progress">
+      <th mat-header-cell *matHeaderCellDef >Progress
+        
+          <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect"> 0/{{ prospect.steps.length}}
+        <div>Messages Sent</div>
+      </td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="stats">
+      <th mat-header-cell *matHeaderCellDef >Stats
+        <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect"> 
+        <span class="dotClicked">{{ prospect.stats.numClicks}}</span>
+        <span class="dotSend" >{{prospect.stats.numEmailsSent}}</span>
+        <span class="dotOpned">{{prospect.stats.numProspectsContacted}}</span>
+        <span class="dotFailed">{{prospect.stats.numReplies}}</span>
+    </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdat">
+      <th mat-header-cell *matHeaderCellDef >Created At
+        <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect"> {{prospect.createdAt | date}}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions
+        <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+        
+      </th>
+      <td mat-cell *matCellDef="let prospect">
+        <button mat-button (click)="editCampaign(prospect)">
+          <mat-icon class="edit" >edit</mat-icon>
+        </button>&nbsp;
+        <button mat-button>
+            <mat-icon color="primary">archive</mat-icon>
+        </button>
+        <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+        </label>
+    </ng-container>
+
+    <!-- add a table row, if not added..rows will not be rendered inside the table -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  
+    
+</div>
+<div>
+  <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+    [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+  </mat-paginator>
+</div>
+
+
+
+<!--
+    Accordian
+    <div *ngFor="let campaign of campaigns" class="mt-5">
+        
         <mat-accordion >
+            <div class="row">
             <mat-expansion-panel >
                 <mat-expansion-panel-header>
-                    <div [ngStyle]="{ background: getTheColor(data.status)}" class="Ccell col-sm-1"
+                   
+                    <div  class=" Ccell col-sm-1"
                         style="margin-top:8px;">
-                        {{data.status}}
+                        {{campaign.status}}
                     </div>
-                    &nbsp;&nbsp;&nbsp;
-                    <div class="col-sm-2" style="margin-top:15px;">&nbsp;&nbsp;&nbsp;&nbsp;
-                        {{data.campaigntitle}}</div>
+                    <div class="col-sm-2" style="margin-top:15px;">
+                        {{campaign.title}}</div>
                     <div class="col-sm-2">
-                        <img style="width: 25px; margin-top: 6px; " [src]="data.senderEmail.imgurl" />
-                        {{data.senderEmail.name}}
-                    </div>&nbsp;&nbsp;
-                    <div class="col-sm-1" style="margin-top:15px"> {{data.progress}}</div>&nbsp;&nbsp;
-                    <div class="col-sm-2" style="margin-top:15px"> {{data.createdAt}}</div>
+                        <img style="width: 25px; margin-top: 6px; "/>
+                        {{campaign.mailAccountId}}
+                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <div   class="col-sm-2" style="margin-top:15px"> {{campaign.steps.length}}</div>
+                    <div class="col-sm-2" style="margin-top:15px"> 
+                      <span>{{campaign.createdAt | date}}</span>  
+                    </div>
+                    <div   class="col-sm-1" style="margin-top:15px"> {{campaign.steps.length}}</div> 
 
                     <div class="col-sm-2">
-                        <span class="dotSend" style="margin-top:10px;">{{data.stats.send}}</span>
-                        <span class="dotOpned">{{data.stats.opened}}</span>
-                        <span class="dotClicked">{{data.stats.clicked}}</span>
-                        <span class="dotFailed">{{data.stats.failed}}</span>
+                        <span class="dotSend" style="margin-top:10px;">{{campaign.stats.numClicks}}</span>
+                        <span class="dotOpned">{{campaign.stats.numEmailsSent}}</span>
+                        <span class="dotClicked">{{campaign.stats.numProspectsContacted}}</span>
+                        <span class="dotFailed">{{campaign.stats.numReplies}}</span>
                     </div>
 
                     <div class="col-sm-2">
@@ -96,10 +168,13 @@
                         </label>
 
                     </div>
+                
                 </mat-expansion-panel-header>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque consequatur fugiat voluptatibus, numquam ducimus possimus.</p>
             </mat-expansion-panel>
+        </div>
         </mat-accordion>
-    </div>
-    </div>
+    
 </div>
+
+-->

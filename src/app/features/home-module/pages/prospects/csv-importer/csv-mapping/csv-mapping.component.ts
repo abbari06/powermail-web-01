@@ -5,6 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CsvService } from 'src/app/core/services/prospectus-services/csv.service';
 import Swal from 'sweetalert2';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 export interface Contact {
   firstname: String;
   lastname: String;
@@ -51,7 +52,8 @@ export class CsvMappingComponent implements OnInit {
     private csvImport: CsvService,
     private http: HttpClient,
     private router: Router,
-    private dialogRef: MatDialogRef<CsvMappingComponent>
+    private dialogRef: MatDialogRef<CsvMappingComponent>,
+    private breakpointObserver:BreakpointObserver
   ) {
     this.createForm();
   }
@@ -393,7 +395,19 @@ export class CsvMappingComponent implements OnInit {
   userAccount = {
     id: undefined,
   };
-  ngOnInit(): void {}
+  mobileView=false;
+  ngOnInit(): void {
+    this.breakpointObserver
+    .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+    .subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.mobileView=true;
+        console.log(
+          'Matches small viewport or handset in portrait mode'
+        );
+      }
+    });
+  }
   onSelection(event) {
     if (event.previouslySelectedIndex == 0) {
       this.mapping();

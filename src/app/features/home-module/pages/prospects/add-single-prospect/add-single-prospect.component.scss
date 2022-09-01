@@ -15,3 +15,11 @@ mat-form-field {
 .footer {
   padding-bottom: 0 !important;
 }
+::ng-deep.mat-chip-list-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: unset!important;
+  align-items: center;
+  margin: -4px;
+  overflow: auto!important;
+}

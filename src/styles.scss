@@ -28,56 +28,86 @@ table {
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
+@import '~quill/dist/quill.bubble.css'; 
 .sub-header {
   height: 60px !important;
 }
 
-/* Include bootstrap CSS file  */
-@import "~bootstrap/dist/css/bootstrap.min.css";
 
-/* Include ng-wizard CSS files */
-@import "~ng-wizard/themes/ng_wizard.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_arrows.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_circles.min.css";
-@import "~ng-wizard/themes/ng_wizard_theme_dots.min.css";
+
+
+// .mat-header-cell,
+// .mat-cell {
+//   min-width: 80px;
+//   box-sizing: border-box;
+// }
+
+// th.mat-header-cell,
+// td.mat-cell,
+// td.mat-footer-cell {
+//   padding: 0;
+//   border-bottom-width: 1px;
+//   border-bottom-style: solid;
+//   font-size: small;
+// }
+
+// .mat-header-row,
+// .mat-row {
+//   min-width: 100%;
+// }
+
+// @media (max-width: 1200px) {
+//   .mat-header-row,
+//   .mat-row {
+//     min-width: 100%;
+//   }
+// }
+
+// @media (max-width: 992px) {
+//   .mat-header-row,
+//   .mat-row {
+//     min-width: 100%;
+//   }
+// }
+
+
+// @media  (max-width: 599px) {
+//  .mat-chip-list{
+//   //flex: 0 0 28% !important;
+//   width: 28% !important;
+//   overflow: auto;
+//   }
+// }
+.mat-column-labels{
+
+  flex: 0 0 28% !important;
+  width: 28% !important;
+  overflow: auto;
+}
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+
+}
+table {
+  width: 100%;
+}
+
+.example-container {
+  overflow: auto;
+  font-size: 16px;
+}
 
 .mat-header-cell,
+.mat-footer-cell,
 .mat-cell {
   min-width: 80px;
   box-sizing: border-box;
 }
 
-th.mat-header-cell,
-td.mat-cell,
-td.mat-footer-cell {
-  padding: 0;
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  font-size: small;
-}
-
 .mat-header-row,
+.mat-footer-row,
 .mat-row {
-  min-width: 100%;
-}
-
-@media (max-width: 1200px) {
-  .mat-header-row,
-  .mat-row {
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 992px) {
-  .mat-header-row,
-  .mat-row {
-    min-width: 100%;
-  }
-}
-
-@media (max-width: 768px) {
-  .mat-header-row,
-  .mat-row {
-    min-width: 100%;
-  }
+  min-width: 900px; /* 24 columns, 80px each */
 }

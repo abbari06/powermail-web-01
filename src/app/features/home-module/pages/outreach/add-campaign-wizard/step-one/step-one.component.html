@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <mat-card>
-      <mat-card-title>Component 1</mat-card-title>
       <mat-card-content class="mt-4">
         <form [formGroup]="AddCampaignFormOne">
+          <div formGroupName="campaign">
           <mat-form-field appearance="outline">
             <mat-label>Campaign Title:</mat-label>
             <input matInput placeholder="Enter Campaign Title" formControlName="title" />
@@ -16,15 +16,16 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Google Email:</mat-label>
-            <mat-select formControlName="mailAccount" selected>
+            <mat-select formControlName="mailAccountId" selected>
               <mat-option *ngFor="let email of allMailAccounts" [value]="email.email">
                 {{email.email}}
               </mat-option>
             </mat-select>
           </mat-form-field>
+        </div>
         </form>
-        <button (click)="next()" class="mat-raised-button  mat-primary"
-          routerLink="/home/outreach/addcampaign/steptwo">Next</button>
+        <button [disabled]="AddCampaignFormOne.invalid"(click)="createCampaign()" class="mat-raised-button  mat-primary"
+          >Next</button>
       </mat-card-content>
     </mat-card>
   </div>

@@ -4,3 +4,59 @@
 h2{
     text-align: center ;
 }
+.timeline {
+    position: relative;
+    margin: 10px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: section;
+  }
+  .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: grey;
+    left: 32px;
+    margin: 0;
+    border-radius: 1px;
+  }
+  .timeline > li {
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 30px;
+    padding-top: 18px;
+    box-sizing: border-box;
+    padding-left: 90px;
+  }
+  .timeline > li:before,
+  .timeline > li:after {
+    display: block;
+  }
+  
+  .timeline > li:before {
+  
+    font-family: "Font Awesome 5 Free";
+    content: "\f0e0";
+    font-weight: 900;
+  
+    background: #8d2eec;
+    width: 65px;
+    height: 65px;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    left: -1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #Fff;
+    font-size: 15px;
+    font-weight: bold;
+    border: 15px solid #fff;
+    box-sizing: border-box;
+  }
+  .timeline > li:after {
+    clear: both;
+  }

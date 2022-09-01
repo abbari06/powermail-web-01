@@ -34,7 +34,7 @@
         </form>
 
         <button class="mat-raised-button mat-warn" mat-dialog-close>Cancel</button>
-        <button class="mat-raised-button  mat-primary" mat-dialog-close [disabled]="AddProfileForm.invalid"
+        <button class="mat-raised-button  mat-primary" [disabled]="AddProfileForm.invalid"
             (click)="addUser()">Add</button>
     </mat-card-content>
 </div>

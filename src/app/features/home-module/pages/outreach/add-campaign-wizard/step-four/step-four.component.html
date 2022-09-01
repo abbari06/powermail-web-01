@@ -1,16 +1,86 @@
 <div class="container">
     <div class="row">
        
-            <mat-card>
+            <mat-card *ngIf="showdata">
                 <mat-card-content>
-                    <div class="card-body">
-                        <h2>You Are Done</h2>
+                   
+                        <h2>Your campaign <b>{{title}}</b> is created and is ready to launch.</h2>
+                    
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <mat-card>
+                                Email Account:<img src="https://pbs.twimg.com/profile_images/1455185376876826625/s1AjSxph_400x400.jpg"
+                                style="width: 30px; height:30px;">
+                                {{email}}
+                            </mat-card>
+                        </div>
+                        <div class="col-sm-6">
+                            Prospect Labels: 
+                                <mat-chip *ngFor="let label of labels" [ngStyle]="{ 'background': label.colorHex }" style="float:none"> {{label.name}} </mat-chip>
+                          
+                        </div>
                     </div>
+                 
+                    <div class="row">
+                        <mat-accordion >
+                           
+                            <mat-expansion-panel >
+                                <mat-expansion-panel-header>
+                                    <div class="col-sm-6">
+                                        Schedule Name:{{scheduleName}}
+                                    </div>
+                                    <div class="col-sm-6">
+                                        Selected TimeZone:{{timeZone}}
+                                    </div>
+                                
+                                </mat-expansion-panel-header>
+                               
+                                <ng-container *ngFor="let day of previewData" >
+                                  
+                                  <ng-container *ngIf="day.active" >
+                                    
+                                    <ng-container *ngFor="let time of day.times">
+                                     {{day.day | uppercase}}: {{time.from}}&nbsp;-&nbsp;{{time.to}}
+                                     </ng-container>
+                                  </ng-container>
+                                </ng-container>
+                              </mat-expansion-panel>
+                        </mat-accordion>
+                    </div>
+                    <ul class="timeline">
+                        <li *ngFor="let step of steps">
+                            
+                        <mat-accordion *ngFor="let mail of step.emails">
+                          <mat-panel-title>
+                            <button style="float:left">step:{{step.stepNumber}}&nbsp;Day:{{step.delayAsString | slice: 0:2}}</button>
+                          </mat-panel-title>
+                         
+                          <mat-expansion-panel (opened)="panelOpenState = true"
+                                               (closed)="panelOpenState = false">
+                              
+                            <mat-expansion-panel-header>
+                             
+                              <mat-panel-title>
+                                
+                                {{mail.subject}}
+                              </mat-panel-title>
+                              <mat-panel-description [innerHTML]="mail.body">
+                               {{mail.body}}
+                              </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <mat-expansion-panel-description [innerHTML]="mail.body">
+                              {{mail.body}}
+                            </mat-expansion-panel-description>
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                        </li>
+                        </ul>
+                      
                 </mat-card-content>
                 <mat-card-actions>
                     <button class="mat-raised-button  mat-accent"
-                        routerLink="/home/outreach/addcampaign/stepthree">Back</button>
-                    <button class="mat-raised-button  mat-primary" routerLink="">Save & Launch</button>
+                        (click)="back()">Back</button>
+                    <button class="mat-raised-button  mat-primary" (click)="save()">Save & Launch</button>
                 </mat-card-actions>
             </mat-card>
        

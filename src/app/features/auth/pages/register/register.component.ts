@@ -1,6 +1,9 @@
 import { Component, OnInit,} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { StripeComponent } from 'src/app/features/home-module/pages/stripe/stripe.component';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,7 +13,8 @@ export class RegisterComponent implements OnInit {
   message:string;
   status:string;
   ifRegistered=false;
-    constructor( private formBuilder: FormBuilder,private authService:AuthService,) { }
+    constructor( private formBuilder: FormBuilder,private authService:AuthService,private router :Router, 
+      public dialog: MatDialog) { }
   ngOnInit(): void {
   }
   registerForm = this.formBuilder.group({
@@ -28,8 +32,32 @@ export class RegisterComponent implements OnInit {
       this.registerForm.value.accounttype="agency";
     }
   }
+  openDialogue(email): void {
+    const dialogRef = this.dialog.open(StripeComponent, {
+      disableClose: true,
+      data:email,
+      width: '95%',
+      height: '95%',
+      
+    });
+    dialogRef.afterClosed().subscribe({
+      next:()=>{
+        
+      }
+      })
+  }
   registerUserOrAgency(){
-    this.authService.register(this.registerForm.value);
+    this.authService.register(this.registerForm.value).subscribe({
+      next: (res: any) => {
+        this.openDialogue(this.registerForm.value.email);
+        console.log(res);
+        this.router.navigate(['auth'], { state: { data: res } });
+      },
+      error: (error: any) => {
+        //alert(error);
+        console.log(error);
+      },
+    });
     console.log(this.registerForm.value)
 }
 

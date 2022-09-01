@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -10,7 +9,6 @@ import { ProspectsLabelsListComponent } from './pages/prospect-labels/prospects-
 import { ProspectsLabelsAddComponent } from './pages/prospect-labels/prospects-labels-add/prospects-labels-add.component';
 import { OutreachListComponent } from './pages/outreach/outreach-list/outreach-list.component';
 import { WizardStepperComponent } from './pages/outreach/add-campaign-wizard/wizard-stepper/wizard-stepper.component';
-import { NgWizardModule, NgWizardConfig, THEME } from 'ng-wizard';
 import { AddSingleProspectComponent } from './pages/prospects/add-single-prospect/add-single-prospect.component';
 import { StepOneComponent } from './pages/outreach/add-campaign-wizard/step-one/step-one.component';
 import { StepTwoComponent } from './pages/outreach/add-campaign-wizard/step-two/step-two.component';
@@ -33,10 +31,38 @@ import {
   NgbTimeStringAdapter,
 } from './pages/settings/all-schedules/add-schedule/add-schedule.component';
 import { NgbTimeAdapter } from '@ng-bootstrap/ng-bootstrap';
+import { CampaignProspectsComponent } from './pages/outreach/edit-campaign/pages/campaign-prospects/campaign-prospects.component';
 
-const ngWizardConfig: NgWizardConfig = {
-  theme: THEME.default,
-};
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { UpdateLabelsComponent } from './pages/outreach/edit-campaign/update-labels/update-labels.component';
+import { UpdateScheduleComponent } from './pages/outreach/edit-campaign/update-schedule/update-schedule.component';
+import { ContactsComponent } from './pages/prospect-labels/contacts/contacts.component';
+import { CampaignsComponent } from './pages/prospect-labels/campaigns/campaigns.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { StripeComponent } from './pages/stripe/stripe.component';
+// import { MsalModule, MsalService, MSAL_INSTANCE , MsalBroadcastService, MsalInterceptorConfiguration, MSAL_INTERCEPTOR_CONFIG} from '@azure/msal-angular';
+// import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
+
+// export function MSALInstanceFactory(): IPublicClientApplication {
+//   return new PublicClientApplication({
+//     auth: {
+//       clientId: 'd47b1bce-155c-412b-ab3f-838e2eb62757',
+//       redirectUri: 'http://localhost:4200',
+//     }
+//   });
+// }
+// export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
+//   const protectedResourceMap = new Map<string, Array<string>>();
+//   protectedResourceMap.set('https://graph.microsoft.com/v1.0/me', ['user.read']);
+//   protectedResourceMap.set('http://localhost:4200/home', ['api://d16e1a06-3be2-4ae1-8bd4-718c19cecac3/home']);
+
+//   return {
+//     interactionType: InteractionType.Popup,
+//     protectedResourceMap
+//   };
+// }
+
+
 
 @NgModule({
   declarations: [
@@ -65,13 +91,24 @@ const ngWizardConfig: NgWizardConfig = {
     ProfileComponent,
     BillingComponent,
     AddScheduleComponent,
+    CampaignProspectsComponent,
+    UpdateLabelsComponent,
+    UpdateScheduleComponent,
+    ContactsComponent,
+    CampaignsComponent,
+    StripeComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    NgWizardModule.forRoot(ngWizardConfig),
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    // MsalModule
+    
   ],
-  providers: [{ provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter }],
+  providers: [{ provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter },
+    // 
+  ],
 })
 export class HomeModule {}

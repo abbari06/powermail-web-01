@@ -1,34 +1,62 @@
+<div>
 <mat-toolbar fxLayout="row">
 
-    <span style="font-size:medium;" fxFlex>Prospect Labels:&nbsp;&nbsp;
-        <mat-form-field class="example-full-width">
-            <mat-label>Search</mat-label>
-            <input matInput (keyup)="applyFilter($event)">
-        </mat-form-field> &nbsp;
-        <mat-form-field>
-            <mat-label>Search by</mat-label>
-            <mat-select [(ngModel)]="selectedOption">
-                <mat-option value="name">
-                    Label Name
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-    </span>
-
+        <span class="searchbar" style="font-size:medium;" fxFlex >Prospect Labels:
+            <mat-form-field class="example-full-width">
+                <mat-label>Search</mat-label>
+                <button *ngIf="searched" mat-button  matSuffix mat-icon-button aria-label="clear" 
+                (click)="onSearchClear()"
+                >
+                <mat-icon>close</mat-icon>
+              </button>
+                <input matInput #search (keyup)="applyFilter($event)">
+            </mat-form-field> &nbsp;
+            <mat-form-field>
+                <mat-label>Search by</mat-label>
+                <mat-select [(ngModel)]="selectedOption">
+                    <mat-option value="name">
+                        Label Name
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </span>
+   
+   
+<div>
+    
+</div>
     <button mat-raised-button (click)="openDialogue()" color="primary" fxHide.xs>
         <mat-icon>add</mat-icon>
-        New
+        New <mat-icon>keyboard_arrow_down</mat-icon>
     </button>&nbsp;
 
-    <button mat-raised-button color="warn" fxHide.xs (click)="deleteBulkLabels()" [disabled]="disableBtn">
+    <button mat-raised-button color="warn" fxHide.xs (click)="deleteBulkLabels()" [disabled]="disableBtn" >
         <mat-icon>delete</mat-icon>
         Delete
     </button>
 
-
+    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #dropMenu="matMenu">
+        <ng-container>
+            <button mat-menu-item (click)="openDialogue()" color="primary" >
+                <mat-icon>add</mat-icon>
+                New 
+            </button>
+        
+            <button mat-menu-item   (click)="deleteBulkLabels()" [disabled]="disableBtn" >
+                <mat-icon>delete</mat-icon>
+                Delete
+            </button>
+        
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-menu>
 </mat-toolbar>
+</div>
 <!-- here Data is the arr of values defined in variable Data in .ts -->
-<div>
+<div class="mt-4 example-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="labelName"
         (matSortChange)="sort($event)" matSortDirection="asc">
 
@@ -50,7 +78,11 @@
         <!-- construct the columns -->
 
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Name</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Name
+                <div>
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                  </div>
+            </th>
             <td mat-cell *matCellDef="let label">
                 <mat-chip-list aria-label="Fish selection">
                     <mat-chip [ngStyle]="{ 'background': label.colorHex }">{{label.name}}</mat-chip>
@@ -59,26 +91,58 @@
         </ng-container>
 
         <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Description</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Description
+                <div>
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                  </div>
+            </th>
             <td mat-cell *matCellDef="let label">
                 {{label.description}}</td>
         </ng-container>
 
         <ng-container matColumnDef="color">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prospect Labels</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prospect Labels
+                <div>
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                  </div>
+            </th>
             <td mat-cell *matCellDef="let label"> {{label.colorHex}}</td>
+        </ng-container>
+        <ng-container matColumnDef="contacts">
+            <th mat-header-cell *matHeaderCellDef >Contacts
+            
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                  
+            </th>
+            <td mat-cell *matCellDef="let label">{{label.contacts}}</td>
         </ng-container>
 
         <ng-container matColumnDef="outreach">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Outreach Campaigns</th>
-            <td mat-cell *matCellDef="let label"></td>
+            <th mat-header-cell *matHeaderCellDef >Outreaches
+                
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                  
+            </th>
+            <td mat-cell *matCellDef="let label">{{label.outreaches}}</td>
         </ng-container>
 
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <th mat-header-cell *matHeaderCellDef>Actions
+            
+                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
+                 
+            </th>
             <td mat-cell *matCellDef="let label">
                 <button mat-button>
-                    <mat-icon class="edit" (click)="editLabel(label)">edit</mat-icon>
+                    <mat-icon class="edit" (click)="editLabel(label)">edit
+                       
+                    </mat-icon>
+                </button>
+                <button mat-button (click)="getContacts(label)">
+                    <mat-icon>contacts</mat-icon>
+                </button>
+                <button mat-button (click)="getCampaigns(label)">
+                    <mat-icon >campaign</mat-icon>
                 </button>
                 <button mat-button (click)="deleteSingleLabel(label)">
                     <mat-icon color="warn">delete</mat-icon>
@@ -91,7 +155,8 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     </table>
-    <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-        [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-    </mat-paginator>
+   
 </div>
+<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+[pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
+</mat-paginator>

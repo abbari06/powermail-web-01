@@ -7,6 +7,13 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './core/services/guards/auth.guard';
 import { TokenInterceptor } from './core/interceptors/token.interceptor';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -15,6 +22,11 @@ import { MatIconModule } from '@angular/material/icon';
     BrowserAnimationsModule,
     HttpClientModule,
     MatIconModule,
+    MatProgressSpinnerModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    MatSnackBarModule
   ],
   providers: [
     AuthGuard,
@@ -23,6 +35,7 @@ import { MatIconModule } from '@angular/material/icon';
       useClass: TokenInterceptor,
       multi: true,
     },
+    
   ],
   bootstrap: [AppComponent],
 })

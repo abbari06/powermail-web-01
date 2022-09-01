@@ -12,5 +12,10 @@ export class user_model{
     modifiedAt:number;
     useraccounts: [];
     token:"";
-
+    mailAccountconnected:boolean;
+    prospectsAdded:boolean;
+    prospectLabelAdded:boolean;
+    campaignCreated:boolean;
+    fb_token:string;
+    trialPlan:boolean;
 }

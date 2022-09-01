@@ -1,110 +1,13 @@
-<mat-toolbar fxLayout >
+
   <div class="container">
     <div class="row">
       <nav class="nav nav-pills nav-justified">
-        <a class="nav-link"  routerLink="stepone" routerLinkActive="active">Let's Start&nbsp;<mat-icon>start</mat-icon></a>
-        <a class="nav-link"  routerLink="steptwo" routerLinkActive="active">Schedule & Prospects<mat-icon>schedule</mat-icon></a>
-        <a class="nav-link"  routerLink="stepthree" routerLinkActive="active">Message Steps <mat-icon>message</mat-icon></a>
-        <a class="nav-link"  routerLink="stepfour" routerLinkActive="active">Preview & Launch<mat-icon>preview</mat-icon></a>
+        <a class="nav-link"  class="nav-link disabled" routerLink="stepone" routerLinkActive="active">Let's Start&nbsp;<mat-icon>start</mat-icon></a>
+        <a class="nav-link"  class="nav-link disabled" routerLink="steptwo" routerLinkActive="active">Schedule & Prospects<mat-icon>schedule</mat-icon></a>
+        <a class="nav-link"  class="nav-link disabled" routerLink="stepthree" routerLinkActive="active">Message Steps <mat-icon>message</mat-icon></a>
+        <a class="nav-link"  class="nav-link disabled" routerLink="stepfour" routerLinkActive="active">Preview & Launch<mat-icon>preview</mat-icon></a>
       </nav>
     </div>
-    
   </div>
-</mat-toolbar>
+
 <router-outlet></router-outlet>
-<!-- <ng-wizard [config]="config" (stepChanged)="stepChanged($event)">
-
-  <ng-wizard-step [title]="'Step 1'" [description]="'Lets Start '" [canEnter]="isValidTypeBoolean"
-    [canExit]="isValidFunctionReturnsBoolean.bind(this)">
-
-
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card" style="margin-top:20px;">
-          <div class="card-body">
-
-            <label>Campaign Title:</label>
-            <input type="text" class="form-control" placeholder="Enter Campaign Title" />
-
-            <label>Description:</label>
-            <input type="text" class="form-control" placeholder="Enter Campaign Description" />
-
-            <label>Google Email:</label>
-            <input type="text" class="form-control" placeholder="Enter Your Google Email" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-wizard-step>
-
-  <ng-wizard-step [title]="'Step 2'" [description]="'Schedule & Prospects'">
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card" style="margin-top:20px;">
-          <div class="card-body">
-            <label>Choose Calender Schedule:</label>
-            <div ngbDropdown>
-              <button style="width:100%; border: none;" ngbDropdownToggle>Choose</button>
-              <div ngbDropdownMenu="menu">
-                <button ngbDropdownItem></button>
-                <button ngbDropdownItem></button>
-                <button ngbDropdownItem></button>
-              </div>
-            </div>
-            <br />
-
-            <label for="selection">Select Labels:</label>
-            <div ngbDropdown>
-              <button class="btn btn-info" style="width:50%; border: none;" ngbDropdownToggle>Select</button>
-              <div ngbDropdownMenu="menu">
-                <button ngbDropdownItem>Label 1</button>
-                <button ngbDropdownItem>Label 2</button>
-                <button ngbDropdownItem>Label 3</button>
-              </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              Application Prospects
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </ng-wizard-step>
-
-  <ng-wizard-step [title]="'Step 3'" [description]="'Steps To Add Message'"
-    [canEnter]="isValidFunctionReturnsObservable.bind(this)" [canExit]="isValidFunctionReturnsBoolean.bind(this)">
-    <br />
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <button class="btn btn-primary" style="margin-left:40%;">Add New Message</button>
-            <ul class="pagination">
-                    <li class="page-item">
-                      <a class="page-link" href="#">Prev</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item active">
-                      <a class="page-link" href="#">4</a>
-                    </li>
-                    <li class="page-item">
-                      <a class="page-link" href="#">Next</a>
-                    </li>
-                  </ul> -->
-<!-- </div>
-        </div>
-      </div>
-    </div>
-  </ng-wizard-step>
-
-  <ng-wizard-step [title]="'Step 4'" [description]="'Preview & Launch'" [state]="stepStates.error">
-    <span>Yor Are Done</span>
-  </ng-wizard-step>
-
-</ng-wizard>  -->

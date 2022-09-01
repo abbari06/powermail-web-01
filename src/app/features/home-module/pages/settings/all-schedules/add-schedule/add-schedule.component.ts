@@ -36,6 +36,8 @@ export class AddScheduleComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public editData: any
   ) {
     if (editData) {
+      this.selectTimezone=false;
+    this.timezone = editData.timezone
       this.getSchedule();
       this.heading = 'Edit Your Schedule';
       this.btn = 'Update';
@@ -47,6 +49,7 @@ export class AddScheduleComponent implements OnInit {
   userAccount = {
     id: undefined,
   };
+  selectTimezone= true;
   timezone: any;
   heading = 'Add New Schedule';
   btn = 'Save';
@@ -88,8 +91,8 @@ export class AddScheduleComponent implements OnInit {
     } else {
       for (let i = 0; i < this.calender.schedules.length; i++) {
         if (this.calender.schedules[i].active == false) {
-          this.calender.schedules[i].times[0].from = '00:00';
-          this.calender.schedules[i].times[0].to = '00:00';
+          this.calender.schedules[i].times[0].from = '';
+          this.calender.schedules[i].times[0].to = '';
         }
       }
       this.calender.timezone = this.timezone.nameValue;
@@ -129,8 +132,15 @@ export class AddScheduleComponent implements OnInit {
     this.calender.schedules = this.editData.schedules;
   }
   updateSchedule() {
+    for (let i = 0; i < this.calender.schedules.length; i++) {
+      if (this.calender.schedules[i].active == false) {
+        this.calender.schedules[i].times[0].from = '';
+        this.calender.schedules[i].times[0].to = '';
+      }
+    }
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userAccount = JSON.parse(localStorage.getItem('userprofile'));
+    this.calender.timezone = this.timezone.nameValue;
     this.schedulesService
       .updateSchedule(this.user.id, this.userAccount.id, this.calender)
       .subscribe({

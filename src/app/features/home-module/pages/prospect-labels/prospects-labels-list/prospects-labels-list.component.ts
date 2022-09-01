@@ -2,6 +2,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   Inject,
   OnInit,
   ViewChild,
@@ -12,12 +13,16 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { ProspectsLabelsAddComponent } from '../prospects-labels-add/prospects-labels-add.component';
 import { ProspectLabelService } from 'src/app/core/services/prospect-label/prospect-label.service';
 import { payload } from '../../prospects/contacts-list/modals/payload-modal';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import Swal from 'sweetalert2';
+import { ContactsComponent } from '../contacts/contacts.component';
+import { CampaignsComponent } from '../campaigns/campaigns.component';
+import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 
 //make an interface class to define the properties
 //that goes inside the table
@@ -41,7 +46,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) set matSort(sort: MatSort) {
     this.dataSource.sort = sort;
   }
-
+  searched=false;
   payload = new payload();
   selectedOption = 'name';
   totalRows = 0;
@@ -60,6 +65,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
     'name',
     'description',
     'color',
+    'contacts',
     'outreach',
     'actions',
   ];
@@ -106,10 +112,27 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
 
   constructor(
     public dialog: MatDialog,
-    private prospectLabelService: ProspectLabelService
+    private prospectLabelService: ProspectLabelService,private breakpointObserver:BreakpointObserver
   ) {}
-
-  ngOnInit(): void {}
+    mobileViewWidth='30%';
+    mobileViewHeight='40%';
+    contactsWidth= '80%';
+    contactsHeight='80%';
+  ngOnInit(): void {
+    this.breakpointObserver
+    .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+    .subscribe((state: BreakpointState) => {
+      if (state.matches) {
+        this.mobileViewWidth = '80%';
+        this.mobileViewHeight='70%';
+        this.contactsWidth='100%';
+        this.contactsHeight='90%';
+        console.log(
+          'Matches small viewport or handset in portrait mode'
+        );
+      }
+    });
+  }
 
   ngAfterViewInit(): void {
     this.fetchAllLabels();
@@ -129,6 +152,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
     this.payload.userAccountId = userAccountId;
     this.prospectLabelService.getLabels(this.payload).subscribe({
       next: (res: any) => {
+        this.selection.clear();
         console.log(res);
         this.dataSource.data = res.content;
         setTimeout(() => {
@@ -146,14 +170,37 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
 
   openDialogue(): void {
     const dialogRef = this.dialog.open(ProspectsLabelsAddComponent, {
-      width: '300px',
-      height: '380px',
+      width: this.mobileViewWidth,
+      //height: '50%',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      this.fetchAllLabels();
+    dialogRef.afterClosed().subscribe(() => {
+        this.fetchAllLabels();
     });
   }
+  getContacts(row) {
+    console.log(row);
+    const dialogRef = this.dialog.open(ContactsComponent, {
+      width:this.contactsWidth,
+      height:this.contactsWidth,
+      data: row,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+     
+    });
+  }
+  getCampaigns(row) {
+    console.log(row);
+    const dialogRef = this.dialog.open(CampaignsComponent, {
+      width: this.contactsWidth,
+      height: this.contactsHeight,
+      data: row,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      
+    });
+  }
+  
   pageChanged(event: PageEvent) {
     console.log({ event });
     this.pageSize = event.pageSize;
@@ -176,6 +223,7 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
     this.fetchAllLabels();
   }
   applyFilter(event: Event) {
+    this.searched=true;
     const filterValue = (event.target as HTMLInputElement).value;
     console.log(filterValue);
     // let value = filterValue.trim().toLowerCase();
@@ -190,11 +238,14 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
     console.log(row);
     const dialogRef = this.dialog.open(ProspectsLabelsAddComponent, {
       width: '300px',
-      height: '380px',
+      //height: '380px',
       data: row,
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.fetchAllLabels();
+    dialogRef.afterClosed().subscribe((val) => {
+      //if(val=="result"){
+        this.fetchAllLabels();
+    //  }
+      
     });
   }
 
@@ -223,8 +274,16 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
           .subscribe({
             next: (res: any) => {
               console.log(res);
-              Swal.fire('Deleted!', 'Your Label has been deleted.', 'success');
-              this.fetchAllLabels();
+              Swal.fire({
+                text: " Label has been deleted.",
+                icon: 'success',
+                showCancelButton: false,
+                showConfirmButton:false,
+              })
+              setTimeout(() => {
+                Swal.close();
+                this.fetchAllLabels();
+              }, 1000);
             },
             error: (error: any) => {
               console.log(error);
@@ -262,12 +321,17 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
           .subscribe({
             next: (res: any) => {
               console.log(res);
-              Swal.fire(
-                'Deleted!',
-                'Your Labels Have Been Deleted.',
-                'success'
-              );
-              this.fetchAllLabels();
+              Swal.fire({
+                text: " Labels have been deleted.",
+                icon: 'success',
+                showCancelButton: false,
+                showConfirmButton:false,
+              })
+              setTimeout(() => {
+                Swal.close();
+                this.fetchAllLabels();
+              }, 1000);
+              
             },
             error: (error: any) => {
               console.log(error);
@@ -276,4 +340,15 @@ export class ProspectsLabelsListComponent implements OnInit, AfterViewInit {
       }
     });
   }
+  @ViewChild('search', {  
+    static: true  
+}) search: ElementRef  
+onSearchClear() {   
+  this.searched=false;
+    console.log(this.search.nativeElement.value);
+    this.search.nativeElement.value='';
+    this.payload.filters=null;
+    this.fetchAllLabels();
+}  
+
 }

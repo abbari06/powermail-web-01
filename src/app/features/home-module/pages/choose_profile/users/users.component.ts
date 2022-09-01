@@ -22,7 +22,8 @@ export class UsersComponent implements OnInit {
   constructor(
     public dialog: MatDialog,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialogRef: MatDialogRef<UsersComponent>
   ) {}
 
   ngOnInit(): void {
@@ -31,34 +32,54 @@ export class UsersComponent implements OnInit {
   openDialogue(): void {
     const dialogRef = this.dialog.open(AddUsersComponent, {
       width: '400px',
-      height: '400px',
+      
     });
+    dialogRef.afterClosed().subscribe({
+      next:()=>{
+        this.showUsers();
+      }
+      })
   }
   logOut() {
     localStorage.clear();
     this.router.navigateByUrl('auth/login');
     this.dialog.closeAll();
   }
+  user:any=undefined;
   showUsers() {
-    this.users = this.authService.userModel.useraccounts;
+    this.authService.getUserAccounts().subscribe({
+      next: (res: any) => {
+       this.users=res;
+      }
+    })
+
   }
   deleteProfile() {}
   //totalAccounts: any;
   saveUserAccount(currentUser) {
+    this.dialogRef.close('submit');
+    this.user=JSON.parse(localStorage.getItem('user'));
     const currentId = currentUser.id;
-    this.totalaccounts = this.authService.userModel.useraccounts;
+    this.totalaccounts = this.users;
     for (let i = 0; i <= this.totalaccounts.length; i++) {
       if (currentId == this.totalaccounts[i].id) {
-        localStorage.setItem(
-          'user',
-          JSON.stringify(this.authService.userModel)
-        );
+        if(this.user==undefined){
+          this.user=this.authService.userModel;
+          localStorage.setItem(
+            'user',
+            JSON.stringify(this.user)
+          );
+        }
         localStorage.setItem(
           'userprofile',
           JSON.stringify(this.totalaccounts[i])
         );
       }
     }
+    
   }
   totalaccounts = [];
+  onNoClick(){
+    
+  }
 }

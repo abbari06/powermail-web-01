@@ -1,1 +1,338 @@
-<p>campaign-stats works!</p>
+<!-- Pie charts -->
+<mat-card class="mat-elevation-z4 card" class="mt-2">
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <div style="width:100%;">
+                <canvas id="myChart" width="700" height="250" #mychart></canvas>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div style="width:100%;">
+                <canvas id="pieChart" width="700" height="250" #mychart></canvas>
+            </div>
+        </div>
+    </div>
+</mat-card>
+
+
+<!-- total prospect -->
+<mat-card class="mat-elevation-z4 card" class="mt-2">
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="column2">
+
+                <div class="row g-2">
+                    <label class="title">Total Prospect 0</label>
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+
+                            </div>
+
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Outreach Campaign</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+
+                            </div>
+
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Completed- No Reply</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+                                <!-- <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label> -->
+                            </div>
+
+                            <!-- <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div> -->
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Stopped</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+                                <!-- <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label> -->
+                            </div>
+
+                            <!-- <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div> -->
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Unsubscribed</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+                                <!-- <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label> -->
+                            </div>
+
+                            <!-- <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div> -->
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Opened</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+                                <!-- <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label> -->
+                            </div>
+
+                            <!-- <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div> -->
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Replied</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="tl">0</label>
+                                <!-- <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label> -->
+                            </div>
+
+                            <!-- <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div> -->
+                            <br>
+
+                            <div class="mt-3">
+                                <label class="LStyle">Clicked</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</mat-card>
+
+
+
+<!-- step metrics -->
+<mat-card class="mat-elevation-z4 card" class="mt-2">
+
+    <!-- <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-sm-6"></div>
+
+            <div class="col-sm-1">
+                <div style="float: right;">
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <label style="margin-top: 9px; font-size: 16px; font-weight: 500;">View A/B test reports</label>
+            </div>
+
+
+            <div class="col-sm-1">
+                <button style="float: right" mat-raised-button color="primary">
+                    <mat-icon>download</mat-icon>
+                    Download
+                </button>
+            </div>
+
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div class="col-sm-2">
+            <label class="title">Stepwise Metrics</label>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-sm-3">
+
+                <div>
+                    <button mat-icon-button disabled style="padding-bottom: 12px;">
+                        <mat-icon color="warn">email</mat-icon>&nbsp;
+                        <label class="LStyle">Step 1</label>
+                    </button>
+                </div>
+
+                <div class="mt-2">
+                    <label style="font-size: 16px;">0 %</label>
+                    <h4>Email</h4>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-9">
+
+                <div class="row g-2">
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="ufl">0 Opens</label>
+                                <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #aa6ecc;">visibility</mat-icon>
+                                </label>
+                            </div>
+
+                            <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div>
+
+                            <div class="mt-3">
+                                <label class="ufl">0 %</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="ufl">0 Clicks</label>
+                                <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #e36a8f;">touch_app</mat-icon>
+                                </label>
+                            </div>
+
+                            <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div>
+
+                            <div class="mt-3">
+                                <label class="ufl">0 %</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="ufl">0 Replies</label>
+                                <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #cdd87e;">reply</mat-icon>
+                                </label>
+                            </div>
+
+                            <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div>
+
+                            <div class="mt-3">
+                                <label class="ufl">0 %</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <mat-card>
+                            <div>
+                                <label class="ufl">0 Bounced</label>
+                                <label class="fl">
+                                    <mat-icon style="font-size: 1.4em; color: #f44336;">call_missed_outgoing</mat-icon>
+                                </label>
+                            </div>
+
+                            <div class="mt-3">
+                                <mat-progress-bar></mat-progress-bar>
+                            </div>
+
+                            <div class="mt-3">
+                                <label class="ufl">0 %</label>
+                            </div>
+
+                        </mat-card>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</mat-card>
+<br>
+<br>
+<br>

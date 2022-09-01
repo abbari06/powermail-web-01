@@ -2,119 +2,259 @@
   <span fxFlex>Dashboard
   </span>
 </mat-toolbar>
-<div>
+<div *ngIf="stepper">
+  <mat-stepper #stepper  (selectionChange)="goTolinkAccounts($event)" >
+    <mat-step>
+      
+      <ng-template matStepLabel ><h5 fxHide.xs>Let's Stert</h5> <mat-icon fxShow.xs fxHide.lg>east</mat-icon></ng-template>
+  </mat-step>
+    <mat-step [completed]="completedStep1">
+      
+        <ng-template matStepLabel ><h5 fxHide.xs>Link Mail Accounts</h5> <mat-icon fxShow.xs fxHide.lg>contacts</mat-icon></ng-template>
+    </mat-step>
+    <mat-step [completed]="completedStep2">
+      
+        <ng-template matStepLabel><h5 fxHide.xs>Add Your Prospects</h5><mat-icon fxShow.xs fxHide.lg>contacts</mat-icon> </ng-template>
+    </mat-step>
+    <mat-step [completed]="completedStep3">
+      <ng-template matStepLabel><h5 fxHide.xs>Add Prospect Labels</h5><mat-icon fxShow.xs fxHide.lg>label</mat-icon></ng-template>
+      
+    </mat-step>
+    <mat-step [completed]="completedStep4">
+      <ng-template  matStepLabel><h5 fxHide.xs>Add Outreach</h5><mat-icon fxShow.xs fxHide.lg>signal_cellular_alt</mat-icon></ng-template>
+      
+    </mat-step>
+  </mat-stepper>
+ 
+  
+</div>
+<div class="container-fluid mt-1">
+  <div class="row">
+    <div class="col-sm-5 scrollable-content">
+      <mat-card fxHide.xs>
 
-  <mat-menu #menu="matMenu" xPosition="after" [overlapTrigger]="false">
-    <div>
-      <button mat-button>Dashboard</button>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-card-title><i class="fas fa-paper-plane"></i> Total Outreachs</mat-card-title>
+          <h1></h1>
+        </div>
+        <mat-divider></mat-divider>
+
+        <div class="container mt-2">
+
+          <div class="row text-center">
+
+            <div class="col-sm-3">
+              <div class="col">Created</div>
+              <h1>{{created}}</h1>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="col">Active</div>
+              <h1></h1>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="col">Paused</div>
+              <h1></h1>
+            </div>
+
+            <div class="col-sm-3">
+              <div class="col">Archived</div>
+              <h1></h1>
+            </div>
+
+          </div>
+
+        </div>
+
+      </mat-card>
+      
+      <mat-accordion fxShow.xs fxHide.lg>       
+        <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <i class="fas fa-paper-plane"></i> &nbsp;
+                Total Outreachs
+              </mat-expansion-panel-header>
+              <div class="container mt-2">
+
+                <div class="row text-center">
+      
+                  <div class="col-sm-3">
+                    <div class="col">Created</div>
+                    <h1>{{created}}</h1>
+                  </div>
+      
+                  <div class="col-sm-3">
+                    <div class="col">Active</div>
+                    <h1></h1>
+                  </div>
+      
+                  <div class="col-sm-3">
+                    <div class="col">Paused</div>
+                    <h1></h1>
+                  </div>
+      
+                  <div class="col-sm-3">
+                    <div class="col">Archived</div>
+                    <h1></h1>
+                  </div>
+      
+                </div>
+      
+              </div>
+            </mat-expansion-panel>
+      </mat-accordion>
+
+      <mat-card class="mt-3" fxHide.xs>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-card-title><i class="fas fa-address-book"></i> Total Prospect</mat-card-title>
+          <h1>500</h1>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="container mt-2">
+          <div class="row text-center">
+            <div class="col-sm-3">
+              <div class="col">Opened</div>
+              <h1>10</h1>
+            </div>
+            <div class="col-sm-3">
+              <div class="col">Clicked</div>
+              <h1>7</h1>
+            </div>
+            <div class="col-sm-3">
+              <div class="col">Replied</div>
+              <h1>3</h1>
+            </div>
+            <div class="col-sm-3">
+              <div class="col">Paused</div>
+              <h1>4</h1>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <div class="mt-2">
+
+      
+      <mat-accordion fxShow.xs fxHide.lg>       
+        <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <i class="fas fa-address-book"></i> &nbsp;
+                Total Prospect
+              </mat-expansion-panel-header>
+              <div class="container mt-2">
+                <div class="row text-center">
+                  <div class="col-sm-3">
+                    <div class="col">Opened</div>
+                    <h1>10</h1>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="col">Clicked</div>
+                    <h1>7</h1>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="col">Replied</div>
+                    <h1>3</h1>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="col">Paused</div>
+                    <h1>4</h1>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+      </mat-accordion>
     </div>
-  </mat-menu>
-  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga facere officia laudantium! Quis numquam impedit ab
-  nulla
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta cum nesciunt accusamus ea officia. Amet corrupti
-  pariatur nemo quia mollitia quasi suscipit saepe necessitatibus, modi perferendis quod. Dolorum quisquam in eum minima
-  expedita molestiae, ullam assumenda necessitatibus corrupti mollitia reprehenderit aliquid laudantium nostrum
-  accusamus dolores provident ex sit illum possimus hic sunt quam dignissimos. Velit commodi modi consequatur incidunt
-  explicabo aliquid molestiae non esse deserunt saepe provident consectetur perspiciatis delectus molestias sed optio
-  vitae, officiis at alias? Explicabo distinctio consequatur facere soluta perferendis mollitia a. Ipsum commodi quae
-  eius molestias quibusdam nihil maxime numquam dignissimos omnis voluptatem ab dolores laboriosam assumenda facilis
-  cupiditate magnam ex qui labore quasi quidem eligendi, veniam, voluptate ut! Nesciunt dignissimos in velit. Maiores,
-  atque fugiat ipsa excepturi minus, nesciunt molestiae vel aliquid omnis vero cumque iste, commodi dicta sequi libero.
-  Alias, voluptatem. Velit laborum facilis nihil dignissimos harum maxime officia dolores, ullam nostrum commodi
-  laboriosam, corporis, laudantium illum. Recusandae voluptates perferendis aliquam maxime sequi numquam amet facere
-  laborum molestiae illum, tempora eius in neque nobis mollitia ex laudantium maiores earum iste? Et maxime debitis in!
-  Vero harum fugiat laborum error, quo deserunt nam saepe sed, et, vitae aspernatur eaque molestias similique! Dolor
-  vitae enim voluptas, distinctio velit alias rerum eius aperiam repellat neque illo voluptatibus. Similique eveniet
-  error voluptatum culpa ducimus non, vitae fuga nesciunt nihil aspernatur laborum voluptate odit neque obcaecati omnis
-  laudantium autem eos eligendi? Alias neque repellat pariatur non commodi labore fugiat nisi soluta fuga ea
-  perspiciatis quia expedita, impedit earum, eligendi necessitatibus ullam? Iure tempore earum odio ad at. Consequatur
-  consequuntur in, facere sit id eos praesentium corporis nam aspernatur, eligendi harum labore ex minima earum quod
-  ratione architecto optio sequi ipsam? Veniam corrupti repellat unde, exercitationem eveniet dolores ea doloremque
-  perferendis, dolorem error repellendus. Numquam voluptas sapiente eos laudantium ipsum, tenetur cumque et illo nihil
-  animi ex voluptate consectetur adipisci soluta nostrum beatae blanditiis! Error assumenda consectetur atque numquam!
-  Commodi, magni. Fugit natus, corporis dolores distinctio odit, nam qui eaque nobis praesentium accusamus, possimus
-  quidem libero. Illo deleniti id numquam, ab consequatur, est ut quam aperiam enim perspiciatis in debitis eveniet
-  provident atque accusamus at dolore corporis magnam. Sit eaque commodi, voluptate placeat quas laboriosam, obcaecati
-  culpa voluptatibus possimus aliquam ipsam cumque veritatis ducimus praesentium quisquam aperiam. Quas hic
-  necessitatibus labore, voluptatum tenetur quasi eveniet voluptates corrupti illum aliquid repudiandae corporis officia
-  blanditiis dicta quos fugiat architecto eius neque quia laudantium delectus eligendi esse. Voluptatum delectus,
-  similique dolorem illo perferendis ipsa molestiae! Dolorem officia nesciunt quo vel similique in nemo aspernatur
-  cupiditate dolore aliquam, nisi doloremque earum porro nulla consectetur itaque ipsum inventore consequatur
-  repudiandae saepe ab iure doloribus amet! Exercitationem, cumque tempore. Tempore, quas? Deleniti quod blanditiis ab
-  quas eveniet. Reiciendis ex et rem eaque repudiandae dicta, consectetur doloribus illo dolor eum perferendis at odio
-  quibusdam quisquam. Animi, impedit quo aliquid consequuntur cumque dicta voluptatibus omnis, ullam quas sunt minus
-  mollitia tenetur reprehenderit quasi consectetur eos magni modi illo, voluptatum excepturi ipsa? Minima distinctio,
-  autem voluptatibus voluptate iste sunt?
-  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ratione illum odit quasi modi, voluptatibus sequi, iste
-  eveniet minus eos atque sapiente. Eligendi consequuntur nemo, tenetur dolorem quisquam aliquid magni fugit a ipsum,
-  sit eaque? Alias, ad explicabo minima vero eius nam, esse sunt suscipit, eos a placeat impedit illum aperiam veritatis
-  rem dolores unde qui quae quibusdam! Laboriosam voluptatum sint doloremque eligendi quis quibusdam praesentium quasi
-  fugiat earum necessitatibus, hic deleniti aut nam sit! Magni nulla a quasi debitis, laudantium odio quia in.
-  Repellendus nemo ipsum similique eos autem est inventore ea doloremque laudantium dolorum natus, quis ab! Aut aperiam
-  nostrum maiores, est quisquam ipsam quibusdam, soluta temporibus quas hic officia obcaecati repellendus minus
-  cupiditate natus qui blanditiis deleniti. Ex ratione qui necessitatibus quas odio inventore nulla possimus, dolorem
-  labore magnam saepe consequuntur fugit vitae iure commodi a? Harum inventore aperiam ad voluptates sed atque
-  voluptatum necessitatibus tenetur, veritatis expedita, laborum modi ab quae est magni eligendi id blanditiis nam
-  provident mollitia odio! Reiciendis, nam. Nemo, alias accusantium? Necessitatibus voluptate itaque blanditiis sint
-  repellat nam voluptatem similique dolores quidem quae. Nisi facilis atque nihil in officiis repellat impedit numquam
-  unde temporibus earum vel recusandae, necessitatibus corrupti deleniti nam. Harum consectetur qui sit commodi animi,
-  deserunt dolorem repudiandae sequi saepe ratione mollitia molestias numquam natus similique iste, at odio aspernatur
-  reprehenderit sed laudantium quam itaque magni? Illum, suscipit. Voluptate soluta mollitia a qui ipsa ea atque cum id
-  sed eaque. Autem veritatis aut ab obcaecati, sed laudantium! Temporibus qui magni repellat, repellendus quasi quaerat
-  nam dolores placeat vitae modi atque doloremque dicta pariatur, necessitatibus vero voluptatum iure ratione impedit
-  debitis veritatis. Adipisci, nostrum voluptate? Fugit quis vero ab praesentium exercitationem a nihil totam? Tenetur
-  quas quaerat, sunt est, nobis necessitatibus aliquid cum ut, nihil culpa fuga recusandae rerum quibusdam hic
-  perspiciatis. Pariatur debitis adipisci quis error eveniet distinctio quibusdam mollitia possimus vitae doloremque
-  provident quae cum officiis est id ipsum sequi explicabo harum necessitatibus, fugiat, velit quaerat! Minus inventore
-  amet aliquid modi. Aperiam ex necessitatibus, reiciendis ab fuga consequatur qui rem ipsum totam veritatis fugiat
-  pariatur quibusdam? Ratione quasi quam magni voluptate soluta, nostrum ad omnis totam quidem repellendus quia
-  laboriosam quis quaerat fuga eligendi sunt labore perferendis unde earum placeat nobis tempore eaque necessitatibus?
-  Hic fugit neque esse itaque obcaecati dolorum excepturi perspiciatis culpa totam odio harum iusto voluptatibus sed
-  ipsam magnam accusantium ratione ducimus laborum optio enim tempore, distinctio, earum, quas saepe. Enim sequi
-  voluptatibus exercitationem a incidunt delectus ratione tenetur voluptatem tempora aliquid, distinctio, obcaecati qui
-  voluptates ex culpa dolorum rerum pariatur debitis totam. Sint nisi, quia obcaecati reprehenderit recusandae eum,
-  doloremque ullam alias distinctio illum ex tenetur possimus consequuntur sed. Aspernatur rem quae culpa fugit nam,
-  officiis tempore blanditiis neque aliquid nisi dolore ducimus perferendis doloribus itaque amet! Cumque animi, omnis
-  magni quidem nihil recusandae ut voluptates accusantium eius quos suscipit, reiciendis doloremque dolore quia officia
-  mollitia perspiciatis! Quidem accusantium ipsam quibusdam. Quisquam, incidunt harum dolore, id magni repellendus
-  doloremque nostrum assumenda fugit veritatis necessitatibus deleniti aperiam laudantium saepe repellat reprehenderit
-  officia, rerum perspiciatis! Laborum harum sit blanditiis tempore libero officia doloremque consequuntur perferendis
-  repudiandae fuga? Accusantium, aliquid impedit, pariatur quibusdam quas non numquam repudiandae iste, tenetur suscipit
-  id perferendis error vel velit odio. Dicta, quibusdam ipsa quas voluptatum aspernatur iusto fuga? Ducimus architecto
-  deserunt laboriosam, saepe cupiditate in odio laudantium, et, incidunt libero consequuntur eum aperiam eos earum
-  itaque porro quas ipsum alias suscipit vel perspiciatis? Illum, suscipit. Quo error quibusdam iure delectus sequi hic
-  voluptas consequuntur quos ea ex laborum porro similique at id distinctio placeat omnis, necessitatibus recusandae
-  corporis fugiat! Ea, fugit? Maxime, similique excepturi fuga perspiciatis asperiores non sit aspernatur tenetur
-  dolorem molestias nulla impedit fugit error explicabo mollitia minus. Ullam molestias sint quos incidunt tempore
-  quaerat repellat pariatur illum doloremque fuga, nemo commodi vero dolores iure atque voluptatum repellendus delectus
-  voluptates, officiis eligendi vitae quam et ad voluptatem? A consequuntur hic explicabo assumenda, veniam, expedita
-  atque laudantium dolorum illum sint similique quos. Doloribus minus autem quam laborum quibusdam saepe commodi ratione
-  aperiam, illo, laudantium praesentium. A reprehenderit vitae, quam adipisci magnam magni saepe facere quae harum,
-  aliquid ad aspernatur corrupti neque quod ipsam molestiae? Sint excepturi molestias nisi, ab iste iusto mollitia vero
-  maxime nesciunt? Error sunt dolores in incidunt debitis. Minus quis laudantium accusantium numquam commodi modi cumque
-  quae? Dolorum quisquam quasi, ad odit ipsa doloribus ipsam iusto blanditiis, impedit tenetur provident aliquam nostrum
-  incidunt nam architecto reiciendis sequi non hic amet consectetur beatae corporis eveniet. Possimus illum voluptates
-  ipsum, voluptatem dolores incidunt eum molestiae rerum! Reiciendis aperiam sed accusantium officiis esse consequatur
-  repellendus explicabo iste. Perferendis exercitationem ut numquam maxime ratione facere mollitia omnis, placeat nihil
-  dolorum, necessitatibus rem ipsam cum porro illum. Soluta est error quo esse quidem ducimus quia sit dignissimos,
-  doloremque qui asperiores, saepe eos sequi? Ipsam eos nihil minus, eaque soluta optio voluptate, hic quae fuga
-  doloremque dignissimos consequuntur labore sapiente ex reprehenderit nemo inventore enim repellendus ea temporibus
-  ducimus! Doloribus ipsa delectus nam aliquid aut magni excepturi fugit veniam. Eum dolores, autem ipsam quae optio
-  voluptatum, distinctio quas vero nulla accusamus laudantium sed possimus deleniti, odio ut perferendis voluptatibus
-  totam ducimus modi necessitatibus nostrum non soluta amet! Vitae maiores vero adipisci, modi, quo aliquid nostrum
-  rerum minus facere sed accusantium tempore dolor, sapiente labore? Ad, reiciendis reprehenderit! Consequatur aut nihil
-  velit recusandae culpa nemo sit nesciunt animi? Fuga ex a nostrum nobis! Ad est ducimus corrupti nisi, suscipit fugiat
-  optio nihil a delectus sequi recusandae. Nobis neque eaque veritatis commodi! Vitae assumenda minima possimus ratione
-  dolores quia adipisci velit commodi accusamus quaerat, alias tenetur rem laborum autem ullam error, aut nostrum eaque
-  maiores unde voluptatibus. Iusto, id. Quis doloribus pariatur iure illum porro possimus explicabo quasi quidem est.
-  Quod tenetur, esse saepe nesciunt, tempora pariatur veniam reprehenderit fugiat cum laudantium earum rerum maxime
-  tempore sequi, exercitationem a natus dolores unde quos! Magnam aliquam distinctio fugiat tenetur quis, mollitia iure
-  dignissimos voluptate dolores aliquid eius animi numquam cumque reprehenderit, illum ea ullam? Explicabo quo tempora
-  voluptates.
-  inventore aut voluptas quisquam natus nobis aperiam mollitia provident, assumenda officiis eveniet laborum praesentium
-  sunt itaque. At, unde dolores ipsam aperiam sint praesentium obcaecati esse suscipit explicabo itaque provident
-  perspiciatis, voluptatum corrupti, labore ab quod! Praesentium veritatis placeat unde veniam accusamus dolorem enim
-  itaque ullam? Nostrum velit temporibus a explicabo officia suscipit! Quae, deserunt iste necessitatibus, velit minus
-  voluptatum a delectus omnis, magnam repellendus quisquam doloremque maxime nemo! Optio hic ducimus animi, tempora
-  nihil dolor! Sed quos nisi atque recusandae fugit rem enim!
+      <mat-card class="mt-3" >
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-card-title><i class="fas fa-tags"></i> Total Prospect-labels</mat-card-title>
+          <h1>100</h1>
+        </div>
+      </mat-card>
+      <mat-card class="mt-3" fxHide.xs>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <mat-card-title><i class="fas fa-envelope"></i> Total Mail Accounts</mat-card-title>
+          <h1>30</h1>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="container mt-2">
+          <div class="row text-center">
+            <div class="col-sm-3">
+              <div class="col">Google</div>
+              <h1>5</h1>
+            </div>
+            <div class="col-sm-3">
+              <div class="col">Outlook</div>
+              <h1>7</h1>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <div class="mt-2">
+
+     
+      <mat-accordion fxShow.xs fxHide.lg>       
+        <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <i class="fas fa-envelope"></i> &nbsp;
+                Total Mail Accounts
+              </mat-expansion-panel-header>
+              <div class="container mt-2">
+                <div class="row text-center">
+                  <div class="col-sm-3">
+                    <div class="col">Google</div>
+                    <h1>5</h1>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="col">Outlook</div>
+                    <h1>7</h1>
+                  </div>
+                </div>
+              </div>
+            </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    </div>
+
+    <div class="col-sm-7">
+      <mat-card class="scrollable-content">
+        <mat-card-title class="text-center"><i class="fas fa-paper-plane"></i> Outreach Timeline</mat-card-title>
+        <div id="tracking">
+          <div class="tracking-list">
+            <div class="tracking-item">
+              <div class="tracking-icon status-outfordelivery">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+              <div class="tracking-content">
+                Recieved by Aamir
+              </div>
+            </div>
+            <div class="tracking-item">
+              <div class="tracking-icon status-delivered">
+                <i class="fas fa-envelope-open"></i>
+              </div>
+              <div class="tracking-date">Jul 19, 2018<span>05:42 PM</span></div>
+              <div class="tracking-content">was opened by Bari</div>
+            </div>
+            <div class="tracking-item">
+              <div class="tracking-icon status-inforeceived">
+                <mat-icon class="mt-2">mouse</mat-icon>
+              </div>
+              <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+              <div class="tracking-content">was click by Naveed</div>
+            </div>
+            <div class="tracking-item">
+              <div class="tracking-icon status-outfordelivery">
+            
+                <i class="fas fa-comment-dots"></i>
+              </div>
+              <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+              <div class="tracking-content">Replied by Umer</div>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      
+    </div>
+  </div>
 </div>

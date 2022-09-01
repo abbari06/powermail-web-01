@@ -1,0 +1,63 @@
+
+
+<div class="example-container">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+    <!-- Checkbox Column -->
+   
+
+    <!-- construct the columns -->
+    <ng-container matColumnDef="place">
+      <mat-header-cell *matHeaderCellDef >No</mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.place}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <mat-header-cell *matHeaderCellDef >First Name</mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</mat-cell>>
+    </ng-container>
+
+    <ng-container matColumnDef="lastname">
+      <mat-header-cell *matHeaderCellDef >Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</mat-cell>>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef >Email</mat-header-cell>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.email}}</mat-cell>>
+    </ng-container>
+
+    <ng-container matColumnDef="company">
+      <mat-header-cell *matHeaderCellDef >Company</mat-header-cell>>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.company}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef >Position</mat-header-cell>>
+      <mat-cell *matCellDef="let prospect"> {{ prospect.position}}</mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="labels">
+      <mat-header-cell *matHeaderCellDef>Labels</mat-header-cell>>
+      <mat-cell *matCellDef="let prospect">
+
+        <ng-container *ngFor="let label of prospect.labels">
+          <mat-chip  [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
+        </ng-container>
+          
+      </mat-cell>
+    </ng-container>
+   
+
+    <!-- add a table row, if not added..rows will not be rendered inside the table -->
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
+  </mat-table>
+  
+</div>
+<div>
+  <mat-paginator #paginator [length]="availableProspects" [pageIndex]="currentPage" [pageSize]="pageSize"
+(page)="pageChanged($event)" aria-label="Select page">
+</mat-paginator>
+</div>

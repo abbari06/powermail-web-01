@@ -1,0 +1,27 @@
+<ng-container>
+    <!-- <mat-label>Select Labels</mat-label> -->
+    <mat-form-field class="example-chip-list">
+        <mat-select [compareWith]="compareFn" [formControl]="previousLabels" multiple>
+
+            <mat-select-trigger>
+                <mat-chip-list>
+                    <mat-chip *ngFor="let label of previousLabels.value"[removable]="true"
+                        (removed)="onPreviousLabelRemoved(label)"
+                        [ngStyle]="{ 'background': label.colorHex }" selected appearance="fill">
+                        {{ label.name}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+            </mat-select-trigger>
+            <mat-option *ngFor="let label of allLabels"
+                [value]="{name:label.name,id:label.id,colorHex:label.colorHex}">
+                <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{ label.name }}</mat-chip><mat-chip  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</mat-chip>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="footer mt-5"  >
+        <button mat-flat-button color="primary" style="float:right" (click)="updateLabels()">Save</button>
+        <button mat-flat-button [mat-dialog-close]="true" color="warn" style="float:left">Cancel</button>
+    </div>
+</ng-container>
+
