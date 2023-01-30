@@ -3,12 +3,24 @@
       <mat-label>Choose Calender Schedule:</mat-label>
       <mat-select [formControl]="schedule" [compareWith]="compareColors">
         <mat-option *ngFor="let schedule of allSchedules" [value]="schedule">
-          {{schedule.name}}<!-- <ng-container *ngFor="let oneSchedule of schedule">
-                                  
-            <ng-container *ngIf="oneSchedule.active" >
+          {{schedule.name}}::
+          <ng-container *ngFor="let oneSchedule of schedule.schedules">
+                                 
+            <ng-container *ngIf="oneSchedule.active">
               
               <ng-container *ngFor="let time of oneSchedule.times">
-               {{oneSchedule.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}}
+                <ng-container>
+                    {{oneSchedule.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}}
+                </ng-container> 
+               </ng-container>
+            </ng-container>
+          </ng-container>
+          <!-- <ng-container *ngFor="let day of previewData">
+                                  
+            <ng-container *ngIf="day.active" >
+              
+              <ng-container *ngFor="let time of day.times">
+               {{day.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}}
                </ng-container>
             </ng-container>
           </ng-container> -->

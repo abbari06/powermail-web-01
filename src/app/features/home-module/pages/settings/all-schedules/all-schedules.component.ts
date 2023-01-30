@@ -59,8 +59,11 @@ export class AllSchedulesComponent implements OnInit {
       width: '99%',
       height: '90%',
     });
-    dialogRef.afterClosed().subscribe(() => {
-      this.listAllSchedules();
+    dialogRef.afterClosed().subscribe((submit) => {
+      setTimeout(() => {
+        this.listAllSchedules();
+      }, 2000);
+      
     });
   }
 
@@ -95,8 +98,11 @@ export class AllSchedulesComponent implements OnInit {
      height: '90%',
       data: row,
     });
-    dialogRef.afterClosed().subscribe((c) => {
-      this.listAllSchedules();
+    dialogRef.afterClosed().subscribe((submit) => {
+      setTimeout(() => {
+        this.listAllSchedules();
+      }, 2000);
+     
     });
   }
   deleteSchedule(schedule) {

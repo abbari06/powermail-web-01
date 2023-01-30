@@ -8,7 +8,18 @@
               <mat-label>Choose Calender Schedule:</mat-label>
               <mat-select formControlName="schedule" [compareWith]="compareColors">
                 <mat-option *ngFor="let schedule of allSchedules" [value]="schedule">
-                  {{schedule.name}}
+                  {{schedule.name}}::
+                  <ng-container *ngFor="let oneSchedule of schedule.schedules">
+                                         
+                    <ng-container *ngIf="oneSchedule.active">
+                      
+                      <ng-container *ngFor="let time of oneSchedule.times">
+                        <ng-container>
+                            {{oneSchedule.day | uppercase}}: {{time.from | time24to12Transform}}&nbsp;-&nbsp;{{time.to | time24to12Transform}}
+                        </ng-container> 
+                       </ng-container>
+                    </ng-container>
+                  </ng-container>
                 </mat-option>
               </mat-select>
             </mat-form-field>

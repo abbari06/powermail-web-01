@@ -136,10 +136,10 @@
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <td mat-cell *matCellDef="let element" class='has_label_on_mobile' data-label='Actions'>
                     <button mat-button>
-                        <mat-icon (click)="editSchedule(element)">edit</mat-icon>
+                        <mat-icon (click)="editSchedule(element)" style="color: primary;">edit</mat-icon>
                     </button>&nbsp;
                     <button mat-button>
-                        <mat-icon style="color:brown" (click)="deleteSchedule({id:element.id})">delete
+                        <mat-icon style="color:#f44336" (click)="deleteSchedule({id:element.id})">delete
                         </mat-icon>
                     </button>
             </ng-container>

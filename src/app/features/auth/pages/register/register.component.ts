@@ -12,7 +12,7 @@ import { StripeComponent } from 'src/app/features/home-module/pages/stripe/strip
 export class RegisterComponent implements OnInit {
   message:string;
   status:string;
-  ifRegistered=false;
+  loading=false;
     constructor( private formBuilder: FormBuilder,private authService:AuthService,private router :Router, 
       public dialog: MatDialog) { }
   ngOnInit(): void {
@@ -40,21 +40,23 @@ export class RegisterComponent implements OnInit {
       height: '95%',
       
     });
-    dialogRef.afterClosed().subscribe({
-      next:()=>{
-        
+    dialogRef.afterClosed().subscribe((val)=>{
+      if(val){
+       // this.router.navigate(["auth"])
       }
       })
   }
   registerUserOrAgency(){
+    this.loading=true;
     this.authService.register(this.registerForm.value).subscribe({
       next: (res: any) => {
+        this.loading=false;
         this.openDialogue(this.registerForm.value.email);
         console.log(res);
         this.router.navigate(['auth'], { state: { data: res } });
       },
       error: (error: any) => {
-        //alert(error);
+        this.loading=false;
         console.log(error);
       },
     });
