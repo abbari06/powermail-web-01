@@ -242,13 +242,15 @@
         </mat-select>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="addBulkLabels()">
+        <button mat-flat-button color="warn" style="float:left" (click)="closePopup()" >
+          Close
+        </button>
+        <button mat-flat-button color="primary" style="float:right" (click)="addBulkLabels()">
           Add
         </button>
+       
       </div>
-      <button type="button" class="btn btn-danger" (click)="closePopup()" style="float:left">
-        Close
-      </button>
+    
     </div>
   </div>
 </div>
@@ -275,14 +277,14 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="removeBulkLabels()">
+        <button mat-flat-button color="primary" style="float:right"(click)="removeBulkLabels()">
           Remove
         </button>
-
+        <button mat-flat-button color="warn" style="float:left" (click)="closeRemovePopup()">
+          Close
+        </button>
       </div>
-      <button type="button" class="btn btn-danger" (click)="closeRemovePopup()" style="float:left">
-        Close
-      </button>
+     
     </div>
   </div>
 </div>

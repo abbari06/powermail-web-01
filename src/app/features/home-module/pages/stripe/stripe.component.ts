@@ -3,8 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SubscriptionService } from 'src/app/core/services/stripe/subscription.service';
 // declare var module: NodeModule;
-declare var stripe: any;
-declare var elements: any;
+// declare var stripe: any;
+// declare var elements: any;
 @Component({
   selector: 'app-stripe',
   templateUrl: './stripe.component.html',
@@ -43,6 +43,7 @@ export class StripeComponent implements OnInit {
     this.initiateCardElement();
   }
   initiateCardElement() {
+    console.log(elements)
     // Giving a base style here, but most of the style is in scss file
     const cardStyle = {
       base: {
@@ -61,9 +62,9 @@ export class StripeComponent implements OnInit {
         iconColor: '#fa755a',
       },
     };
-    this.card = elements.create('card', { cardStyle });
+    this.card = elements.create('card',{cardStyle});
     this.card.mount(this.cardInfo.nativeElement);
-    this.card.addEventListener('change', this.cardHandler);
+    this.card.addEventListener('change',this.cardHandler);
   }
   onChange({ error }) {
     if (error) {

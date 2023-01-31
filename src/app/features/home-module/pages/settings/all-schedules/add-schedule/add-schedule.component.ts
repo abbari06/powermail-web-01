@@ -33,7 +33,8 @@ export class NgbTimeStringAdapter extends NgbTimeAdapter<string> {
 export class AddScheduleComponent implements OnInit {
   constructor(
     private schedulesService: SchedulesService,
-    @Inject(MAT_DIALOG_DATA) public editData: any
+    @Inject(MAT_DIALOG_DATA) public editData: any,
+    private dialogRef: MatDialogRef<AddScheduleComponent>
   ) {
     if (editData) {
       this.selectTimezone=false;
@@ -103,6 +104,7 @@ export class AddScheduleComponent implements OnInit {
         .subscribe({
           next: (res: any) => {
             console.log(res);
+            this.dialogRef.close("submit");
             Swal.fire({
               position: 'top-end',
               icon: 'success',
@@ -112,6 +114,7 @@ export class AddScheduleComponent implements OnInit {
             });
           },
           error: (err) => {
+            this.dialogRef.close();
             Swal.fire({
               position: 'top-end',
               icon: 'error',
@@ -146,6 +149,7 @@ export class AddScheduleComponent implements OnInit {
       .subscribe({
         next: (res: any) => {
           console.log(res);
+          this.dialogRef.close("submit");
           Swal.fire({
             position: 'top-end',
             icon: 'success',

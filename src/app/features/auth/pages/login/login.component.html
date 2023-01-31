@@ -23,8 +23,8 @@
                 </mat-form-field>
             </form>
 
-            <button mat-flat-button color="primary" style="width:100%;" (click)="loginUser()" [disabled]="loading">login
-                <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+            <button [disabled]="loading || !loginForm.valid" mat-flat-button color="primary" style="width:100%;" (click)="loginUser()" >login
+                
             </button><br><br>
             <a routerLink="" style="margin-left: 35%;" class="forgot" (click)="openDialogue()">Forgot password</a><br>
             <div class="footer">

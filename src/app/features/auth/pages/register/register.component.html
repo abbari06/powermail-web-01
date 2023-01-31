@@ -59,7 +59,7 @@
                 </mat-checkbox>
             </form>
             <button mat-flat-button color="primary" style="width:100%;"
-                (click)="registerUserOrAgency()">Register</button><br><br>
+                (click)="registerUserOrAgency()" [disabled]="!registerForm.valid || loading" >Register  <i class="fa fa-spinner fa-spin" *ngIf="loading"></i></button><br><br>
             <div class="footer">
                 <p>Already Registered? <a routerLink="/auth/login" class="login">Login</a></p>
             </div>

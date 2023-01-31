@@ -13,6 +13,7 @@ import {
 import { ForgotPasswordComponent } from '../forgot-password/forgot-password.component';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
+import { StripeComponent } from 'src/app/features/home-module/pages/stripe/stripe.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   token: any;
   status: any;
   message: string = null;
-  loading = false;
+  loading:any;
   constructor(
     private formBuilder: FormBuilder,
     private _snackBar: MatSnackBar,
@@ -57,14 +58,23 @@ export class LoginComponent implements OnInit {
   }
   loginUser() {
     this.loading = true;
-    let error=this.authService.login(this.loginForm.value)
-    setTimeout(() => {
+   let error= this.authService.login(this.loginForm.value)
+   // console.log(error);
+    
+    //setTimeout(() => {
+      // if(!this.authService.userModel.trialPlan){
+      //   this.loading=false;
+      //     this.openStripeDialogue(this.authService.userModel.email) 
+      // }
       if(error){
         console.log(error);
-        this.loading=false;
+        setTimeout(() => {
+          this.loading=false;
+        }, 1000);
+       // 
         
-      }
-    }, 1000);
+       }
+   // }, 1000);
     
   }
   openDialogue(): void {
@@ -77,7 +87,7 @@ export class LoginComponent implements OnInit {
       console.log('The dialog was closed');
       setTimeout(() => {
         result = this.authService.returnMessage();
-        if (result != undefined) {
+        if (result !=='') {
           console.log(result);
           this.openSnackBar(result);
         }
@@ -85,4 +95,20 @@ export class LoginComponent implements OnInit {
       }, 2000);
     });
   }
+  // openStripeDialogue(email): void {
+  //   console.log(email);
+    
+  //   const dialogRef = this.dialog.open(StripeComponent, {
+  //     disableClose: true,
+  //     data:email,
+  //     width: '95%',
+  //     height: '95%',
+      
+  //   });
+  //   dialogRef.afterClosed().subscribe({
+  //     next:()=>{
+        
+  //     }
+  //     })
+  // }
 }

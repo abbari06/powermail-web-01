@@ -74,16 +74,18 @@ export class AuthService {
           this.userModel.fb_token=res.headers.get('x-fb-token');
           this.userModel.trialPlan=res.body.trialPlan;
           this.firebaseLogin(this.userModel.fb_token);
-          if (this.userModel.accounttype == 'client') {
-            localStorage.setItem('user', JSON.stringify(this.userModel));
-            localStorage.setItem(
-              'userprofile',
-              JSON.stringify(res.body.useraccounts[0])
-            );
-            this.router.navigate(['home'],{ state: { mode: 'client' } });
-          } else if (this.userModel.accounttype == 'agency') {
-            this.router.navigate(['home'], { state: { mode: 'agency' } }); //here choose-profile popup will be shown
-          }
+          
+            if (this.userModel.accounttype == 'client') {
+              localStorage.setItem('user', JSON.stringify(this.userModel));
+              localStorage.setItem(
+                'userprofile',
+                JSON.stringify(res.body.useraccounts[0])
+              );
+              this.router.navigate(['home'],{ state: { mode: 'client' ,plan:this.userModel.trialPlan} });
+            } else if (this.userModel.accounttype == 'agency') {
+              this.router.navigate(['home'], { state: { mode: 'agency',plan:this.userModel.trialPlan} }); //here choose-profile popup will be shown
+            }
+         
         },
         error: (error: any) => {
           return error;
@@ -194,4 +196,5 @@ parentUserEmail='';
   getUserID(){
     return localStorage.getItem('U_tk');
   }
+  
 }
