@@ -40,6 +40,7 @@ import { ContactsComponent } from './pages/prospect-labels/contacts/contacts.com
 import { CampaignsComponent } from './pages/prospect-labels/campaigns/campaigns.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { StripeComponent } from './pages/stripe/stripe.component';
+
 // import { MsalModule, MsalService, MSAL_INSTANCE , MsalBroadcastService, MsalInterceptorConfiguration, MSAL_INTERCEPTOR_CONFIG} from '@azure/msal-angular';
 // import { InteractionType, IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 
@@ -105,7 +106,6 @@ import { StripeComponent } from './pages/stripe/stripe.component';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     // MsalModule
-    
   ],
   providers: [{ provide: NgbTimeAdapter, useClass: NgbTimeStringAdapter },
     // 

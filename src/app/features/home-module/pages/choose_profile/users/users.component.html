@@ -1,4 +1,4 @@
-
+<!-- 
 <div class="content">
   
     <div fxLayout="row wrap" fxLayoutGap="16px grid">
@@ -15,9 +15,23 @@
         </div>
 
         <div [fxFlex]="(100/gridColumn) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let userAccount of users">
+            <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
+                <ng-template pTemplate="title">
+                    {{userAccount.name}}
+                </ng-template>
+                <ng-template pTemplate="content">
+                    <p>{{userAccount.email}}</p>
+                    <p>{{userAccount.company}}</p>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                    <p-divider type="dashed"></p-divider>
+                    <button icon="pi pi-trash" pButton pRipple type="button" label="Delete" class="p-button-sm p-button-outlined p-button-danger">
+                    </button>
+                    <button style="float:right" icon="pi pi-check" pButton pRipple type="button" label="Select" class="p-button-sm p-button-outlined"></button>
+                </ng-template>
+                </p-card> -->
 
-
-            <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
+            <!-- <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
 
                 <div class="row">
                     <mat-card-title>{{userAccount.parentUserEmail}}</mat-card-title>
@@ -46,9 +60,40 @@
 
                 </div>
 
-            </mat-card>
-
+            </mat-card> -->
+<!-- 
         </div>
     </div>
 
+</div> -->
+
+<div class="grid">
+    <div class="col-12 md:col-4 lg:col-3">
+        <p-card class="card_add">
+            <ng-template pTemplate="content" >
+                <div class="add">
+                    <button   icon="pi pi-check" pButton pRipple type="button" label="Select" class="p-button-sm p-button-outlined"></button>
+
+                </div>
+
+            </ng-template>
+            </p-card>
+    </div>
+    <div class="col-12 md:col-4 lg:col-3"  *ngFor="let userAccount of users">
+        <p-card >
+            <ng-template pTemplate="title">
+                {{userAccount.name}}
+            </ng-template>
+            <ng-template pTemplate="content">
+                <p>{{userAccount.email}}</p>
+                <p>Company: {{userAccount.company}}</p>
+            </ng-template>
+            <ng-template pTemplate="footer">
+                <p-divider type="dashed"></p-divider>
+                <button (click)="deleteProfile()" icon="pi pi-trash" pButton pRipple type="button" label="Delete" class="p-button-sm p-button-outlined p-button-danger">
+                </button>
+                <button (click)="saveUserAccount(userAccount)" style="float:right" icon="pi pi-check" pButton pRipple type="button" label="Select" class="p-button-sm p-button-outlined"></button>
+            </ng-template>
+            </p-card>
+    </div>
 </div>
