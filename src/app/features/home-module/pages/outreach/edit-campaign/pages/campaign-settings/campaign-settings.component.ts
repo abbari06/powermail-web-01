@@ -95,7 +95,7 @@ get actions():FormArray{
     }
  
   ngOnInit(): void {
-  //  this.addActions()
+   this.addActions()
     this.campaign.id=this.route.snapshot.queryParamMap.get('id');
     console.log(this.campaign.id)
     this.listCampaignsById();

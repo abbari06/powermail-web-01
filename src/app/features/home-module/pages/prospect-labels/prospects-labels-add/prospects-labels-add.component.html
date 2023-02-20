@@ -1,37 +1,67 @@
-<div class="p-3">
-    <div class="header">
-        <mat-card-title>{{heading}}</mat-card-title>
-    </div>&nbsp;
-    <mat-card-content class="mt-4">
+<!-- <div class="p-3">
+  <div class="header">
+    <mat-card-title>{{ heading }}</mat-card-title>
+  </div>
+  &nbsp;
+  <mat-card-content class="mt-4">
+    <form [formGroup]="AddLabelForm">
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Add Label</mat-label>
+        <input type="text" matInput formControlName="name" autofocus />
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Label Description</mat-label>
+        <input type="text" matInput formControlName="description" autofocus />
+      </mat-form-field>
+
+      <app-color-picker
+        [color]="backgroundColor"
+        [heading]="'Select Label Color'"
+        (event)="setColor('background', $event)"
+      ></app-color-picker>
+    </form>
+    <footer class="footer">
+      <button class="mat-raised-button mat-warn" [mat-dialog-close]="true">
+        Cancel
+      </button>
+      <button
+        class="mat-raised-button mat-primary"
+        (click)="setLabels()"
+        [mat-dialog-close]="true"
+        [disabled]="AddLabelForm.invalid"
+      >
+        {{ actionButton }}
+      </button>
+    </footer>
+  </mat-card-content>
+</div> -->
+<p-card [header]="heading">
+    <ng-template pTemplate="content">
         <form [formGroup]="AddLabelForm">
-            <!-- <div class="row">
-                <div class="col-sm-4"> -->
             <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Add Label</mat-label>
-                <input type="text" matInput formControlName="name" autofocus>
+              <mat-label>Add Label</mat-label>
+              <input type="text" matInput formControlName="name" autofocus />
             </mat-form-field>
-            <!-- </div> -->
-            <!-- 
-            <div class="col-sm-4"> -->
+      
             <mat-form-field class="example-full-width" appearance="outline">
-                <mat-label>Label Description</mat-label>
-                <input type="text" matInput formControlName="description" autofocus>
+              <mat-label>Label Description</mat-label>
+              <input type="text" matInput formControlName="description" autofocus />
             </mat-form-field>
-            <!-- </div> -->
-
-            <!-- <div class="col-sm-4"> -->
-            <!-- <mat-label>Pick Color</mat-label> -->
-            <app-color-picker [color]="backgroundColor" [heading]="'Select Label Color'"
-                (event)="setColor('background', $event)"></app-color-picker>
-
-
-            <!-- </div> -->
-            <!-- </div> -->
-        </form>
-        <footer class="footer">
-        <button class="mat-raised-button mat-warn" [mat-dialog-close]="true">Cancel</button>
-        <button class="mat-raised-button  mat-primary" (click)="setLabels()" [mat-dialog-close]="true"
-            [disabled]="AddLabelForm.invalid">{{actionButton}}</button>
-        </footer>    
-    </mat-card-content>
-</div>
+      
+            <app-color-picker
+              [color]="backgroundColor"
+              [heading]="'Select Label Color'"
+              (event)="setColor('background', $event)"
+            ></app-color-picker>
+          </form>
+    </ng-template>
+    <ng-template pTemplate="footer" > 
+        <p-divider type="dashed"></p-divider>
+        <button [mat-dialog-close]="true" icon="pi pi-times" pButton pRipple type="button" label="Cancel" class="p-button-sm p-button-outlined p-button-danger">
+        </button>
+        <button (click)="setLabels()"
+        [mat-dialog-close]="true"
+        [disabled]="AddLabelForm.invalid" style="float:right" icon="pi pi-plus" pButton pRipple type="button" [label]="actionButton" class="p-button-sm p-button-outlined"></button>
+    </ng-template>
+</p-card>

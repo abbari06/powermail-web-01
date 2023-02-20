@@ -12,7 +12,6 @@ export class SpinnerService {
   }
 
   show() {
-    console.log('spinner');
     
     this.visibility.next(true);
   }

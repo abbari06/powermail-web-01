@@ -67,7 +67,6 @@ export class HomeComponent implements OnInit {
 user:any=undefined;
 profile=false;
   ngOnInit(): void {
-    console.log("home")
     this.user=JSON.parse(localStorage.getItem('user'));
     if(this.user==undefined){
       this.firstName=this.authService.userModel.firstname;
@@ -75,7 +74,6 @@ profile=false;
       if(this.authService.userModel.accounttype=='agency'){
         this.profile=true;
       }
-      console.log(this.firstName,this.lastName); 
     }
     
     if(this.user.accounttype=='agency'){
@@ -85,14 +83,12 @@ profile=false;
       this.firstName=this.user.firstname;
     this.lastName=this.user.lastname;
     }
-    console.log(this.user);
     setTimeout(() => {
       const userstate = this.authService.userStateSource;
       userstate.subscribe((user) => {
         if (user) {
        this.notificationsService.fetchNotifications();
        this.notification=this.notificationsService.notificationList;
-            console.log(this.notification);
 
         }
       });
@@ -111,7 +107,6 @@ profile=false;
       //disableClose: true,
     });
     dialogRef.afterClosed().subscribe((val) =>{
-      console.log(val);
       
      if(val==='submit'){
       window.location.reload();
@@ -123,20 +118,16 @@ profile=false;
    * Fetch user for notification handleing
    */
    fetchUser() {
-    console.log('fetchuser');
-    console.log(this.authService.getUserID());
+
 
     this.notificationsService
       .fetchUser(btoa(this.authService.getUserID()))
       .subscribe((user) => {
         if (user) {
 
-    console.log(this.authService.getUserID());
-          console.log("userfound ");
           this.userNotification = user;
 
         } else {
-          console.log('adding user ');
 
           this.userNotification = {
             user_id: this.authService.getUserID(),
@@ -157,14 +148,12 @@ profile=false;
    * Get notifications list
    */
   getNotifications() {
-    console.log("get noti called");
 
     this.notificationsService.list().subscribe(
       (notification) => {
         
         this.notification = notification;
         this.getUserNotifications();
-        console.log(notification+"fgghfghfgh");
       },
       (error) => {},
       () => {}
@@ -175,7 +164,6 @@ profile=false;
    * Get User's notification which are not dismissed
    */
   getUserNotifications() {
-    console.log("get user Notification called");
 
     if (
       this.userNotification.dismissed_notifications &&
@@ -200,7 +188,6 @@ profile=false;
       this.showNotifications = false;
     }
 
-    console.log(`final notications ${this.notification}`);
 
 
   }
@@ -210,7 +197,6 @@ profile=false;
    * @param notificationId
    */
   dismissNotification(notificationId: string) {
-    console.log("dismissed");
 
     this.userNotification.dismissed_notifications.push(notificationId);
     this.notificationsService.notificationDismissed(btoa(this.authService.getUserID()), this.userNotification);

@@ -1,6 +1,6 @@
 
 
-    <div class="row mt-2">
+    <!-- <div class="row mt-2">
         <mat-accordion>       
                       <mat-expansion-panel>
                             <mat-expansion-panel-header>
@@ -8,10 +8,7 @@
                                     {{campaignName}}
                                 </div>
                                 <div class="col-sm-3">
-                                    <!-- <span>
-                                        <mat-chip  *ngFor="let label of labels" [ngStyle]="{ 'background': label.colorHex }" style="float:none;" > {{label.name}} </mat-chip>
-                                    </span> -->
-                                    
+                                  
                                         <mat-chip-list>
                                            
                                              <ng-container *ngFor="let label of labels;let i=index" >
@@ -80,11 +77,12 @@
                             
                           </mat-expansion-panel>
                     </mat-accordion>
-    </div>
+    </div> -->
 
 
-    
-    <div class="container mt-2">
+    <p-tabMenu [model]="items" ></p-tabMenu>
+
+    <!-- <div class="container mt-2">
         
         <div class="row">
             
@@ -99,6 +97,7 @@
             </nav>
       
         </div>
-    </div>
-
-<router-outlet></router-outlet>
+    </div> -->
+<div class="mt-2">
+    <router-outlet></router-outlet>
+</div>

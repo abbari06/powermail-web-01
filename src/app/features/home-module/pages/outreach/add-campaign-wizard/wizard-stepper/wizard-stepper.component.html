@@ -1,5 +1,5 @@
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="row">
       <nav class="nav nav-pills nav-justified">
         <a class="nav-link"  class="nav-link disabled" routerLink="stepone" routerLinkActive="active">Let's Start&nbsp;<mat-icon>start</mat-icon></a>
@@ -8,6 +8,13 @@
         <a class="nav-link"  class="nav-link disabled" routerLink="stepfour" routerLinkActive="active">Preview & Launch<mat-icon>preview</mat-icon></a>
       </nav>
     </div>
-  </div>
+  </div> -->
 
-<router-outlet></router-outlet>
+  <p-card>
+    <p-steps [model]="items" [readonly]="true"></p-steps>
+
+  </p-card>
+<div class="mt-3" >
+  <router-outlet ></router-outlet>
+
+</div>

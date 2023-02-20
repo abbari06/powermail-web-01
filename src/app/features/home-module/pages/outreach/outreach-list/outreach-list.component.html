@@ -1,5 +1,4 @@
-
-<mat-toolbar fxLayout="row">
+<!-- <mat-toolbar fxLayout="row">
   <span fxFlex>OutReach
     </span>
 
@@ -7,27 +6,10 @@
         <mat-icon>add</mat-icon>
         New
     </button>
-    <!-- <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-        <mat-icon>more_vert</mat-icon>
-      </button> -->
-   
-      <!-- <mat-menu #dropMenu="matMenu">
-        <ng-container>
-            <button mat-menu-item color="primary" routerLink="addcampaign">
-                <mat-icon>add</mat-icon>
-                Add 
-            </button>
-          <mat-divider></mat-divider>
-        </ng-container>
-      </mat-menu> -->
-</mat-toolbar>
-<div class="container-fluid example-container">
+</mat-toolbar> -->
+<!-- <div class="container-fluid example-container">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Checkbox Column -->
-   
-
-    <!-- construct the columns -->
     <ng-container matColumnDef="status">
       <th mat-header-cell *matHeaderCellDef >
         Status
@@ -108,7 +90,6 @@
         </label>
     </ng-container>
 
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
@@ -119,62 +100,129 @@
   <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
     [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
   </mat-paginator>
-</div>
+</div> -->
 
+<!-- <p-tabMenu [model]="items"></p-tabMenu> -->
 
+<div class="mb-3">
+  <p-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <button
+        routerLink="addcampaign"
+          icon="pi pi-plus"
+          pButton
+          pRipple
+          type="button"
+          label="Add New"
+          class="p-button-sm p-button-outlined mr-2"
+        ></button>
+      </ng-template>
 
-<!--
-    Accordian
-    <div *ngFor="let campaign of campaigns" class="mt-5">
-        
-        <mat-accordion >
-            <div class="row">
-            <mat-expansion-panel >
-                <mat-expansion-panel-header>
-                   
-                    <div  class=" Ccell col-sm-1"
-                        style="margin-top:8px;">
-                        {{campaign.status}}
-                    </div>
-                    <div class="col-sm-2" style="margin-top:15px;">
-                        {{campaign.title}}</div>
-                    <div class="col-sm-2">
-                        <img style="width: 25px; margin-top: 6px; "/>
-                        {{campaign.mailAccountId}}
-                    </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <div   class="col-sm-2" style="margin-top:15px"> {{campaign.steps.length}}</div>
-                    <div class="col-sm-2" style="margin-top:15px"> 
-                      <span>{{campaign.createdAt | date}}</span>  
-                    </div>
-                    <div   class="col-sm-1" style="margin-top:15px"> {{campaign.steps.length}}</div> 
+      <ng-template pTemplate="right">
+        <button
+          icon="pi pi-trash"
+          pButton
+          pRipple
+          type="button"
+          label="Delete"
+          class="p-button-sm p-button-outlined p-button-danger"
+        ></button>
+      </ng-template>
+    </p-toolbar>
 
-                    <div class="col-sm-2">
-                        <span class="dotSend" style="margin-top:10px;">{{campaign.stats.numClicks}}</span>
-                        <span class="dotOpned">{{campaign.stats.numEmailsSent}}</span>
-                        <span class="dotClicked">{{campaign.stats.numProspectsContacted}}</span>
-                        <span class="dotFailed">{{campaign.stats.numReplies}}</span>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <button mat-button routerLink="editcampaign" >
-                            <mat-icon class="edit">edit</mat-icon>
-                        </button>
-                        <button mat-button>
-                            <mat-icon color="primary">archive</mat-icon>
-                        </button>
-                        <label class="switch">
-                            <input type="checkbox" checked>
-                            <span class="slider round"></span>
-                        </label>
-
-                    </div>
-                
-                </mat-expansion-panel-header>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque consequatur fugiat voluptatibus, numquam ducimus possimus.</p>
-            </mat-expansion-panel>
+    <p-table
+      responsiveLayout="scroll"
+      [resizableColumns]="true"
+      styleClass="p-datatable-sm p-datatable-gridlines"
+      [value]="dataSource.data"
+      [lazy]="true"
+      (onLazyLoad)="pageChanged($event)"
+      [totalRecords]="totalRecords"
+      [rows]="5"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="m-0">Manage Outreachs</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" placeholder="Search..." />
+          </span>
         </div>
-        </mat-accordion>
-    
-</div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Status<i class="pi pi-info" style="font-size: .7rem"></i>
+          </th>
+          <th>Outreach Title</th>
+          <th>Sender Email</th>
+          <th>Progress</th>
+          <th>Stats</th>
+          <th>Created At</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-outreach>
+        <tr>
+          <td>
+            <p-chip [label]="outreach.status" styleClass="mr-2 custom-chip"></p-chip>
 
--->
+          </td>
+          <td>
+            {{ outreach.title }}
+          </td>
+          <td>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+              height="20px"
+              width="20px"
+            />
+            {{ outreach.mailAccountId }}
+          </td>
+          <td class="text-center">
+            0/{{ outreach.steps.length }}
+            <div>Messages Sent</div>
+          </td>
+          <td>
+            <div class="badges">
+              <p-badge [value]="outreach.stats.numClicks" styleClass="mr-2"></p-badge>
+              <p-badge [value]="outreach.stats.numEmailsSent"  severity="warning" styleClass="mr-2"></p-badge>
+              <p-badge [value]="outreach.stats.numProspectsContacted" severity="success" styleClass="mr-2"></p-badge>
+              <p-badge [value]="outreach.stats.numReplies" severity="info" styleClass="mr-2"></p-badge>
+          </div>
+          </td>
+          <td>{{ outreach.createdAt | date }}</td>
+          <td>
+            <button mat-button>
+              <mat-icon color="primary">archive</mat-icon>
+          </button>
+          <label class="switch">
+              <input type="checkbox" checked>
+              <span class="slider round"></span>
+          </label>
+            <button
+              (click)="editCampaign(outreach)"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-text mr-2"
+            ></button>
+            <button
+              (click)="deleteSingleLabel(outreach)"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
+</div>

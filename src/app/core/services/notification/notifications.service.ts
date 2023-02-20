@@ -33,7 +33,6 @@ export class NotificationsService {
         )
       )
       .subscribe((notifications) => {
-        console.log(notifications);
 
         this.notificationList = notifications.filter(
           (notification) =>
@@ -46,7 +45,6 @@ export class NotificationsService {
         this.$notifications.next(this.notificationList);
       });
 
-    console.log('refer');
   }
 
   /**
@@ -61,7 +59,6 @@ export class NotificationsService {
    * @param userId
    */
   fetchUser(userId: string): Observable<any> {
-    console.log(userId);
     return this.db.object(`users/` + userId).valueChanges();
   }
 
@@ -71,11 +68,9 @@ export class NotificationsService {
    * @param data
    */
   addUser(key: any, data: userNotification) {
-    console.log(`adding service ${key}`);
 
    const v = this.usersRef.set(key, data).catch((error) => console.log(error));
 
-    console.log("after adding"+ v);
 
   }
 
@@ -85,7 +80,6 @@ export class NotificationsService {
    * @param data
    */
   notificationDismissed(key: string, data: userNotification) {
-      console.log('notidismissed service');
 
     this.usersRef.update(key, data).catch((error) => console.log(error));
   }

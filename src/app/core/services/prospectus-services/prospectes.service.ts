@@ -11,7 +11,6 @@ export class ProspectesService {
     this.API_BASE_URL = environment.API_BASE_URL;
   }
   fetchProspectes(data) {
-    console.log(data);
     return this.http.post(this.API_BASE_URL + 'users/prospects/list', data);
   }
   addSingleProspect(form) {

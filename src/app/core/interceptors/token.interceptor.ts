@@ -42,13 +42,11 @@ export class TokenInterceptor implements HttpInterceptor {
       if(!this.skipInterceptor){
         const token= this.authService.getToken();
 
-        console.log("chalaaan")
         this.spinnerService.show();
 
         authReq = req.clone({
          headers: req.headers.set('Authorization',token)
       })
-      console.log(authReq);
     }
       return next.handle(authReq).pipe(tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
@@ -63,10 +61,8 @@ export class TokenInterceptor implements HttpInterceptor {
         this.spinnerService.hide();
           let errorMsg = '';
           if (error.error instanceof ErrorEvent) {
-              console.log('This is client side error');
               errorMsg = `Error: ${error.error.message}`;
           } else {
-            console.log(error.status);
             switch (error.status) {
               case 0:{
                 errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
@@ -97,10 +93,8 @@ export class TokenInterceptor implements HttpInterceptor {
               default:
                 break;
             }
-              console.log('This is server side error');
               errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
           }
-          console.log(errorMsg);
           return throwError(errorMsg);
       })
   );

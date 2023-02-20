@@ -1,8 +1,5 @@
-<mat-toolbar fxLayout="row">
-  <span fxFlex>Dashboard
-  </span>
-</mat-toolbar>
-<div *ngIf="stepper">
+
+<div *ngIf="stepper" class="mb-2">
   <mat-stepper #stepper  (selectionChange)="goTolinkAccounts($event)" >
     <mat-step>
       
@@ -28,194 +25,140 @@
  
   
 </div>
-<div class="container-fluid mt-1">
+<!-- <p-breadcrumb [model]="items"></p-breadcrumb> -->
+
+
+<!-- <div class="container-fluid mt-1"> -->
   <div class="row">
     <div class="col-sm-5 scrollable-content">
-      <mat-card fxHide.xs>
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-card-title><i class="fas fa-paper-plane"></i> Total Outreachs </mat-card-title>
-          <h1>{{totalOutreaches}}</h1>
-        </div>
-        <mat-divider></mat-divider>
-
-        <div class="container mt-2">
-
-          <div class="row text-center">
-
-            <div class="col-sm-3">
-              <div class="col">Created</div>
-              <h1>{{created}}</h1>
+     <p-card  >
+      <ng-template pTemplate="title">
+        Outreachs  <i class="pi pi-volume-up"></i> <span style="float:right" >{{totalOutreaches}}</span> </ng-template>
+      <ng-template pTemplate="content">
+        <p-divider ></p-divider>
+        <div class="grid" style="text-align:center">
+          <div class="col-3">
+            <div>
+              Created
             </div>
-
-            <div class="col-sm-3">
-              <div class="col">Active</div>
-              <h1></h1>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="col">Paused</div>
-              <h1></h1>
-            </div>
-
-            <div class="col-sm-3">
-              <div class="col">Archived</div>
-              <h1></h1>
-            </div>
-
-          </div>
-
-        </div>
-
-      </mat-card>
-      
-      <mat-accordion fxShow.xs fxHide.lg>       
-        <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <i class="fas fa-paper-plane"></i> &nbsp;
-                Total Outreachs
-              </mat-expansion-panel-header>
-              <div class="container mt-2">
-
-                <div class="row text-center">
-      
-                  <div class="col-sm-3">
-                    <div class="col">Created</div>
-                    <h1>{{created}}</h1>
-                  </div>
-      
-                  <div class="col-sm-3">
-                    <div class="col">Active</div>
-                    <h1></h1>
-                  </div>
-      
-                  <div class="col-sm-3">
-                    <div class="col">Paused</div>
-                    <h1></h1>
-                  </div>
-      
-                  <div class="col-sm-3">
-                    <div class="col">Archived</div>
-                    <h1></h1>
-                  </div>
-      
-                </div>
-      
-              </div>
-            </mat-expansion-panel>
-      </mat-accordion>
-
-      <mat-card class="mt-3" fxHide.xs>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-card-title><i class="fas fa-address-book"></i> Total Prospect</mat-card-title>
-          <h1>500</h1>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="container mt-2">
-          <div class="row text-center">
-            <div class="col-sm-3">
-              <div class="col">Opened</div>
-              <h1>10</h1>
-            </div>
-            <div class="col-sm-3">
-              <div class="col">Clicked</div>
-              <h1>7</h1>
-            </div>
-            <div class="col-sm-3">
-              <div class="col">Replied</div>
-              <h1>3</h1>
-            </div>
-            <div class="col-sm-3">
-              <div class="col">Paused</div>
-              <h1>4</h1>
+            <div>
+              {{created}}
             </div>
           </div>
-        </div>
-      </mat-card>
-      <div class="mt-2">
-
-      
-      <mat-accordion fxShow.xs fxHide.lg>       
-        <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <i class="fas fa-address-book"></i> &nbsp;
-                Total Prospect
-              </mat-expansion-panel-header>
-              <div class="container mt-2">
-                <div class="row text-center">
-                  <div class="col-sm-3">
-                    <div class="col">Opened</div>
-                    <h1>10</h1>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="col">Clicked</div>
-                    <h1>7</h1>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="col">Replied</div>
-                    <h1>3</h1>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="col">Paused</div>
-                    <h1>4</h1>
-                  </div>
-                </div>
-              </div>
-            </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-      <mat-card class="mt-3" >
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-card-title><i class="fas fa-tags"></i> Total Prospect-labels</mat-card-title>
-          <h1>100</h1>
-        </div>
-      </mat-card>
-      <mat-card class="mt-3" fxHide.xs>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <mat-card-title><i class="fas fa-envelope"></i> Total Mail Accounts</mat-card-title>
-          <h1>30</h1>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="container mt-2">
-          <div class="row text-center">
-            <div class="col-sm-3">
-              <div class="col">Google</div>
-              <h1>5</h1>
-            </div>
-            <div class="col-sm-3">
-              <div class="col">Outlook</div>
-              <h1>7</h1>
-            </div>
+          <div class="col-3">
+            <div>Active</div>
+            <div>133</div>
+          </div>
+          <div class="col-3">
+            <div>Paused</div>
+            <div>112</div>
+          </div>
+          <div class="col-3">
+            <div>Archived</div>
+            <div>127</div>
           </div>
         </div>
-      </mat-card>
-      <div class="mt-2">
+      </ng-template>
+    </p-card>
+      
+  
+ <p-card class="mt-2" >
+      <ng-template pTemplate="title">
+        Prospects  <i class="pi pi-users"></i> <span style="float:right" >500</span> </ng-template>
+      <ng-template pTemplate="content">
+        <p-divider ></p-divider>
+        <div class="grid" style="text-align:center">
+          <div class="col-3">
+            <div>
+              Opened
+            </div>
+            <div>
+              {{created}}
+            </div>
+          </div>
+          <div class="col-3">
+            <div>Clicked</div>
+            <div>133</div>
+          </div>
+          <div class="col-3">
+            <div>Replied</div>
+            <div>112</div>
+          </div>
+          <div class="col-3">
+            <div>Paused</div>
+            <div>127</div>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
 
-     
-      <mat-accordion fxShow.xs fxHide.lg>       
-        <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <i class="fas fa-envelope"></i> &nbsp;
-                Total Mail Accounts
-              </mat-expansion-panel-header>
-              <div class="container mt-2">
-                <div class="row text-center">
-                  <div class="col-sm-3">
-                    <div class="col">Google</div>
-                    <h1>5</h1>
-                  </div>
-                  <div class="col-sm-3">
-                    <div class="col">Outlook</div>
-                    <h1>7</h1>
-                  </div>
-                </div>
-              </div>
-            </mat-expansion-panel>
-      </mat-accordion>
-    </div>
+     <p-card class="mt-2" >
+      <ng-template pTemplate="title">
+        Mailaccounts  <i class="pi pi-envelope"></i> <span style="float:right" >20</span> </ng-template>
+      <ng-template pTemplate="content">
+        <p-divider ></p-divider>
+        <div class="grid" style="text-align:center">
+          <div class="col-6">
+            <div>
+              Gmail
+            </div>
+            <div>
+              10
+            </div>
+          </div>
+          <div class="col-6">
+            <div>Outlook</div>
+            <div>133</div>
+          </div>
+        </div>
+      </ng-template>
+    </p-card>
     </div>
 
     <div class="col-sm-7">
+<p-card>
+  <ng-template pTemplate="title">
+    Outreach Timeline  <i class="pi pi-plane"></i> </ng-template>
+    <p-divider ></p-divider>
+    <ng-template pTemplate="content">
+      <div id="tracking">
+        <div class="tracking-list">
+          <div class="tracking-item">
+            <div class="tracking-icon status-outfordelivery">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+            <div class="tracking-content">
+              Recieved by Aamir
+            </div>
+          </div>
+          <div class="tracking-item">
+            <div class="tracking-icon status-delivered">
+              <i class="fas fa-envelope-open"></i>
+            </div>
+            <div class="tracking-date">Jul 19, 2018<span>05:42 PM</span></div>
+            <div class="tracking-content">was opened by Bari</div>
+          </div>
+          <div class="tracking-item">
+            <div class="tracking-icon status-inforeceived">
+              <mat-icon class="mt-2">mouse</mat-icon>
+            </div>
+            <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+            <div class="tracking-content">was click by Naveed</div>
+          </div>
+          <div class="tracking-item">
+            <div class="tracking-icon status-outfordelivery">
+          
+              <i class="fas fa-comment-dots"></i>
+            </div>
+            <div class="tracking-date">Jul 20, 2018<span>08:58 AM</span></div>
+            <div class="tracking-content">Replied by Umer</div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+</p-card>
+<!-- 
       <mat-card class="scrollable-content">
         <mat-card-title class="text-center"><i class="fas fa-paper-plane"></i> Outreach Timeline</mat-card-title>
         <div id="tracking">
@@ -253,8 +196,8 @@
             </div>
           </div>
         </div>
-      </mat-card>
+      </mat-card> -->
       
     </div>
   </div>
-</div>
+<!-- </div> -->

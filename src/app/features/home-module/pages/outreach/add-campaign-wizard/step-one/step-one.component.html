@@ -24,9 +24,36 @@
           </mat-form-field>
         </div>
         </form>
-        <button [disabled]="AddCampaignFormOne.invalid"(click)="createCampaign()" class="mat-raised-button  mat-primary"
-          >Next</button>
+        <div style="text-align:right" > 
+          <button [disabled]="AddCampaignFormOne.invalid"(click)="createCampaign()" icon="pi pi-arrow-right" pButton pRipple type="button" label="Next" class="p-button-sm p-button-outlined"></button>
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+<!-- <form [formGroup]="AddCampaignFormOne">
+<div class="stepsdemo-content">
+  <p-card>
+    <ng-template pTemplate="content">
+    <div class="p-fluid" class="field">
+      <label for="title">Campaign Title</label>
+      <input formControlName="title" class="width"  type="text" required pInputText > 
+  </div>
+    <div class="p-fluid" class="field">
+      <label for="description">Description</label>
+      <textarea formControlName="description" id="float-input" rows="2" cols="30" pInputTextarea class="width"></textarea>
+      </div>
+    <div class="p-fluid" class="field">
+      <label for="description">Mail Account</label>
+      <p-dropdown formControlName="mailAccountId"  [options]="allMailAccounts"  placeholder="Select a mail-id" optionLabel="email" [showClear]="true"></p-dropdown>
+    </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div style="text-align:right">
+        <button [disabled]="AddCampaignFormOne.invalid"(click)="createCampaign()" icon="pi pi-arrow-right" pButton pRipple type="button" label="Next" class="p-button-sm p-button-outlined"></button>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+</form> -->

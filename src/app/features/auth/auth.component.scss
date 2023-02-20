@@ -1,13 +1,70 @@
-img{ 
-    height:55px;
-    width: 55px;
-    border-radius: 30px;
+.spacer{
+  flex: 1 1 auto;
 }
-.mat-toolbar-row{
-    background-image: radial-gradient(circle, #6bcdd1, #4ac5dd, #33bbea, #3eaff2, #62a0f4, #4d91df, #3783ca, #1f74b5, #005e83, #004552, #0e2b2b, #0e1110);
-     background: rgb(2,0,36);
-     background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,45,121,0.8015581232492998) 34%, rgba(0,212,255,1) 100%);
-   }
-   .spacer{
-     flex: 1 1 auto!important;
-   }
+// .profile-container{
+//   color: var(--color);
+//   //border: 2px solid var(--color)!important;
+//   border-radius: 10px;
+// }
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 78px;
+background: linear-gradient(90deg, var(--background));
+color: var(--color);
+}
+
+mat-sidenav {
+  width: 100px;
+      background: linear-gradient(to bottom, var(--background));
+      overflow:visible;
+}
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.example-is-mobile .example-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+h1.example-app-name {
+  margin-left: 8px;
+}
+
+.example-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+     causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+     `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+    .content {
+        // margin-top: 22px;
+        // margin-left: 22px;
+        // width: 97%;
+      // border-radius: 5px;
+      box-shadow: 5px 10px #495057;
+    -webkit-box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+-moz-box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+box-shadow: -4px 7px 20px -7px rgba(73,80,87,0.7);
+    }
+    .logo{
+      top: 60px;
+      width: 60px;
+  }
+  @media  (max-width: 599px) {
+    .logo{
+      width: 25px;
+    }
+  }

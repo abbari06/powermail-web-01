@@ -1,186 +1,334 @@
-<!--<Span>Import Contacts
-    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)"
-        accept=".xlsx,.xls,.csv" />
-</Span>
-<table class="minimalistBlack" *ngIf="records.length > 0">
-    <thead>
-        <tr>
-            <th>ID </th>
-            <th>FirstName </th>
-            <th>LastName </th>
-            <th>Age </th>
-            <th>Position </th>
-            <th>Company </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let record of records;let i = index;">
-            <td> <span>{{record.id}}</span> </td>
-            <td> <span>{{record.firstName}}</span> </td>
-            <td> <span>{{record.lastName}}</span> </td>
-            <td> <span>{{record.age}}</span> </td>
-            <td> <span>{{record.position}}</span> </td>
-            <td> <span>{{record.mobile}}</span> </td>
-        </tr>
-    </tbody>
-</table>
--->
-
 <head>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <link
+    href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    rel="stylesheet"
+    id="bootstrap-css"
+  />
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <div class="containerr-fluid">
-    <div class="row">
-        <form [formGroup]="fieldMapForm">
-            <mat-horizontal-stepper (selectionChange)="onSelection($event)">
-                <mat-step label="Import">
-                    <div class="container" *ngIf="!mobileView">
-                        <div class="row mt-5 pt-3">
-                            <div class="col-md-6 offset-3">
-                                <form method="post" action="#" id="#">
-                                    <div class="form-group files color">
-                                        <label>Upload Your File </label>
-                                        <input type="file" class="form-control" (change)="uploadListener($event)"
-                                            accept=".xlsx,.xls,.csv">
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="mobileView">
+  <div class="row">
+    <form [formGroup]="fieldMapForm">
+      <mat-horizontal-stepper (selectionChange)="onSelection($event)">
+        <mat-step label="Import">
+          <div class="container" *ngIf="!mobileView">
+            <div class="row mt-5 pt-3">
+              <div class="col-md-6 offset-3">
+                <form method="post" action="#" id="#">
+                  <p-card>
+                    <ng-template pTemplate="content">
+                      <div class="form-group files color">
                         <label>Upload Your File </label>
-                        <input type="file" class="form-control" (change)="uploadListener($event)"
-                            accept=".xlsx,.xls,.csv">
+                        <input
+                          type="file"
+                          class="form-control"
+                          (change)="uploadListener($event)"
+                          accept=".xlsx,.xls,.csv"
+                        />
+                      </div>
+                    </ng-template>
+                  </p-card>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="mobileView">
+            <label>Upload Your File </label>
+            <input
+              type="file"
+              class="form-control"
+              (change)="uploadListener($event)"
+              accept=".xlsx,.xls,.csv"
+            />
+          </div>
 
-                    </div>
-                    <div>
-                        <button class="nextbtn mt-5" (click)="mapping()" [disabled]="!imported" mat-raised-button
-                            color="primary" matStepperNext>Next</button>
-                    </div>
-                </mat-step>
+          <button
+            style="float: right"
+            matStepperNext
+            (click)="mapping()"
+            [disabled]="!imported"
+            icon="pi pi-arrow-right"
+            pButton
+            pRipple
+            type="button"
+            label="Next"
+            class="p-button-sm p-button-outlined"
+          ></button>
+        </mat-step>
 
-                <mat-step label="Mapping">
-                    <div>
-                        <h2 class="text-center">Map your csv columns</h2>
-                        <h4>
-                            Select the columns from your CSV file corresponding to the fields
-                            listed on the left.
-                        </h4>
-                        <div>
-                            <label>
-                                <input type="checkbox" name="containsHeaders" formControlName="containsHeaders" />
-                                Check mark if your CSV file contains column titles</label>
-                        </div>
-                        <div class="row pt-4" [class.uk-form-danger]="
-                header.key === 'email' &&
-                hasValidEmail(fieldMapForm.controls[header.key].value)
-              " uk-grid *ngFor="let header of parseHeaders">
-                            <div class="col-sm-6">
-                                <div>
-                                    {{ header.text }}
-                                </div>
-                                <div>
-                                    <div class="col-sm-6">
-                                        <select style="border: none;" [name]="header.key" [formControlName]="header.key"
-                                            class="form-select form-select-sm border-bottom"
-                                            aria-label=".form-select-sm example">
-                                            <option value="">None</option>
-                                            <option *ngFor="let header of customCSVHeaders; let i = index" [value]="i">
-                                                {{ header }}
-                                            </option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="border-bottom">
-                                    {{
-                                    showSampleData(fieldMapForm.controls[header.key].value) || "-"
-                                    }}
-                                    <mat-icon></mat-icon>
-                                </div>
-                            </div>
+        <mat-step label="Mapping">
+          <p-card header="Map your csv columns">
+            <ng-template pTemplate="content">
+              <p>
+                Select the columns from your CSV file corresponding to the
+                fields listed on the left.
+              </p>
+              <div>
+                <input
+                  type="checkbox"
+                  name="containsHeaders"
+                  formControlName="containsHeaders"
+                />
+                <label style="margin-left: 10px;">
+                  Check mark if your CSV file contains column titles</label
+                >
 
-                        </div>
-                        <div>
-                            <button class="nextbtn" (click)="next()" mat-raised-button color="primary"
-                                matStepperNext>Next</button>
-                            <button class="backbtn" mat-button matStepperPrevious mat-raised-button
-                                color="warn">Back</button>
-                        </div>
-                    </div>
+                
+              </div>
 
-                </mat-step>
+              <div
+                class="row pt-2"
+                [class.uk-form-danger]="
+                  header.key === 'email' &&
+                  hasValidEmail(fieldMapForm.controls[header.key].value)
+                "
+                uk-grid
+                *ngFor="let header of parseHeaders"
+              >
+                <div class="col-sm-6">
+                  <div>
+                    {{ header.text }}
+                  </div>
+                  <div>
+                      <select
+                        style="border: none"
+                        [name]="header.key"
+                        [formControlName]="header.key"
+                        class="form-select form-select-sm border-bottom"
+                        aria-label=".form-select-sm example"
+                      >
+                        <option value="">None</option>
+                        <option
+                          *ngFor="let header of customCSVHeaders; let i = index"
+                          [value]="i"
+                        >
+                          {{ header }}
+                        </option>
+                      </select>
+                  </div>
+                </div>
+                <div class="col-sm-6 mt-4">
+                  <div class="border-bottom">
+                    {{
+                      showSampleData(fieldMapForm.controls[header.key].value) ||
+                        "-"
+                    }}
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="footer"> 
+              <div class="mt-2">
+                <button matStepperPrevious  icon="pi pi-arrow-left" pButton pRipple type="button" label="Back" class="p-button-sm p-button-outlined  p-button-danger" ></button>
+                <button style="float:right" matStepperNext    (click)="next()" icon="pi pi-arrow-right" pButton pRipple type="button" label="Next" class="p-button-sm p-button-outlined"></button>
+  
+              </div>
+            
+            </ng-template>
+          </p-card>
+        
+        </mat-step>
 
-                <mat-step label="Preview And Submit">
-                    <div>
-                        <h2> Total success contacts {{successData.length}} and <button mat-button mat-raised-button
-                                color="warn" (click)="displayErrorContacts()">error
-                                contacts
-                                {{errorData.length}}</button>
-                        </h2>
-                        <div *ngIf="displayError"  style="overflow-x:auto;">
-                            <h3 style="Color:rgb(233, 113, 14)">Eroor Contacts</h3>
-                            <table class="table table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Firstname</th>
-                                        <th scope="col">Lastname</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Company</th>
-                                        <th scope="col">Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let data of errorData">
-                                        <td>{{ data.firstname }}</td>
-                                        <td>{{ data.lastname }}</td>
-                                        <td>{{ data.email }}</td>
-                                        <td>{{ data.company }}</td>
-                                        <td>{{ data.position }}</td>
-                                    </tr>
-                                </tbody>
-
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                        <div *ngIf="displaySuccess"  style="overflow-x:auto;">
-                            <h3 style="Color:rgba(18, 223, 238, 0.993)">Success Contacts</h3>
-                            <table class="table table table-striped" >
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Firstname</th>
-                                        <th scope="col">Lastname</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Company</th>
-                                        <th scope="col">Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let data of successData">
-                                        <td>{{ data.firstname }}</td>
-                                        <td>{{ data.lastname }}</td>
-                                        <td>{{ data.email }}</td>
-                                        <td>{{ data.company }}</td>
-                                        <td>{{ data.position }}</td>
-                                    </tr>
-                                </tbody>
-
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                        <button mat-button matStepperPrevious mat-raised-button color="warn"
-                            (click)="back()">Back</button>
-                        <button [disabled]="submitContacts" (click)="saveData()" mat-raised-button color="primary"
-                            style="float:right">Submit</button>
-
-                        <!-- <button mat-button matStepperNext>Next</button> -->
-                    </div>
-                </mat-step>
-            </mat-horizontal-stepper>
-        </form>
-
+        <mat-step label="Preview And Submit">
+<p-card>
+  <ng-template pTemplate="title">
+    Total success contacts {{successData.length}} 
+    <span>
+      <button
+      style="float:right"
+      icon="pi pi-eye"
+      pButton
+      pRipple
+      type="button"
+      (click)="displayErrorContacts()"
+      [label]="'Error Contacts '+errorData.length"
+      class="p-button-sm p-button-outlined p-button-danger"
+    ></button>
+    </span>
+  </ng-template>
+  <div *ngIf="displayError" >
+    <p-table
+    responsiveLayout="scroll"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm"
+    [value]="errorData"
+    [rows]="5"
+    [paginator]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Error Contacts</h5>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Position</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-contact>
+      <tr>
+        <td>
+        {{contact.firstname}}
+        </td>
+        <td>
+          {{ contact.lastname }}
+        </td>
+        <td>
+         
+          {{ contact.email }}
+        </td>
+        <td>
+       {{contact.company}}
+        </td>
+        <td>
+     {{contact.position}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </div>
+  <div *ngIf="displaySuccess" >
+    <p-table
+    responsiveLayout="scroll"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm"
+    [value]="successData"
+    [rows]="5"
+    [paginator]="true">
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Success Contacts</h5>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Company</th>
+        <th>Position</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-contact>
+      <tr>
+        <td>
+        {{contact.firstname}}
+        </td>
+        <td>
+          {{ contact.lastname }}
+        </td>
+        <td>
+         
+          {{ contact.email }}
+        </td>
+        <td>
+       {{contact.company}}
+        </td>
+        <td>
+     {{contact.position}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </div>
+  <ng-template  pTemplate="footer">
+    <div class="mt-2" > 
+      <button  (click)="back()" matStepperPrevious  icon="pi pi-arrow-left" pButton pRipple type="button" label="Back" class="p-button-sm p-button-outlined  p-button-danger" ></button>
+      <button  [disabled]="submitContacts"
+      (click)="saveData()" style="float:right"    icon="pi pi-arrow-right" pButton pRipple type="button" label="Next" class="p-button-sm p-button-outlined"></button>
     </div>
+   
+  </ng-template>
+
+</p-card>
+
+          <!-- <div>
+            <h2>
+              Total success contacts {{ successData.length }} and
+              <button
+                mat-button
+                mat-raised-button
+                color="warn"
+                (click)="displayErrorContacts()"
+              >
+                error contacts {{ errorData.length }}
+              </button>
+            </h2>
+            <div *ngIf="displayError" style="overflow-x: auto">
+              <h3 style="color: rgb(233, 113, 14)">Eroor Contacts</h3>
+              <table class="table table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Position</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of errorData">
+                    <td>{{ data.firstname }}</td>
+                    <td>{{ data.lastname }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.company }}</td>
+                    <td>{{ data.position }}</td>
+                  </tr>
+                </tbody>
+
+                <tbody></tbody>
+              </table>
+            </div>
+            <div *ngIf="displaySuccess" style="overflow-x: auto">
+              <h3 style="color: rgba(18, 223, 238, 0.993)">Success Contacts</h3>
+              <table class="table table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Firstname</th>
+                    <th scope="col">Lastname</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Position</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of successData">
+                    <td>{{ data.firstname }}</td>
+                    <td>{{ data.lastname }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.company }}</td>
+                    <td>{{ data.position }}</td>
+                  </tr>
+                </tbody>
+
+                <tbody></tbody>
+              </table>
+            </div>
+            <button
+              mat-button
+              matStepperPrevious
+              mat-raised-button
+              color="warn"
+              (click)="back()"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="submitContacts"
+              (click)="saveData()"
+              mat-raised-button
+              color="primary"
+              style="float: right"
+            >
+              Submit
+            </button>
+          </div> -->
+        </mat-step>
+      </mat-horizontal-stepper>
+    </form>
+  </div>
 </div>

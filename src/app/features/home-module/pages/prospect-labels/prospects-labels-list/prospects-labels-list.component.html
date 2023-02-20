@@ -1,162 +1,134 @@
-<div>
-<mat-toolbar fxLayout="row">
+<p-card>
+  <p-toolbar styleClass="mb-4 gap-2">
+    <ng-template pTemplate="left">
+      <button
+        (click)="openDialogue()"
+        icon="pi pi-plus"
+        pButton
+        pRipple
+        type="button"
+        label="Add New"
+        class="p-button-sm p-button-outlined mr-2"
+      ></button>
+    </ng-template>
 
-        <span class="searchbar" style="font-size:medium;" fxFlex >Prospect Labels:
-            <mat-form-field class="example-full-width">
-                <mat-label>Search</mat-label>
-                <button *ngIf="searched" mat-button  matSuffix mat-icon-button aria-label="clear" 
-                (click)="onSearchClear()"
-                >
-                <mat-icon>close</mat-icon>
-              </button>
-                <input matInput #search (keyup)="applyFilter($event)">
-            </mat-form-field> &nbsp;
-            <mat-form-field>
-                <mat-label>Search by</mat-label>
-                <mat-select [(ngModel)]="selectedOption">
-                    <mat-option value="name">
-                        Label Name
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+    <ng-template pTemplate="right">
+      <button
+        (click)="deleteBulkLabels()"
+        [disabled]="!selectedLabels || !selectedLabels.length"
+        icon="pi pi-trash"
+        pButton
+        pRipple
+        type="button"
+        label="Delete"
+        class="p-button-sm p-button-outlined p-button-danger"
+      ></button>
+    </ng-template>
+  </p-toolbar>
+
+  <p-table
+    responsiveLayout="scroll"
+    [resizableColumns]="true"
+    styleClass="p-datatable-sm"
+    [(selection)]="selectedLabels"
+    [value]="labels"
+    [lazy]="true"
+    (onLazyLoad)="pageChanged($event)"
+    [totalRecords]="totalRecords"
+    [rowsPerPageOptions]="[10, 20, 30]"
+    [rows]="10"
+    [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [showCurrentPageReport]="true"
+  >
+    >
+    <ng-template pTemplate="caption">
+      <div class="flex align-items-center justify-content-between">
+        <h5 class="m-0">Manage Labels</h5>
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input
+            pInputText
+            type="text"
+            (keyup)="applyFilter($event)"
+            placeholder="Search..."
+          />
         </span>
-   
-   
-<div>
-    
-</div>
-    <button mat-raised-button (click)="openDialogue()" color="primary" fxHide.xs>
-        <mat-icon>add</mat-icon>
-        New <mat-icon>keyboard_arrow_down</mat-icon>
-    </button>&nbsp;
-
-    <button mat-raised-button color="warn" fxHide.xs (click)="deleteBulkLabels()" [disabled]="disableBtn" >
-        <mat-icon>delete</mat-icon>
-        Delete
-    </button>
-
-    <button mat-icon-button [matMenuTriggerFor]="dropMenu" fxHide fxShow.xs>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #dropMenu="matMenu">
-        <ng-container>
-            <button mat-menu-item (click)="openDialogue()" color="primary" >
-                <mat-icon>add</mat-icon>
-                New 
-            </button>
-        
-            <button mat-menu-item   (click)="deleteBulkLabels()" [disabled]="disableBtn" >
-                <mat-icon>delete</mat-icon>
-                Delete
-            </button>
-        
-          <mat-divider></mat-divider>
-        </ng-container>
-      </mat-menu>
-</mat-toolbar>
-</div>
-<!-- here Data is the arr of values defined in variable Data in .ts -->
-<div class="mt-4 example-container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="labelName"
-        (matSortChange)="sort($event)" matSortDirection="asc">
-
-        <!-- Checkbox Column -->
-        <ng-container matColumnDef="select">
-            <th mat-header-cell *matHeaderCellDef>
-                <mat-checkbox (change)="$event ? masterToggle() : null"
-                    [checked]="selection.hasValue() && isAllSelected()"
-                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
-                </mat-checkbox>
-            </th>
-            <td mat-cell *matCellDef="let row">
-                <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
-                    [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
-                </mat-checkbox>
-            </td>
-        </ng-container>
-
-        <!-- construct the columns -->
-
-        <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Name
-                <div>
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                  </div>
-            </th>
-            <td mat-cell *matCellDef="let label">
-                <mat-chip-list aria-label="Fish selection">
-                    <mat-chip [ngStyle]="{ 'background': label.colorHex }">{{label.name}}</mat-chip>
-                </mat-chip-list>
-            </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Description
-                <div>
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                  </div>
-            </th>
-            <td mat-cell *matCellDef="let label">
-                {{label.description}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="color">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Prospect Labels
-                <div>
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                  </div>
-            </th>
-            <td mat-cell *matCellDef="let label"> {{label.colorHex}}</td>
-        </ng-container>
-        <ng-container matColumnDef="contacts">
-            <th mat-header-cell *matHeaderCellDef >Contacts
-            
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                  
-            </th>
-            <td mat-cell *matCellDef="let label">{{label.contacts}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="outreach">
-            <th mat-header-cell *matHeaderCellDef >Outreaches
-                
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                  
-            </th>
-            <td mat-cell *matCellDef="let label">{{label.outreaches}}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef>Actions
-            
-                    <mat-icon class="tooltp" style="font-size: small;" matTooltip="Info about the action" >help_outline</mat-icon>
-                 
-            </th>
-            <td mat-cell *matCellDef="let label">
-                <button mat-button>
-                    <mat-icon class="edit" (click)="editLabel(label)">edit
-                       
-                    </mat-icon>
-                </button>
-                <button mat-button (click)="getContacts(label)">
-                    <mat-icon>contacts</mat-icon>
-                </button>
-                <button mat-button (click)="getCampaigns(label)">
-                    <mat-icon >campaign</mat-icon>
-                </button>
-                <button mat-button (click)="deleteSingleLabel(label)">
-                    <mat-icon color="warn">delete</mat-icon>
-                </button>
-            </td>
-
-        </ng-container>
-        <!-- add a table row, if not added..rows will not be rendered inside the table -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    </table>
-   
-</div>
-<mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-[pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-</mat-paginator>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th
+          pSortableColumn="name"
+          style="min-width: 15rem"
+          style="width: 170px"
+        >
+          Name <p-sortIcon field="name"></p-sortIcon>
+        </th>
+        <th style="width: 500px">Discription</th>
+        <th>Color</th>
+        <th>Prospects</th>
+        <th>Outreachs</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-label>
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="label"></p-tableCheckbox>
+        </td>
+        <td>{{ label.name }}</td>
+        <td class="table-description">
+          {{ label.description }}
+        </td>
+        <td style="display: flex;">
+            <mat-chip
+             style=" padding: 7px 12px;"
+            [ngStyle]="{ 'border-color': label.colorHex }"
+          >
+            {{ label.name }} 
+          </mat-chip>
+        </td>
+        <td>{{ label.contacts }}</td>
+        <td>{{ label.outreaches }}</td>
+        <td>
+          <button
+            (click)="getContacts(label)"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-users"
+            class="p-button-rounded p-button-secondary p-button-text mr-2"
+          ></button>
+          <button
+            (click)="getCampaigns(label)"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-send"
+            class="p-button-rounded p-button-info p-button-text mr-2"
+          ></button>
+          <button
+            (click)="editLabel(label)"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-pencil"
+            class="p-button-rounded p-button-text mr-2"
+          ></button>
+          <button
+            (click)="deleteSingleLabel(label)"
+            pButton
+            pRipple
+            type="button"
+            icon="pi pi-trash"
+            class="p-button-rounded p-button-text p-button-danger"
+          ></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</p-card>

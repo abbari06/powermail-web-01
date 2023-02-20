@@ -4,6 +4,7 @@ import { MatRow,  } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 export interface User {
   status: string;
   title: string;
@@ -23,7 +24,7 @@ export interface User {
 export class OutreachListComponent implements OnInit,AfterViewInit{
   
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  items: MenuItem[];
   ableRow: any;
   closeResult: string = '';
   public records: any[] = [];
@@ -40,8 +41,9 @@ export class OutreachListComponent implements OnInit,AfterViewInit{
   //initialise the dataSource with arr of values defined in Var Data
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   totalRows = 0;
-  pageSize = 10;
+  pageSize = 5;
   currentPage = 0;
+  totalRecords:any;
   pageSizeOptions: number[] = [5,10, 20, 30, 50];
 
   campaigns=[];
@@ -57,11 +59,14 @@ export class OutreachListComponent implements OnInit,AfterViewInit{
   constructor(private outreachService:OutreachService,private router:Router) { }
 
   ngOnInit(): void {
-    this.getAllCampaigns();
+    this.items = [
+      {label: 'Active'},
+      {label: 'Clicked', icon: 'pi pi-fw pi-calendar'},
+      {label: 'Opened', icon: 'pi pi-fw pi-pencil'},
+      {label: 'Bounced', icon: 'pi pi-fw pi-file'}  ];
+
    }
    ngAfterViewInit(): void {
-    this.getAllCampaigns();
-    this.dataSource.paginator = this.paginator;
   }
  
   getAllCampaigns(){
@@ -69,27 +74,22 @@ export class OutreachListComponent implements OnInit,AfterViewInit{
     this.userAccount=JSON.parse(localStorage.getItem('userprofile'));
     this.outreachService.listAllCampaigns(this.user.id,this.userAccount.id,this.currentPage,this.pageSize,this.orderBy).subscribe({
       next: (res: any) => {
-        console.log(res);
-        this.dataSource.data = res.content;
-        console.log(this.dataSource);
-        setTimeout(() => {
-          this.paginator.pageIndex = this.currentPage;
-          this.paginator.length = res.totalElements;
-        });
+          this.totalRecords = res.totalElements;
+          this.dataSource.data = res.content;
       },
       error: (error: any) => {
-        alert(error);
         console.log(error);
       },
     });
   }
-  pageChanged(event: PageEvent) {
-    console.log({ event });
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    this.getAllCampaigns();
-    
-  }
+  pageChanged(event: LazyLoadEvent) {
+    event.first == 0
+        ? (this.currentPage = 0)
+        : (this.currentPage = (event.first ?? 10) / (event.rows ?? 10));
+        this.pageSize = event.rows;
+     
+      this.getAllCampaigns();
+    }
   editCampaign(prospect){
     this.router.navigate(
       ['home/outreach/editcampaign'],

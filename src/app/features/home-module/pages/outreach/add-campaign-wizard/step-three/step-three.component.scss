@@ -45,7 +45,7 @@
     content: "\f0e0";
     font-weight: 900;
   
-    background: #8d2eec;
+    background: #06d4fe;
     width: 65px;
     height: 65px;
     position: absolute;
@@ -83,3 +83,285 @@
     font-weight: 500;
     font-size: 15px;
   }
+  .p-accordion .p-accordion-header .p-accordion-header-link {
+     padding: 0rem; 
+    border: 1px solid #dee2e6;
+    color: black;
+    background: #f8f9fa;
+    font-weight: normal; 
+    border-radius: 3px;
+    transition: box-shadow 0.2s;
+}
+.sub{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 75ch;
+}
+
+
+
+
+.dotSend {
+  text-align: center;
+  padding-top: 10.2px;
+  color: #000;
+  height: 40px;
+  width: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid #000;
+  display: inline-block;
+}
+
+.input {
+  padding: 12px;
+}
+
+/* mat-form-field {
+  width: 65%;
+  margin-left: 10px;
+} */
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  color: gray;
+
+}
+
+[_nghost-syd-c336] {
+  display: inherit;
+  overflow: hidden;
+}
+
+/* table csss */
+
+mat-table {
+  width: 100%;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+
+}
+
+.expDesc {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.expInter{
+  line-height: 2.0; font-size: 16px;
+}
+
+.mat-column-Subject {
+  width: 32%;
+  padding-right: 24px;
+}
+
+.mat-column-Dated {
+  padding-left: 16px;
+}
+
+.mat-column-Status {
+  width: 12px;
+}
+
+.mat-column-Position {
+  width: 32px;
+
+}
+
+mat-row {
+  min-height: 80px;
+}
+
+.timeStyle {
+  font-size: 17px;
+  font-weight: bold;
+  font-weight: 500;
+  color: #3f51b5;
+  padding-top: 4px;
+}
+
+.Description {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 21px;
+  color: #606060;
+}
+
+.Subject {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 21px;
+  color: #606060;
+}
+
+.Status {
+  padding-top: 21px;
+}
+
+.Position {
+  padding-top: 21px;
+
+}
+
+.exStyle {
+  font-size: 16px;
+  line-height: 2;
+}
+
+.exLabelStyle {
+  font-size: 22px;
+  font-weight: 500;
+}
+
+
+
+.test{
+  margin-left: 25px;
+}
+
+
+.timeline {
+  position: relative;
+  margin: 10px 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: section;
+}
+.timeline:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: grey;
+  left: 32px;
+  margin: 0;
+  border-radius: 1px;
+}
+.timeline > li {
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 30px;
+  padding-top: 18px;
+  box-sizing: border-box;
+  padding-left: 90px;
+}
+.timeline > li:before,
+.timeline > li:after {
+  display: block;
+}
+
+.timeline > li:before {
+
+  font-family: "Font Awesome 5 Free";
+  content: "\f0e0";
+  font-weight: 900;
+
+  background: #06d4fe;
+  width: 65px;
+  height: 65px;
+  position: absolute;
+  top: 0;
+  border-radius: 50%;
+  left: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #Fff;
+  font-size: 15px;
+  font-weight: bold;
+  border: 15px solid #fff;
+  box-sizing: border-box;
+}
+.timeline > li:after {
+  clear: both;
+}
+
+.card-header{
+  padding: 0%!important;
+
+}
+/* .pop{
+  background: transparent;
+  border: none!important;
+  height: 50px;
+  align-items: center;
+} */
+.no-email{
+  background: rgb(164, 162, 162);
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+}
+.spacer{
+  display: grid;
+grid-auto-flow: column;
+grid-column-gap: 10px;
+}
+.butto{
+  background: transparent!important;
+
+}
+.messagebody {
+  overflow: hidden;
+  white-space: nowrap!important;
+  clear: both;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+          /* line-clamp: 1;  */
+  -webkit-box-orient: vertical;
+}
+.subject {
+  display: block;
+  width: 200px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  font-size: 15px;
+}
+.edit{
+  cursor: pointer;
+}
+
+.show{
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+.button{
+  margin: 0;
+  font-family: inherit;
+  font-size: 16px;
+  line-height: inherit;
+  border: none;
+  background: none;
+}

@@ -17,6 +17,23 @@ import {CardModule} from 'primeng/card';
 import {ButtonModule} from 'primeng/button';
 import {DividerModule} from 'primeng/divider';
 import {AvatarModule} from 'primeng/avatar';
+import {TableModule} from 'primeng/table';
+import {ToolbarModule} from 'primeng/toolbar';
+import {InputTextModule} from 'primeng/inputtext';
+import {PaginatorModule} from 'primeng/paginator';
+import { ChipModule } from 'primeng/chip';
+import {MenuModule} from 'primeng/menu';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
+import {PasswordModule} from 'primeng/password';
+import {StepsModule} from 'primeng/steps';
+import { NgDynamicBreadcrumbModule } from 'ng-dynamic-breadcrumb';
+import {TabMenuModule} from 'primeng/tabmenu';
+import {InputSwitchModule} from 'primeng/inputswitch';
+import {AccordionModule} from 'primeng/accordion';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {DialogModule} from 'primeng/dialog';
+import {MultiSelectModule} from 'primeng/multiselect';
+import {BadgeModule} from 'primeng/badge';
 
 @NgModule({
   declarations: [SidebarComponent, TopMenuComponent , Time24to12Format],
@@ -35,7 +52,25 @@ import {AvatarModule} from 'primeng/avatar';
     CardModule,
     ButtonModule,
     DividerModule,
-    AvatarModule
+    AvatarModule,
+    TableModule,
+    ToolbarModule,
+    InputTextModule,
+    PaginatorModule,
+    ChipModule,
+    MenuModule,
+    BreadcrumbModule,
+    PasswordModule,
+    StepsModule,
+    NgDynamicBreadcrumbModule,
+    TabMenuModule,
+    InputSwitchModule,
+    AccordionModule,
+    InputNumberModule,
+    DialogModule,
+    MultiSelectModule,
+    BadgeModule
+    
   ],
   exports: [
     SidebarComponent,
@@ -54,7 +89,24 @@ import {AvatarModule} from 'primeng/avatar';
     MatTooltipModule,
     CardModule,
     ButtonModule,
-    DividerModule
+    DividerModule,
+    TableModule,
+    ToolbarModule,
+    InputTextModule,
+    PaginatorModule,
+    ChipModule,
+    MenuModule,
+    BreadcrumbModule,
+    PasswordModule,
+    StepsModule,
+    NgDynamicBreadcrumbModule,
+    TabMenuModule,
+    InputSwitchModule,
+    AccordionModule,
+    InputNumberModule,
+    DialogModule,
+    MultiSelectModule,
+    BadgeModule
   ],
 })
 export class SharedModule {}

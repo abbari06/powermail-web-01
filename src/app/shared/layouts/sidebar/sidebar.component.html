@@ -1,50 +1,71 @@
 <ng-container>
   <mat-nav-list>
-    <a mat-list-item routerLink="dashboard" routerLinkActive="list-item-active" (mouseover)="showButton=true"
-      (mouseout)="showButton=false" [routerLinkActiveOptions]={exact:true} ngbPopover="Dashboard"
-      triggers="mouseenter:mouseleave" placement="right">
+    <a
+      mat-list-item
+      routerLink="dashboard"
+      routerLinkActive="list-item-active"
+      (mouseover)="showButton = true"
+      (mouseout)="showButton = false"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ngbPopover="Dashboard"
+      triggers="mouseenter:mouseleave"
+      placement="right"
+    >
       <mat-icon>home</mat-icon>
-   
-
-
     </a>
 
-    <a mat-list-item routerLink="contacts" routerLinkActive="list-item-active" ngbPopover="Prospects"
-      triggers="mouseenter:mouseleave" placement="right">
+    <a
+      mat-list-item
+      routerLink="contacts"
+      routerLinkActive="list-item-active"
+      ngbPopover="Prospects"
+      triggers="mouseenter:mouseleave"
+      placement="right"
+    >
       <mat-icon> contacts</mat-icon>
+      
     </a>
-    <a mat-list-item routerLink="/home/prospects" routerLinkActive="list-item-active" ngbPopover="Prospect Labels"
-      triggers="mouseenter:mouseleave" placement="right">
+    <a
+      mat-list-item
+      routerLink="/home/prospects"
+      routerLinkActive="list-item-active"
+      ngbPopover="Prospect Labels"
+      triggers="mouseenter:mouseleave"
+      placement="right"
+    >
       <mat-icon>label</mat-icon>
     </a>
-    <a mat-list-item routerLink="/home/outreach" routerLinkActive="list-item-active" ngbPopover="Outreachs"
-      triggers="mouseenter:mouseleave" placement="right">
+    <a
+      mat-list-item
+      routerLink="/home/outreach"
+      routerLinkActive="list-item-active"
+      ngbPopover="Outreachs"
+      triggers="mouseenter:mouseleave"
+      placement="right"
+    >
       <mat-icon>signal_cellular_alt</mat-icon>
     </a>
-    <a [matMenuTriggerFor]="settings" mat-list-item ngbPopover="Settings" triggers="mouseenter:mouseleave"
-      placement="right">
+    <a
+      [matMenuTriggerFor]="settings"
+      routerLinkActive="list-item-active"
+      mat-list-item
+      ngbPopover="Settings"
+      triggers="mouseenter:mouseleave"
+      placement="right"
+    >
       <mat-icon>settings</mat-icon>
     </a>
   </mat-nav-list>
-  <!-- <div *ngIf="showButton" 
-    style="margin-left: 40px;
-    z-index: 99999;
-    "
-    >
-      <button>dashboard</button>
-    </div> -->
 </ng-container>
 <mat-menu #settings="matMenu">
-  <button mat-menu-item routerLink="/home/settings/mailaccounts">Mail
-    Accounts</button>
-  <button mat-menu-item routerLink="/home/settings/schedules">All Schedules</button>
+  <button mat-menu-item routerLink="/home/settings/mailaccounts">
+    Mail Accounts
+  </button>
+  <button mat-menu-item routerLink="/home/settings/schedules">
+    All Schedules
+  </button>
   <button mat-menu-item routerLink="/home/settings/profile">Profile</button>
   <button mat-menu-item routerLink="/home/settings/billing">Billing</button>
 </mat-menu>
 
-<!-- #enddocregion mat-menu-trigger-for -->
-<mat-menu mat-button #menuu="matMenu">
-  <!-- <button mat-menu-item>Item 1</button> -->
-  <!-- <button mat-menu-item>Item 2</button> -->
-
-</mat-menu>
+<mat-menu mat-button #menuu="matMenu"> </mat-menu>

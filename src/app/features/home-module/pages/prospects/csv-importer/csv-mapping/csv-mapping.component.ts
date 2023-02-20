@@ -45,7 +45,7 @@ export class CsvMappingComponent implements OnInit {
   viewCsvMap: any;
   actionBtn: string = 'Submit';
   displayError: boolean = false;
-  displaySuccess: boolean = true;
+  displaySuccess: boolean ;
   submitContacts: boolean = false;
   constructor(
     private fb: FormBuilder,
@@ -341,8 +341,6 @@ export class CsvMappingComponent implements OnInit {
       successData: this.successData,
       errorData: this.errorData,
     };
-    console.log(this.errorData.length);
-    console.log(this.successData.length);
     this.loader = true;
     this.user = JSON.parse(localStorage.getItem('user'));
     console.log(this.user);

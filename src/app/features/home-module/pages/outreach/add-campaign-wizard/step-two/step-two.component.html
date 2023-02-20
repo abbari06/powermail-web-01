@@ -34,15 +34,15 @@
                   <mat-chip-list>
                       <mat-chip *ngFor="let label of selectedLabels.value" [removable]="true"
                           (removed)="onLabelRemoved(label)"
-                          [ngStyle]="{ 'background': label.colorHex }" selected>
+                          [style]="'border:1px solid'+ label.colorHex+'; color:black;'"  selected>
                           {{ label.name}}
-                          <mat-icon matChipRemove>cancel</mat-icon>
+                          <mat-icon matChipRemove style="color: black;">cancel</mat-icon>
                       </mat-chip>
                   </mat-chip-list>
               </mat-select-trigger>
                 <mat-option *ngFor="let label of allLabels"
                     [value]="{id:label.id,name:label.name,colorHex:label.colorHex}">
-                    <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{label.name}}</mat-chip><mat-chip  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</mat-chip>
+                    <mat-chip [style]="'border:1px solid'+ label.colorHex" > {{label.name}}</mat-chip><span  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</span>
                 </mat-option>
               </mat-select>
             </mat-form-field>
@@ -51,67 +51,69 @@
             <span>Applicable Prospects:{{availableProspectes}}</span>
           </div>
           <div *ngIf="availableProspectes" class="col-sm-1 mt-3">
-            <button class="mat-raised-button mat-primary" (click)="open(mymodal)">View Prospects</button>
+            <button (click)="open(mymodal)" icon="pi pi-eye" pButton pRipple type="button" label="Prospects" class="p-button-sm p-button-outlined"></button>
           </div>
           </div>
         <mat-card-actions>
-          <button class="mat-raised-button  mat-accent" (click)="backToStepOne()">Back</button>
-          <button class="mat-raised-button  mat-primary" (click)="addCampaignStepTwo()" >Next</button>
+          <button (click)="backToStepOne()" icon="pi pi-arrow-left" pButton pRipple type="button" label="Back" class="p-button-sm p-button-outlined  p-button-danger" ></button>
+          <button style="float:right"  (click)="addCampaignStepTwo()" icon="pi pi-arrow-right" pButton pRipple type="button" label="Next" class="p-button-sm p-button-outlined"></button>
         </mat-card-actions>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 <ng-template #mymodal let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">Applicable Prospects</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div class="example-container">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
-      <ng-container matColumnDef="place">
-        <th mat-header-cell *matHeaderCellDef >No</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.place}}</td>
-      </ng-container>
-      <ng-container matColumnDef="firstname">
-        <th mat-header-cell *matHeaderCellDef >First Name</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</td>
-      </ng-container>
-      <ng-container matColumnDef="lastname">
-        <th mat-header-cell *matHeaderCellDef >Last Name</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</td>
-      </ng-container>
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef >Email</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.email}}</td>
-      </ng-container>
-      <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef >Company</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.company}}</td>
-      </ng-container>
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef >Position</th>
-        <td mat-cell *matCellDef="let prospect"> {{ prospect.position}}</td>
-      </ng-container>
-      <ng-container matColumnDef="labels">
-        <th mat-header-cell *matHeaderCellDef >Labels</th>
-        <td mat-cell *matCellDef="let prospect">
-          <mat-chip-list>
-            <ng-container *ngFor="let label of prospect.labels">
-              <mat-chip [ngStyle]="{ 'background': label.colorHex }"> {{label.name}}&nbsp; </mat-chip>
-            </ng-container>
-          </mat-chip-list>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table> 
-  </div>
+ <p-card>
+<ng-template pTemplate="title">
+  Applicable Prospects 
+  <span>
+    <button (click)="modal.dismiss('Cross click')" style="float: right;" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
+  </span>
+</ng-template>
+<ng-template pTemplate="content">
+  <table mat-table [dataSource]="dataSource" >
+    <ng-container matColumnDef="place">
+      <th mat-header-cell *matHeaderCellDef >No</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.place}}</td>
+    </ng-container>
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef >First Name</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</td>
+    </ng-container>
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell *matHeaderCellDef >Last Name</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</td>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef >Email</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.email}}</td>
+    </ng-container>
+    <ng-container matColumnDef="company">
+      <th mat-header-cell *matHeaderCellDef >Company</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.company}}</td>
+    </ng-container>
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef >Position</th>
+      <td mat-cell *matCellDef="let prospect"> {{ prospect.position}}</td>
+    </ng-container>
+    <ng-container matColumnDef="labels">
+      <th mat-header-cell *matHeaderCellDef >Labels</th>
+      <td mat-cell *matCellDef="let prospect">
+        <mat-chip-list>
+          <ng-container *ngFor="let label of prospect.labels">
+            <mat-chip [style]="'border:1px solid'+ label.colorHex"  > {{label.name}}&nbsp; </mat-chip>
+          </ng-container>
+        </mat-chip-list>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
   <div>
     <mat-paginator #paginator [length]="availableProspectes" [pageIndex]="currentPage" [pageSize]="pageSize"
     (page)="pageChanged($event)" aria-label="Select page">
   </mat-paginator>
   </div>
+</ng-template>
+</p-card>
 </ng-template>

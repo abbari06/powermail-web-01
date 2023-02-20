@@ -1,42 +1,21 @@
-<mat-toolbar class="sub-navbar">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-1 heading">
-                <h1>All Schedules</h1>
-            </div>
-            <div class="col-sm-10"></div>
-            <div class="col-1 btn">
-                <button mat-flat-button color="primary" (click)="addSchedule()" style=" float: right;">
-                    <mat-icon>add</mat-icon> Add New Schedule
-                </button>
-                
-            </div>
-
-        </div>
-
-    </div>
-
-</mat-toolbar>
+<!-- 
 <div class="example-container mat-elevation-z8">
     <div class="example-table-container">
 
         <table mat-table [dataSource]="dataSource" matSort>
 
-            <!-- Position Column -->
             <ng-container matColumnDef="Name">
                 <th mat-header-cell *matHeaderCellDef> Schedule Name </th>
                 <td mat-cell *matCellDef="let element" class='m-card-title' data-label='Name'> {{element.name}}
                 </td>
             </ng-container>
 
-            <!-- Name Column -->
             <ng-container matColumnDef="TimeZone">
                 <th mat-header-cell *matHeaderCellDef>TimeZone </th>
                 <td mat-cell *matCellDef="let element" class='m-card-sub-title' data-label='TimeZone'>
                     {{element.timezone}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
 
             <ng-container matColumnDef="Monday">
                 <th mat-header-cell *matHeaderCellDef>Monday </th>
@@ -53,7 +32,6 @@
                 </td>
             </ng-container>
 
-            <!-- Symbol Column -->
             <ng-container matColumnDef="Tuesday">
                 <th mat-header-cell *matHeaderCellDef>Tuesday </th>
                 <td mat-cell *matCellDef="let element" class='has_label_on_mobile' data-label='Tuesday'>
@@ -166,5 +144,171 @@
     </button>
 </mat-menu>
 
+ -->
+<div class="pb-3">
 
+    <p-card>
+        <p-toolbar styleClass="mb-4 gap-2">
+          <ng-template pTemplate="left">
+            <button
+              icon="pi pi-plus"
+              (click)="addSchedule()"
+              pButton
+              pRipple
+              type="button"
+              label="Add New"
+              class="p-button-sm p-button-outlined mr-2"
+            ></button>
+          </ng-template>
+        </p-toolbar>
+      
+        <p-table
+          responsiveLayout="scroll"
+          [resizableColumns]="true"
+          styleClass="p-datatable-sm"
+          [value]="dataSource.data"
+          [lazy]="true"
+          (onLazyLoad)="listAllSchedules()"
+          [totalRecords]="totalRecords"
+          [rowsPerPageOptions]="[10, 20, 30]"
+          [rows]="10"
+          [paginator]="true"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+        >
+          >
+          <ng-template pTemplate="caption">
+            <div class="flex align-items-center justify-content-between">
+              <h5 class="m-0">Manage Schedules</h5>
+              <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input
+                  pInputText
+                  type="text"
+                  placeholder="Search..."
+                />
+              </span>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th
+                style="min-width: 15rem"
+                style="width: 170px"
+              >
+                Name 
+              </th>
+              <th >Timezone</th>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+              <th>Saturday</th>
+              <th>Sunday</th>
+              <th>Action</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-schedule>
+            <tr>
+              <td>{{ schedule.name }}</td>
+              <td class="table-description">
+                {{ schedule.timezone }}
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='monday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='tuesday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='wednesday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='thursday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='firday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='saturday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+              <td>
+                <ng-container *ngFor="let days of schedule.schedules">
+                    <ng-container *ngIf="days.day=='sunday'">
+                        <ng-container *ngFor="let time of days.times">
+                            <div *ngIf="!days.active">-- --</div>
+                            <div *ngIf="days.active">{{time.from | time24to12Transform}}-{{time.to | time24to12Transform}}</div>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+              </td>
+             
+          
+              <td>
+              
+                <button
+                pButton
+                pRipple
+                (click)="editSchedule(schedule)"
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text mr-2"
+              ></button>
+              <button
+              (click)="deleteSchedule({id:schedule.id})"
+                pButton
+                pRipple
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+              ></button>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-card>
+</div>
 

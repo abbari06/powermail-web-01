@@ -3,6 +3,7 @@
 // .spacer {
 //   flex: 1 1 auto;
 // }
+
 .mat-header-cell {
   background-color: #fbeaff;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -58,4 +59,38 @@
 }
 .modal-footer{
   display:block;
+}
+
+.sort-icon-size{
+  .pi{
+    font-size: .8rem!important;
+  } 
+
+}
+
+mat-chip {
+  width: auto;
+  color: black;
+  border-radius: 4px !important;
+  text-align: center !important;
+  border: 1px solid ;
+  background: transparent !important;
+  margin: 2px;
+  box-sizing: border-box;
+  padding: 7px 12px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.14);
+}
+.ng-tns-c329-7 .p-multiselect .p-component .p-multiselect-chip{
+width: 100%!important;
+}
+.mat-chip.mat-standard-chip.mat-chip-selected.mat-primary .mat-chip-remove {
+  /* color: #fff; */
+  color: black !important;
+  opacity: .4;
+}
+::ng-deep .mat-form-field-wrapper{
+  margin-bottom: -1.25em;
+}
+ .p-card .p-card-body {
+  padding: 0rem;
 }

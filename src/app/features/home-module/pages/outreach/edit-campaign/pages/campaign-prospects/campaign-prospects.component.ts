@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { OutreachService } from 'src/app/core/services/outreach/outreach.service';
 import { MatRow, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { LazyLoadEvent } from 'primeng/api';
 export interface User {
   fName: string;
   lName: string;
@@ -23,15 +24,7 @@ export class CampaignProspectsComponent implements OnInit {
 
   //schedule = new FormControl();
   closeResult:string
-  displayStyle = 'none';
-  displayedColumns: string[] = [
-    'firstname',
-    'lastname',
-    'email',
-    'company',
-    'position',
-    'labels',
-  ];
+
   totalRows = 0;
   pageSize = 10;
   currentPage = 0;
@@ -49,12 +42,12 @@ export class CampaignProspectsComponent implements OnInit {
   userAccount={
     id:undefined
   }
+  totalRecords:any;
   labels=[];
   constructor(private route:ActivatedRoute,private outreachService:OutreachService) { }
 
   ngOnInit(): void {
     this.campaign.id= this.route.snapshot.queryParamMap.get('id');
-    console.log(this.campaign.id)
     this.listCampaignsById();
    
   }
@@ -64,13 +57,9 @@ listCampaignsById(){
   this.userAccount=JSON.parse(localStorage.getItem('userprofile'));
     this.outreachService.getCampaignsById(this.user.id,this.userAccount.id,this.campaign).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.labels=res.labels;
-        console.log(this.labels)
-        this.getProspectsByLabels();
       },
       error: (error: any) => {
-        alert(error);
         console.log(error);
       },
     });
@@ -78,20 +67,23 @@ listCampaignsById(){
 getProspectsByLabels(){
   this.outreachService.getProspectesByLabels(this.user.id,this.userAccount.id,this.labels,this.currentPage,this.pageSize,this.orderBy).subscribe({
     next: (res: any) => {
-      console.log("resssssss",res);
       this.dataSource.data = res.content;
       this.availableProspects=res.totalElements;
+      
     },
     error: (error: any) => {
-      alert(error);
       console.log(error);
     },
   });
 }
-pageChanged(event: PageEvent) {
-  console.log({ event });
-  this.pageSize = event.pageSize;
-  this.currentPage = event.pageIndex;
-  this.getProspectsByLabels();
-}
+
+
+pageChanged(event: LazyLoadEvent) {
+  event.first == 0
+      ? (this.currentPage = 0)
+      : (this.currentPage = (event.first ?? 10) / (event.rows ?? 10));
+      this.pageSize = event.rows;
+   
+      this.getProspectsByLabels();
+    }
 }

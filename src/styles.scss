@@ -4,13 +4,17 @@
 html,
 body {
   height: 100%;
+  font-size: 14px;
 }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: var(--background-color);
+  background-color: var(--background-color)!important;
 }
-
+:root.custom-bread-crumb[_ngcontent-nym-c202] {
+  padding:0px;
+  list-style: none;
+}
 // theme colors
 
 :root {
@@ -23,9 +27,9 @@ body {
 .edit {
   color: var(--color);
 }
-table {
-  width: 100%;
-}
+// table {
+//   width: 100%;
+// }
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
@@ -97,7 +101,7 @@ table {
 
 .example-container {
   overflow: auto;
-  font-size: 16px;
+  // font-size: 14px;
 }
 
 .mat-header-cell,
@@ -120,5 +124,39 @@ table {
 }
 
 .p-card .p-card-content {
-  padding: .5rem 0 0 0!important;
+  padding: 0 0 0 0!important;
+}
+
+.table-description{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 500px;
+}
+
+.table-email{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 230px;
+}
+
+.right{
+  float: right;
+}
+
+ul.custom-bread-crumb{
+  padding: 0px !important;
+}
+mat-chip {
+  width: auto;
+  color: black;
+  border-radius: 4px !important;
+  text-align: center !important;
+  border: 1px solid ;
+  background: transparent !important;
+  margin: 2px;
+  box-sizing: border-box;
+  padding: 7px 12px;
+  box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.14);
 }

@@ -1,6 +1,12 @@
 import { SelectionModel } from '@angular/cdk/collections';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MatRow, MatTableDataSource } from '@angular/material/table';
 import { payload } from './modals/payload-modal';
 import { ProspectesService } from 'src/app/core/services/prospectus-services/prospectes.service';
@@ -17,7 +23,13 @@ import Swal from 'sweetalert2';
 import { ProspectLabelService } from 'src/app/core/services/prospect-label/prospect-label.service';
 import { FormControl } from '@angular/forms';
 import { DashboardService } from 'src/app/core/services/dashboard/dashboard.service';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import {
+  BreakpointObserver,
+  Breakpoints,
+  BreakpointState,
+} from '@angular/cdk/layout';
+import { LazyLoadEvent, MenuItem, SortEvent } from 'primeng/api';
+
 export interface User {
   fName: string;
   lName: string;
@@ -31,13 +43,16 @@ export interface User {
   selector: 'app-contacts-list',
   templateUrl: './contacts-list.component.html',
   styleUrls: ['./contacts-list.component.scss'],
+  // encapsulation:ViewEncapsulation.None
 })
 export class ContactsListComponent implements OnInit, AfterViewInit {
-  searched=false;
-  mobileViewWidth='80%';
-  mobileViewHeight='95%';
-
+  searched = false;
+  mobileViewWidth = '80%';
+  mobileViewHeight = '90%';
+  addButtonItems: MenuItem[];
+  contactList = [];
   addBulklabelsForm = new FormControl('');
+  displayResponsive: any = false;
   user = {
     id: undefined,
   };
@@ -55,25 +70,18 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   tableRow: any;
   closeResult: string = '';
   public records: any[] = [];
-  //define columns inside the variable displayedColumns
-  displayedColumns: string[] = [
-    'select',
-    'firstname',
-    'lastname',
-    'email',
-    'company',
-    'position',
-    'labels',
-    'actions',
-  ];
+
   //initialise the dataSource with arr of values defined in Var Data
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   selection = new SelectionModel<User>(true, []);
   totalRows = 0;
   pageSize = 10;
   currentPage = 0;
+  selectedContacts = [];
+  totalContacts;
   pageSizeOptions: number[] = [10, 20, 30, 50];
   /** Whether the number of selected elements matches the total number of rows. */
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     if (numSelected > 0) {
@@ -110,16 +118,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   constructor(
     private prospectesService: ProspectesService,
     public dialog: MatDialog,
-    private prospectLabelService: ProspectLabelService,private dashboardService:DashboardService,private breakpointObserver:BreakpointObserver
+    private prospectLabelService: ProspectLabelService,
+    private dashboardService: DashboardService,
+    private breakpointObserver: BreakpointObserver
   ) {}
   ngAfterViewInit(): void {
-
-    this.getAllProspectes();
+    // this.getAllProspectes();
     this.dataSource.paginator = this.paginator;
   }
 
   displayStyle = 'none';
-  displayStyleRemoveLabels = 'none';
+  displayStyleRemoveLabels = false;
 
   openPopup() {
     this.fetchLabels();
@@ -131,32 +140,46 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   }
   openRemovePopup() {
     this.showSelectedLabels();
-    this.displayStyleRemoveLabels = 'block';
+    this.displayStyleRemoveLabels = true;
   }
   closeRemovePopup() {
     this.getAllProspectes();
-    this.displayStyleRemoveLabels = 'none';
+    this.displayStyleRemoveLabels = false;
   }
-  
+  showResponsiveDialog() {
+    this.fetchLabels();
+    this.displayResponsive = true;
+  }
+
   ngOnInit(): void {
     this.breakpointObserver
-    .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
-    .subscribe((state: BreakpointState) => {
-      if (state.matches) {
-        this.mobileViewWidth = '80%'
-        this.mobileViewHeight='70%'
-        console.log(
-          'Matches small viewport or handset in portrait mode'
-        );
-      }
-    });
+      .observe([Breakpoints.Small, Breakpoints.HandsetPortrait])
+      .subscribe((state: BreakpointState) => {
+        if (state.matches) {
+          this.mobileViewWidth = '80%';
+          this.mobileViewHeight = '70%';
+        }
+      });
+
+    this.addButtonItems = [
+      {
+        label: 'Add new',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.openContactDialogue();
+        },
+      },
+      {
+        label: 'Import CSV',
+        icon: 'pi pi-fw pi-file-import',
+        command: () => {
+          this.openDialogue();
+        },
+      },
+    ];
   }
   getAllProspectes() {
-    this.payload.limit = this.pageSize;
-    this.payload.page = this.currentPage;
-    if (this.payload.orderBy === undefined) {
-      this.payload.orderBy = '-modifiedAt';
-    }
+    this.selectedContacts = [];
     var user = JSON.parse(localStorage.getItem('user'));
     var userAccount = JSON.parse(localStorage.getItem('userprofile'));
     var userId = user.id;
@@ -165,19 +188,12 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
     this.payload.userAccountId = userAccountId;
     this.prospectesService.fetchProspectes(this.payload).subscribe({
       next: (res: any) => {
-        this.selection.clear();
-        console.log(res);
         this.dataSource.data = res.content;
-        console.log(this.dataSource.data.length);
-        
-        if(this.dataSource.data.length>0){
-          this.dashboardService.completedStep2=true;
+        this.totalContacts = res.totalElements;
+
+        if (this.dataSource.data.length > 0) {
+          this.dashboardService.completedStep2 = true;
         }
-        console.log(this.dataSource.data);
-        setTimeout(() => {
-          this.paginator.pageIndex = this.currentPage;
-          this.paginator.length = res.totalElements;
-        });
       },
       error: (error: any) => {
         console.log(error);
@@ -206,40 +222,35 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  pageChanged(event: PageEvent) {
-    console.log({ event });
-    this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
-    this.getAllProspectes();
-    this.isAllSelected();
-    // if (!this.selection.isSelected) {
-    this.selection.clear();
-    // }
-  }
-  applyFilter(event: Event) {
-    this.searched=true;
-    const filterValue = (event.target as HTMLInputElement).value;
-    let value = filterValue.trim().toLowerCase();
-    this.payload.filters = { [this.selectedOption]: value };
-    this.getAllProspectes();
-  }
-  sort(event) {
-    console.log(event);
-    if (event.direction === 'asc') {
-      this.payload.orderBy = event.active;
-    } else if (event.direction === 'desc') {
-      this.payload.orderBy = '-' + event.active;
+  pageChanged(event: LazyLoadEvent) {
+  event.first == 0
+      ? (this.payload.page = 0)
+      : (this.payload.page = (event.first ?? 10) / (event.rows ?? 10));
+    this.payload.limit = event.rows;
+    if (event.sortField != undefined) {
+      if (event.sortOrder == 1) {
+        this.payload.orderBy = `${event.sortField}`;
+      } else {
+        this.payload.orderBy = `-${event.sortField}`;
+      }
     } else {
       this.payload.orderBy = '-modifiedAt';
     }
     this.getAllProspectes();
   }
+  applyFilter(event: Event) {
+    this.searched = true;
+    const filterValue = (event.target as HTMLInputElement).value;
+    let value = filterValue.trim().toLowerCase();
+    this.payload.filters = { [this.selectedOption]: value };
+    this.getAllProspectes();
+  }
+
   openDialogue(): void {
     const dialogRef = this.dialog
       .open(CsvMappingComponent, {
         width: this.mobileViewWidth,
         height: this.mobileViewHeight,
-
       })
       .afterClosed()
       .subscribe((val) => {
@@ -251,16 +262,16 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   openContactDialogue() {
     const dialogRef = this.dialog.open(AddSingleProspectComponent, {
       width: this.mobileViewWidth,
-     /// height: this.mobileViewHeight,
+      /// height: this.mobileViewHeight,
     });
     dialogRef.afterClosed().subscribe((val) => {
-      if (val === "submit") {
+      if (val === 'submit') {
         Swal.fire({
-          text: "Prospect has been updated",
+          text: 'Prospect has been updated',
           icon: 'success',
           showCancelButton: false,
-          showConfirmButton:false,
-        })
+          showConfirmButton: false,
+        });
         setTimeout(() => {
           Swal.close();
           this.getAllProspectes();
@@ -304,18 +315,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
             next: (res: any) => {
               console.log(res);
               Swal.fire({
-                text: "Your Prospect has been deleted.",
+                text: 'Your Prospect has been deleted.',
                 icon: 'success',
                 showCancelButton: false,
-                showConfirmButton:false,
-              })
+                showConfirmButton: false,
+              });
               setTimeout(() => {
                 Swal.close();
                 this.getAllProspectes();
               }, 1000);
-              
-             // Swal.fire('Deleted!', 'Your Prospect has been deleted.', 'success');
-             
+
+              // Swal.fire('Deleted!', 'Your Prospect has been deleted.', 'success');
             },
             error: (error: any) => {
               console.log(error);
@@ -332,17 +342,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
         this.user.id,
         this.userAccount.id,
         this.addBulklabelsForm.value,
-        this.selection.selected
+        this.selectedContacts
       )
       .subscribe({
         next: (res: any) => {
           console.log(res);
           Swal.fire({
-            text: "Labels have been added successfully.",
+            text: 'Labels have been added successfully.',
             icon: 'success',
             showCancelButton: false,
-            showConfirmButton:false,
-          })
+            showConfirmButton: false,
+          });
           setTimeout(() => {
             Swal.close();
             this.getAllProspectes();
@@ -355,7 +365,6 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
     this.closePopup();
   }
   deleteBulkProspects() {
-    console.log(this.selection.selected);
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userAccount = JSON.parse(localStorage.getItem('userprofile'));
     Swal.fire({
@@ -372,17 +381,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
           .deleteProspects(
             this.user.id,
             this.userAccount.id,
-            this.selection.selected
+            this.selectedContacts
           )
           .subscribe({
             next: (res: any) => {
               console.log(res);
               Swal.fire({
-                text: "Prospects have been deleted.",
+                text: 'Prospects have been deleted.',
                 icon: 'success',
                 showCancelButton: false,
-                showConfirmButton:false,
-              })
+                showConfirmButton: false,
+              });
               setTimeout(() => {
                 Swal.close();
                 this.getAllProspectes();
@@ -411,9 +420,9 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   selectedLabelsForm = new FormControl();
   selectedLabels = [];
   showSelectedLabels() {
-    console.log(this.selection.selected);
+    console.log(this.selectedContacts);
     var labels = [];
-    for (let label of this.selection.selected) {
+    for (let label of this.selectedContacts) {
       labels.push(...label.labels);
     }
     var filterLabels = Array.from(
@@ -425,14 +434,12 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
   }
   labelsRemoved = [];
   onBulkLabelRemove(label) {
-    console.log(label);
     this.labelsRemoved.push(label);
     const index = this.selectedLabels.indexOf(label);
     if (index !== -1) {
       this.selectedLabels.splice(index, 1);
       this.selectedLabelsForm.setValue(this.selectedLabels);
     }
-    console.log(this.selectedLabelsForm.value);
   }
   removeBulkLabels() {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -442,17 +449,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
         this.user.id,
         this.userAccount.id,
         this.labelsRemoved,
-        this.selection.selected
+        this.selectedContacts
       )
       .subscribe({
         next: (res: any) => {
           console.log(res);
           Swal.fire({
-            text: "Labels have been removed successfully.",
+            text: 'Labels have been removed successfully.',
             icon: 'success',
             showCancelButton: false,
-            showConfirmButton:false,
-          })
+            showConfirmButton: false,
+          });
           setTimeout(() => {
             Swal.close();
             this.getAllProspectes();
@@ -464,17 +471,17 @@ export class ContactsListComponent implements OnInit, AfterViewInit {
       });
     this.closeRemovePopup();
   }
- 
-  @ViewChild('search', {  
-    static: true  
-}) search: ElementRef  
-onSearchClear() { 
-    this.searched=false;  
-    console.log(this.search.nativeElement.value);
-    this.search.nativeElement.value='';
-    this.payload.filters=null
-    this.selectedOption='email'
-    this.getAllProspectes();
-}  
 
+  @ViewChild('search', {
+    static: true,
+  })
+  search: ElementRef;
+  onSearchClear() {
+    this.searched = false;
+    console.log(this.search.nativeElement.value);
+    this.search.nativeElement.value = '';
+    this.payload.filters = null;
+    this.selectedOption = 'email';
+    this.getAllProspectes();
+  }
 }

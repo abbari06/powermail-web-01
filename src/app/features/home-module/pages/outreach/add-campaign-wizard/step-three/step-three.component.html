@@ -1,194 +1,254 @@
-<div class="container">
-    <div class="row">
-        <mat-card>
-           
-            
-            <ul class="timeline">
-            <li *ngFor="let step of steps">
-                
-            <mat-accordion *ngFor="let mail of step.emails">
-              <mat-panel-title>
-                <button style="float:left">step:{{step.stepNumber}}&nbsp;Day:{{step.delayAsString | slice: 0:2}}</button>
-              </mat-panel-title>
-             
-              <mat-expansion-panel (opened)="panelOpenState = true"
-                                   (closed)="panelOpenState = false">
-                  
-                <mat-expansion-panel-header>
-                  <div class="col-sm-1">
-                    <span>
-                      <mat-icon
-                        class="edit"
-                        (click)="
-                          editStep(
-                            step,
-                            mail,
-                            mymodal,
-                            step.delayAsString
-                          )
-                        "
-                        >edit</mat-icon>
-                    </span>
-                    </div>
-                  <mat-panel-title >
-                    <ng-container class="subject">
-                      {{mail.subject}}
-
-                    </ng-container>
-                  </mat-panel-title>
-                  <mat-panel-description [innerHTML]="mail.body">
-                    <div class="messagebody">
-                      {{mail.body}}
-                    </div>
-                   
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                <mat-expansion-panel-description [innerHTML]="mail.body" >
-                  {{mail.body}}
-                </mat-expansion-panel-description>
-               
-                
-              </mat-expansion-panel>
-            </mat-accordion>
-            </li>
-            </ul>
-            <mat-card-content>
-                <div class="row">
-                    <div class="col-sm-4"></div>
-                    <div class="col-sm-4">
-                      
-                        <button id="msg" class="mat-raised-button mat-primary" (click)="open(mymodal)">
-                            <mat-icon>add</mat-icon> New Message
-                        </button>
-                    </div>
-                    <div class="col-sm-4"></div>
+<div class="container pb-3">
+  <div class="row">
+    <mat-card>
+      <ul class="timeline">
+        <li *ngFor="let step of steps">
+          <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1">
+            <ngb-panel>
+              <ng-template ngbPanelHeader>
+                <div class="card-header">
+                  <button mat-button>
+                    Step-{{ step.stepNumber }} Day-{{
+                      step.delayAsString | slice : 0 : 2
+                    }}
+                  </button>
                 </div>
-            </mat-card-content>
-       
-            <mat-card-actions>
-                <button class="mat-raised-button mat-primary" (click)="next()">Next</button>
-                <button class="mat-raised-button mat-accent" (click)="backToStepTwo()">Back</button>
-            </mat-card-actions>
-        </mat-card>
-    </div>
+                <div class="container mt-2" style="height: 35px;">
+                  <div class="row" *ngFor="let mail of step.emails">
+                    <div class="col-sm-3">
+                      <p class="subject">{{ mail.subject }}</p>
+                    </div>
+                    <div class="col-sm-7">
+                      <p class="messagebody" [innerHTML]="mail.body"></p>
+                    </div>
+                    <div class="col-sm-2">
+                      <span>
+                        <button
+                          (click)="
+                            editStep(step, mail, mymodal, step.delayAsString)
+                          "
+                          pButton
+                          pRipple
+                          type="button"
+                          icon="pi pi-pencil"
+                          class="p-button-rounded p-button-danger p-button-text"
+                        ></button>
+                        <button
+                          pButton
+                          pRipple
+                          ngbPanelToggle
+                          type="button"
+                          icon="pi pi-arrow-down"
+                          class="p-button-rounded p-button-info p-button-text"
+                        ></button>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent *ngFor="let emails of step.emails">
+                <span class="expDesc">Subject: </span>
+                <span class="expInter">{{ emails.subject }}</span>
+                <br /><br />
+                <div>
+                  <span class="expDesc">Message: </span>
+                  <span class="expInter" [innerHTML]="emails.body"></span>
+                </div>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </li>
+      </ul>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4 text-center">
+            <button
+              (click)="open(mymodal)"
+              icon="pi pi-plus"
+              pButton
+              pRipple
+              type="button"
+              label="New Message"
+              class="p-button-sm p-button-outlined"
+            ></button>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button
+          (click)="backToStepTwo()"
+          icon="pi pi-arrow-left"
+          pButton
+          pRipple
+          type="button"
+          label="Back"
+          class="p-button-sm p-button-outlined p-button-danger"
+        ></button>
+        <button
+          style="float: right"
+          (click)="next()"
+          icon="pi pi-arrow-right"
+          pButton
+          pRipple
+          type="button"
+          label="Next"
+          class="p-button-sm p-button-outlined"
+        ></button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 <ng-template #mymodal let-modal>
-  <div >
-    <h3 style="text-align: center;">Add New Email Message</h3>
-    <button class="mat-raised-button mat-primary" style="float:left;margin-left: 17px;" (click)="openDelay(delayModel)"><mat-icon>edit</mat-icon> step: {{stepNumber}}&nbsp;Day:{{dayNumber}}</button>
+  <div class="mt-2">
+    <h4 style="text-align: center">Add New Email Message</h4>
+    <button
+      style="float: left; margin-left: 17px"
+      (click)="openDelay(delayModel)"
+      icon="pi pi-arrow-down"
+      pButton
+      pRipple
+      type="button"
+      [label]="'Step' + stepNumber + '-Day' + dayNumber"
+      class="p-button-sm p-button-outlined"
+    ></button>
   </div>
-  
-  <div class="modal-body">
 
-      <form [formGroup]="AddMessageForm">
-       
-        
-        <div class="row">
-        <mat-form-field appearance="outline" style="width:100%">
+  <div class="modal-body">
+    <form [formGroup]="AddMessageForm">
+      <div class="row">
+        <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Subject</mat-label>
-          <input matInput placeholder="Enter Your Subject Here" formControlName="subject" />
+          <input
+            matInput
+            placeholder="Enter Your Subject Here"
+            formControlName="subject"
+          />
         </mat-form-field>
       </div>
-    <quill-editor formControlName="message" [styles]="{ height: '300px' }">
-      <div quill-editor-toolbar>
-        <span class="ql-formats">
-          <select class="ql-font"></select>
-          <select class="ql-size"></select>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-bold"></button>
-          <button class="ql-italic"></button>
-        </span>
-        <span class="ql-formats">
-          <select class="ql-color"></select>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-script" value="sub"></button>
-          <button class="ql-script" value="super"></button>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-header" value="1"></button>
-          <button class="ql-header" value="2"></button>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-list" value="ordered"></button>
-          <button class="ql-list" value="bullet"></button>
-          <button class="ql-indent" value="-1"></button>
-          <button class="ql-indent" value="+1"></button>
-        </span>
-        <span class="ql-formats">
-          <select class="ql-align"></select>
-        </span>
-        <span class="ql-formats">
-          <button class="ql-link"></button>
-          <button class="ql-image"></button>
-          <button class="ql-video"></button>
-        </span>
+      <quill-editor formControlName="message" [styles]="{ height: '300px' }">
+        <div quill-editor-toolbar>
+          <span class="ql-formats">
+            <select class="ql-font"></select>
+            <select class="ql-size"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-bold"></button>
+            <button class="ql-italic"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-color"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-script" value="sub"></button>
+            <button class="ql-script" value="super"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-header" value="1"></button>
+            <button class="ql-header" value="2"></button>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-list" value="ordered"></button>
+            <button class="ql-list" value="bullet"></button>
+            <button class="ql-indent" value="-1"></button>
+            <button class="ql-indent" value="+1"></button>
+          </span>
+          <span class="ql-formats">
+            <select class="ql-align"></select>
+          </span>
+          <span class="ql-formats">
+            <button class="ql-link"></button>
+            <button class="ql-image"></button>
+            <button class="ql-video"></button>
+          </span>
+        </div>
+      </quill-editor>
+      <div class="mt-1">
+        <button
+          *ngIf="AddMessageForm.valid"
+          (click)="saveMessage()"
+          (click)="modal.close('Close click')"
+          style="float: right"
+          icon="pi pi-check"
+          pButton
+          pRipple
+          type="button"
+          label="Save"
+          class="p-button-sm p-button-outlined"
+        ></button>
+
+        <button
+          (click)="modal.close('Close click')"
+          (click)="closeQuill()"
+          icon="pi pi-times"
+          pButton
+          pRipple
+          type="button"
+          label="Cancel"
+          class="p-button-sm p-button-outlined p-button-danger"
+        ></button>
       </div>
-      
-    </quill-editor>
-    <button *ngIf="AddMessageForm.valid" class="mat-raised-button mat-primary" style="float:right" (click)="saveMessage()"  (click)="modal.close('Close click')">Save</button>
-    <button
-    mat-raised-button
-    color="warn"
-    (click)="modal.close('Close click')"
-    (click)="closeQuill()"
-    class="custom_cancel_btn"
-  >
-    Cancel
-  </button>
-      </form>
+    </form>
   </div>
 </ng-template>
 <!---delay String-->
 <ng-template #delayModel let-modal>
-
-  
-  <div class="modal-body">
-
-    <div class="row">
+  <p-card>
+    <ng-template pTemplate="content">
       <form [formGroup]="DelayStringForm">
-        
-          <mat-label>day</mat-label>
-          <select formControlName="day">
-            <option *ngFor="let day of days" [value]="day" >
-              {{day}}
-            </option>
-          </select>
-       
-        &nbsp;
-          <mat-label>hour</mat-label>
-          <select formControlName="hour" >
-            <option *ngFor="let hour of hours" [value]="hour">
-             {{hour}}
-            </option>
-          </select>
-       
-          &nbsp;
-        
-          <mat-label>minute</mat-label>
-          <select formControlName="minute">
-            <option *ngFor="let minute of minutes" [value]="minute">
-              {{minute}}
-            </option>
-          </select>
-          &nbsp;
-      </form>
-      
-    </div>
-  </div>
-    <div class="modal-footer">
-      <div>
-      <button type="button" class="btn btn-primary" style="float:right" (click)="addDelayString()"  (click)="modal.close('Close click')">
-        Add
-      </button>
-      </div>
-      <div>
-        <button type="button" class="btn btn-danger"  style="float:left"  (click)="modal.close('Close click')">
-          Close
-        </button>
-      </div>
-    </div>
- 
+        <div class="grid">
+          <div class="col-4">
+            <label for="day" class="label">Day</label>
+            <select formControlName="day" class="form-control">
+              <option *ngFor="let day of days" [value]="day">
+                {{ day }}
+              </option>
+            </select>
+          </div>
+          <div class="col-4">
+            <label for="hour" class="label">Hour</label>
 
+            <select formControlName="hour" class="form-control">
+              <option *ngFor="let hour of hours" [value]="hour">
+                {{ hour }}
+              </option>
+            </select>
+          </div>
+          <div class="col-4">
+            <label for="minute" class="label">Minute</label>
+            <select formControlName="minute" class="form-control">
+              <option *ngFor="let minute of minutes" [value]="minute">
+                {{ minute }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <p-divider type="dashed"></p-divider>
+      <button
+        (click)="modal.close('Close click')"
+        icon="pi pi-times"
+        pButton
+        pRipple
+        type="button"
+        label="Cancel"
+        class="p-button-sm p-button-outlined p-button-danger"
+      ></button>
+      <button
+        (click)="addDelayString()"
+        (click)="modal.close('Close click')"
+        style="float: right"
+        icon="pi pi-check"
+        pButton
+        pRipple
+        type="button"
+        label="Save"
+        class="p-button-sm p-button-outlined"
+      ></button>
+    </ng-template>
+  </p-card>
 </ng-template>

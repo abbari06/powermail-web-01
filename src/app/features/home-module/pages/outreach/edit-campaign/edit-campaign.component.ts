@@ -8,6 +8,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { UpdateScheduleComponent } from './update-schedule/update-schedule.component';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { UpdateScheduleComponent } from './update-schedule/update-schedule.compo
 })
 export class EditCampaignComponent implements OnInit {
   gridColumn = 4;
+  items: MenuItem[];
 id:any
 user={
   id:undefined
@@ -46,6 +48,12 @@ schedules=[];
     this.campaign.id=this.id;
     console.log(this.id);
     this.listCampaignsById();
+    this.items = [
+      {label: 'Messages', icon: 'pi pi-envelope', routerLink:'messages',queryParams:{id:this.id}},
+      {label: 'Prospects', icon: 'pi pi-users', routerLink:'prospects',queryParams:{id:this.id}},
+      {label: 'Setttings', icon: 'pi pi-cog',routerLink:'settings',queryParams:{id:this.id}},
+      {label: 'Stats', icon: 'pi pi-chart-line',routerLink:'stats',queryParams:{id:this.id}}
+  ];
   }
   listCampaignsById(){
     this.user=JSON.parse(localStorage.getItem('user'))

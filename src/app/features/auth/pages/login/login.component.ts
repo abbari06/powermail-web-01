@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     if (history.state.data) {
-      console.log(history.state.data);
+      (history.state.data);
       this.message = `${history.state.data.status}!!  ${history.state.data.message}`;
       if (this.message != null) {
         this.openSnackBar(this.message);
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
     }
     if (history.state.mode == 'setpassword') {
       this.message = history.state.data;
-      console.log(this.message);
+      (this.message);
       this.openSnackBar(this.message);
     }
   }
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.loading = true;
    let error= this.authService.login(this.loginForm.value)
-   // console.log(error);
+   // (error);
     
     //setTimeout(() => {
       // if(!this.authService.userModel.trialPlan){
@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
       //     this.openStripeDialogue(this.authService.userModel.email) 
       // }
       if(error){
-        console.log(error);
+        (error);
         setTimeout(() => {
           this.loading=false;
         }, 1000);
@@ -84,19 +84,19 @@ export class LoginComponent implements OnInit {
       data: { email: this.email },
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('The dialog was closed');
+      ('The dialog was closed');
       setTimeout(() => {
         result = this.authService.returnMessage();
         if (result !=='') {
-          console.log(result);
+          (result);
           this.openSnackBar(result);
         }
-        console.log(this.authService.returnMessage());
+        (this.authService.returnMessage());
       }, 2000);
     });
   }
   // openStripeDialogue(email): void {
-  //   console.log(email);
+  //   (email);
     
   //   const dialogRef = this.dialog.open(StripeComponent, {
   //     disableClose: true,

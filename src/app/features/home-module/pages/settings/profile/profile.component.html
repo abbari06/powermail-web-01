@@ -1,4 +1,4 @@
-<mat-toolbar class="sub-navbar">
+<!-- <mat-toolbar class="sub-navbar">
     <div class="container">
         <div class="row">
             <div class="col-sm-1">
@@ -6,16 +6,101 @@
             </div>
             <div class="col-sm-10"></div>
             <div class="col-1">
-                <!-- <button mat-flat-button color="primary" style=" float: right;">
-                    <mat-icon>update</mat-icon> Update Profile
-                </button> -->
+         
             </div>
         </div>
     </div>
-</mat-toolbar>
+</mat-toolbar> -->
+<form [formGroup]="userDetails">
+  <p-card>
+    <ng-template pTemplate="title"
+      >Profile
+      <span style="float: right">
+        <button
+          (click)="enableForm()"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-pencil"
+          class="p-button-rounded p-button-danger p-button-text"
+        ></button>
+        <button
+          (click)="disableForm()"
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-check"
+          class="p-button-rounded p-button-text"
+        ></button>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="content" style="padding: 1rem 0 !important">
+      <div class="grid" style="width: 100%">
+        <div class="col-12 lg:col-4">
+          <input type="text" pInputText formControlName="firstname" />
+        </div>
+        <div class="col-12 lg:col-4">
+          <input type="text" pInputText formControlName="lastname" />
+        </div>
+        <div class="col-12 lg:col-4">
+          <input
+            type="email"
+            pInputText
+            formControlName="email"
+            [disabled]="true"
+          />
+        </div>
+        <div class="col-12 lg:col-4">
+          <input
+            type="text"
+            pInputText
+            formControlName="mobile"
+            placeholder="Number"
+          />
+        </div>
+        <div class="col-12 lg:col-4">
+          <input type="text" pInputText placeholder="Position" />
+        </div>
+        <div class="col-12 lg:col-4">
+          <input
+            type="text"
+            pInputText
+            formControlName="company"
+            placeholder="Company"
+          />
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</form>
 
+<div class="mt-5">
+  <p-card>
+    <ng-template pTemplate="title"
+      >Timezone
+      <span style="float: right">
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="pi pi-check"
+          class="p-button-rounded p-button-text"
+        ></button>
+      </span>
+    </ng-template>
+    <ng-template pTemplate="content" style="padding: 1rem 0 !important">
+      <ng-moment-timezone-picker
+        class="timezone"
+        [getUserZone]="true"
+        [customPlaceholderText]="''"
+        ngModel="timeZone"
+      >
+      </ng-moment-timezone-picker>
+    </ng-template>
+  </p-card>
+</div>
 
-<div class="container">
+<!-- <div class="container">
 
     <div class="row">
 
@@ -30,7 +115,6 @@
                 <div style="text-align: center;">
                     <br>
                     <label>
-                        <!-- <ngx-avatar size="150" textSizeRatio="2.2" name={{fullname}}></ngx-avatar> -->
                     </label>
                     <br>
                     <br>
@@ -73,27 +157,6 @@
                     </mat-toolbar>
 
 
-                    <!-- <mat-toolbar class="innerTool">
-
-
-                        <div class="column">
-                            Personal Info.
-                        </div>
-
-                        <div class="column2">
-                            <button (click)="enableForm();" mat-mini-fab color="warn" [hidden]="icoe">
-                                <mat-icon>edit</mat-icon>
-                            </button>
-                            <button (click)="disableForm();" mat-mini-fab color="warn" [hidden]="icoc">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                            &nbsp; &nbsp;
-                            <button mat-stroked-button color="primary" [disabled]="btndsbl">
-                                <mat-icon>update</mat-icon> Update Profile
-                            </button>
-                        </div>
-
-                    </mat-toolbar> -->
 
                     <br>
 
@@ -160,6 +223,4 @@
 
     </mat-card>
 
-</div>
-
-<br>
+</div> -->

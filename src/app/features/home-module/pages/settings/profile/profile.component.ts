@@ -25,7 +25,8 @@ export class ProfileComponent implements OnInit {
     this.icoc = false;
     this.isDisabled = false;
     this.btndsbl = false;
-    this.formm();
+    // this.formm();
+    this.userDetails.enable();
   }
 
   disableForm() {
@@ -33,28 +34,29 @@ export class ProfileComponent implements OnInit {
     this.icoc = true;
     this.isDisabled = true;
     this.btndsbl = true;
-    this.formm();
+    this.userDetails.disable();
+    // this.formm();
   }
 
   formm() {
     this.userDetails = new FormGroup({
       firstname: new FormControl(
-        { value: this.firstName, disabled: this.isDisabled },
+        { value: this.firstName, disabled: true },
         [Validators.required]
       ),
       lastname: new FormControl(
-        { value: this.lastName, disabled: this.isDisabled },
+        { value: this.lastName, disabled:true },
         [Validators.required]
       ),
       mobile: new FormControl(
-        { value: this.Phone, disabled: this.isDisabled },
+        { value: this.Phone, disabled: true },
         [Validators.required]
       ),
       company: new FormControl(
-        { value: this.Company, disabled: this.isDisabled },
+        { value: this.Company, disabled: true },
         [Validators.required]
       ),
-      email: new FormControl({ value: this.Email, disabled: this.isDisabled }, [
+      email: new FormControl({ value: this.Email, disabled: true }, [
         Validators.required,
       ]),
     });

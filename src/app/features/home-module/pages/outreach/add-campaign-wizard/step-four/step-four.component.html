@@ -1,7 +1,166 @@
-<div class="container">
+<p-card *ngIf="showdata">
+  <ng-template pTemplate="title">
+    Your outreach {{title}} is created and is ready to launch.
+</ng-template>
+<ng-template pTemplate="content mt-1">
+  <div class="grid">
+    <div class="lg:col-6 col-12">
+      <span>
+       <b> Mail-Id:</b> 
+        <img style="margin-left: 10px;" src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" height="18px" width="18px" >  {{email}}
+      </span>
+ </div>
+    <div class="lg:col-6 col-12" class="labels">
+        <div>
+          <b> Labels:</b>
+        </div> 
+        <div *ngFor="let label of labels" style="margin-left: 5px;">
+          <mat-chip  [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
+        </div>
+    </div>
+  </div>
+  <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1" class="mt-1">
+    <ngb-panel>
+      <ng-template ngbPanelHeader>
+        <div class="grid mt-1">
+          <div class="col-5">
+         <div style="margin-left: 5px;" > 
+          <b> Schedule: </b>{{scheduleName}}
+         </div>  
+          </div>
+          <div class="col-5">
+            <b> TimeZone: </b> {{timeZone}}
+          </div>
+          <div class="col-2">
+            <button
+            pButton
+            pRipple
+            ngbPanelToggle
+            type="button"
+            icon="pi pi-arrow-down"
+            class="p-button-rounded p-button-info p-button-text"
+          ></button>
+          </div>
+        </div>
+        <!-- <div class="container">
+          <div class="row" *ngFor="let mail of step.emails">
+            <div class="col-sm-3">
+              <p class="subject">{{ mail.subject }}</p>
+            </div>
+            <div class="col-sm-7">
+              <p class="messagebody" [innerHTML]="mail.body"></p>
+            </div>
+            <div class="col-sm-2">
+              <span>
+                <button
+                  (click)="
+                    editStep(step, mail, mymodal, step.delayAsString)
+                  "
+                  pButton
+                  pRipple
+                  type="button"
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-danger p-button-text"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  ngbPanelToggle
+                  type="button"
+                  icon="pi pi-arrow-down"
+                  class="p-button-rounded p-button-info p-button-text"
+                ></button>
+              </span>
+            </div>
+          </div>
+        </div> -->
+      </ng-template>
+      <ng-container ngbPanelContent *ngFor="let day of previewData" >
+                                  
+        <ng-container *ngIf="day.active" >
+          
+          <ng-container *ngFor="let time of day.times">
+           {{day.day | uppercase}}: {{time.from}}&nbsp;-&nbsp;{{time.to}}
+           </ng-container>
+        </ng-container>
+      </ng-container>
+    </ngb-panel>
+  </ngb-accordion>
+
+  <ul class="timeline">
+    <li *ngFor="let step of steps">
+      <ngb-accordion #a="ngbAccordion" activeIds="custom-panel-1">
+        <ngb-panel>
+          <ng-template ngbPanelHeader>
+            <div class="card-header">
+              <button mat-button>
+                Step-{{ step.stepNumber }} Day-{{
+                  step.delayAsString | slice : 0 : 2
+                }}
+              </button>
+            </div>
+            <div class="container mt-2" style="height: 35px;">
+              <div class="row" *ngFor="let mail of step.emails">
+                <div class="col-sm-3">
+                  <p class="subject">{{ mail.subject }}</p>
+                </div>
+                <div class="col-sm-7">
+                  <p class="messagebody" [innerHTML]="mail.body"></p>
+                </div>
+                <div class="col-sm-2">
+                  <span>
+                    <button
+                      pButton
+                      pRipple
+                      ngbPanelToggle
+                      type="button"
+                      icon="pi pi-arrow-down"
+                      class="p-button-rounded p-button-info p-button-text"
+                    ></button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent *ngFor="let emails of step.emails">
+            <span class="expDesc">Subject: </span>
+            <span class="expInter">{{ emails.subject }}</span>
+            <br /><br />
+            <div>
+              <span class="expDesc">Message: </span>
+              <span class="expInter" [innerHTML]="emails.body"></span>
+            </div>
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </li>
+  </ul>
+</ng-template>
+<ng-template pTemplate="footer">
+  <button
+  (click)="back()"
+  icon="pi pi-arrow-left"
+  pButton
+  pRipple
+  type="button"
+  label="Back"
+  class="p-button-sm p-button-outlined p-button-danger"
+></button>
+<button
+  style="float: right"
+  (click)="save()"
+  icon="pi pi-check"
+  pButton
+  pRipple
+  type="button"
+  label="Save & Launch"
+  class="p-button-sm p-button-outlined"
+></button>
+</ng-template>
+</p-card>
+<!-- <div class="container">
     <div class="row">
-       
-            <mat-card *ngIf="showdata">
+         <mat-card *ngIf="showdata">
                 <mat-card-content>
                    
                         <h2>Your campaign <b>{{title}}</b> is created and is ready to launch.</h2>
@@ -85,4 +244,4 @@
             </mat-card>
        
     </div>
-</div>
+</div> -->

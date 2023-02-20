@@ -1,63 +1,82 @@
 
-
-<div class="example-container">
-  <mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
-
-    <!-- Checkbox Column -->
-   
-
-    <!-- construct the columns -->
-    <ng-container matColumnDef="place">
-      <mat-header-cell *matHeaderCellDef >No</mat-header-cell>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.place}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="firstname">
-      <mat-header-cell *matHeaderCellDef >First Name</mat-header-cell>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.firstname}}</mat-cell>>
-    </ng-container>
-
-    <ng-container matColumnDef="lastname">
-      <mat-header-cell *matHeaderCellDef >Last Name</mat-header-cell>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.lastname}}</mat-cell>>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef >Email</mat-header-cell>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.email}}</mat-cell>>
-    </ng-container>
-
-    <ng-container matColumnDef="company">
-      <mat-header-cell *matHeaderCellDef >Company</mat-header-cell>>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.company}}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef >Position</mat-header-cell>>
-      <mat-cell *matCellDef="let prospect"> {{ prospect.position}}</mat-cell>
-    </ng-container>
-
-
-    <ng-container matColumnDef="labels">
-      <mat-header-cell *matHeaderCellDef>Labels</mat-header-cell>>
-      <mat-cell *matCellDef="let prospect">
-
-        <ng-container *ngFor="let label of prospect.labels">
-          <mat-chip  [ngStyle]="{ 'background': label.colorHex }"> {{label.name}} </mat-chip>
-        </ng-container>
-          
-      </mat-cell>
-    </ng-container>
-   
-
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
-  </mat-table>
+<div class="pb-3">
+  <p-card>
   
-</div>
-<div>
-  <mat-paginator #paginator [length]="availableProspects" [pageIndex]="currentPage" [pageSize]="pageSize"
-(page)="pageChanged($event)" aria-label="Select page">
-</mat-paginator>
+    <p-table
+      responsiveLayout="scroll"
+      [resizableColumns]="true"
+      styleClass="p-datatable-sm"
+      [value]="dataSource.data"
+      [lazy]="true"
+      (onLazyLoad)="pageChanged($event)"
+      [totalRecords]="availableProspects"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [rows]="pageSize"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="m-0">Outreach Prospects</h5>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          
+          <th
+            style="min-width: 15rem"
+            style="width: 150px"
+          >
+            First Name 
+          </th>
+          <th  style="width: 150">
+            Last Name
+          </th>
+          <th style="width: 230" >Email </th>
+          <th style="width: 150px">Company </th>
+          <th style="width: 150px">Position</th>
+          <th style="width: 150px">Labels</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-prospect>
+        <tr>
+          <td>{{ prospect.firstname }}</td>
+          <td>
+            {{ prospect.lastname }}
+          </td>
+          <td class="table-email">
+            {{ prospect.email }}
+          </td>
+          <td>
+            {{ prospect.company }}
+          </td>
+          <td>
+            {{ prospect.position }}
+          </td>
+  
+          <td class="text-center" style="display: flex;">
+            <ng-container  *ngFor="let label of prospect?.labels">
+              <mat-chip
+               style=" padding: 7px 12px;"
+               [style]="'border:1px solid'+ label.colorHex"
+            >
+              {{ label.name }} 
+            </mat-chip>
+          </ng-container>
+          </td>
+  
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
 </div>

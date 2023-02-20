@@ -1,7 +1,21 @@
 
 <div class="grid">
     <div class="lg:col-4 md:col-4 col-12" >
+      <p-card header="Connect New Account"  >
+        <ng-template pTemplate="content">
+          <div class="grid text-center" style="margin-top: 29px;">
+            <div class="col-6">
+              <img style="cursor: pointer;" (click)="connectGoogleAccount()" src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" height="80px" width="80px" > 
+              <p>Google</p>
+            </div>
+            <div class="col-6">
+              <img style="cursor: pointer;" (click)="connectOutlookAccount()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Microsoft_Outlook_2013-2019_logo.svg/2163px-Microsoft_Outlook_2013-2019_logo.svg.png" height="80px" width="80px" alt="">
+           <p>Outlook</p>
+            </div>
+          </div>
 
+</ng-template>
+      </p-card>
     </div>
     <div class="lg:col-4 md:col-4 col-12" *ngFor="let account of mailAccounts">
         <p-card>

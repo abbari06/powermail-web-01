@@ -107,9 +107,9 @@
    .tracking-status-inforeceived {
     background-color:#214977
    }
-   .tracking-list {
-    border-top:1px solid #e5e5e5
-   }
+//    .tracking-list {
+//     // border-top:1px solid #e5e5e5
+//    }
    .tracking-item {
     border-left:1px solid #e5e5e5;
     position:relative;
@@ -198,7 +198,7 @@
    }
 
    .scrollable-content{
-    height: 423px;
+    height: 500px;
     overflow: hidden;
   display: flex;
   flex-direction: column;

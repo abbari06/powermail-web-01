@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import {NgbModal, ModalDismissReasons, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import { day,hour,minute } from './models/delay-string';
 import {  FormBuilder,FormGroup,Validators } from '@angular/forms';
@@ -9,7 +9,8 @@ import { ActivatedRoute ,Router} from '@angular/router';
 @Component({
   selector: 'app-step-three',
   templateUrl: './step-three.component.html',
-  styleUrls: ['./step-three.component.scss']
+  styleUrls: ['./step-three.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class StepThreeComponent implements OnInit {
 

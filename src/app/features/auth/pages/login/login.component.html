@@ -1,5 +1,5 @@
 <div class="authBox">
-    <mat-card>
+    <!-- <mat-card>
         <div class="header">
             <mat-card-title></mat-card-title>
             <mat-card-subtitle>Login to powermail</mat-card-subtitle>
@@ -31,5 +31,33 @@
                 <p>Not a member? <a routerLink="/auth/register" class="register">Register</a></p>
             </div>
         </mat-card-content>
-    </mat-card>
+    </mat-card> -->
+    <p-card header="Login" >
+        <ng-template pTemplate="content" >
+            <form [formGroup]="loginForm">
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com" autofocus>
+                    <mat-error>
+                        Please enter a valid email address.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput formControlName="password" placeholder="Enter your password">
+                    <mat-error>
+                        Minimum six characters are required.
+                    </mat-error>
+                </mat-form-field>
+            </form>
+
+            <button [disabled]="loading || !loginForm.valid" mat-flat-button color="primary" style="width:100%;" (click)="loginUser()" >login
+                
+            </button> <br> <br>
+            <a routerLink="" style="margin-left: 35%;" class="forgot" (click)="openDialogue()">Forgot password</a><br>
+            <div class="footer">
+                <p>Not a member? <a routerLink="/auth/register" class="register">Register</a></p>
+            </div>
+            </ng-template>
+        </p-card>
 </div>

@@ -1,4 +1,4 @@
-
+<!-- 
 
 <mat-toolbar fxLayout="row" >
   <span class="searchbar" style="font-size:medium;" fxFlex>
@@ -91,12 +91,10 @@
 
 </mat-menu>
 
-<!-- here prospect is the arr of values defined in variable prospect in .ts -->
 <div class="example-container">
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortActive="email"
     (matSortChange)="sort($event)" matSortDirection="asc">
 
-    <!-- Checkbox Column -->
     <ng-container matColumnDef="select">
       <mat-header-cell *matHeaderCellDef>
         <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
@@ -110,7 +108,6 @@
       </mat-cell>
     </ng-container>
 
-    <!-- construct the columns -->
     <ng-container matColumnDef="place">
       <mat-header-cell *matHeaderCellDef mat-sort-header>No</mat-header-cell>
       <mat-cell *matCellDef="let prospect"> {{ prospect.place}}</mat-cell>
@@ -197,17 +194,10 @@
           </div>
         </mat-icon>
        </button>
-        
-        <!-- <button mat-button>
-          <mat-icon class="edit" (click)="editProspect(prospect)">edit</mat-icon>
-        </button>&nbsp;
-        <button mat-button class="dlt">
-          <mat-icon color="warn" (click)="deleteSingleProspect(prospect)">delete</mat-icon>
-        </button> -->
+    
         </mat-cell>
     </ng-container>
 
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>>
   </mat-table>
@@ -254,7 +244,6 @@
     </div>
   </div>
 </div>
-<!--REmove Labels Popup-->
 <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyleRemoveLabels}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -287,4 +276,249 @@
      
     </div>
   </div>
+</div> -->
+<div class="pb-3">
+  <p-card>
+    <p-toolbar styleClass="mb-4 gap-2">
+      <ng-template pTemplate="left">
+        <button
+          (click)="menu.toggle($event)"
+          icon="pi pi-plus"
+          pButton
+          pRipple
+          type="button"
+          label="Add New"
+          class="p-button-sm p-button-outlined"
+          [matMenuTriggerFor]="userMenu"
+        ></button>
+     
+      </ng-template>
+  
+      <ng-template pTemplate="right">
+        <button
+          [matMenuTriggerFor]="userMenu1"
+          [disabled]="!selectedContacts || !selectedContacts.length"
+          icon="pi pi-box"
+          pButton
+          pRipple
+          type="button"
+          label="Bulk Operations"
+          class="p-button-sm p-button-outlined"
+        ></button>
+      </ng-template>
+    </p-toolbar>
+  
+    <p-table
+      responsiveLayout="scroll"
+      [resizableColumns]="true"
+      styleClass="p-datatable-sm p-datatable-gridlines"
+      [(selection)]="selectedContacts"
+      [value]="dataSource.data"
+      [lazy]="true"
+      (onLazyLoad)="pageChanged($event)"
+      [totalRecords]="totalContacts"
+      [rowsPerPageOptions]="[10, 20, 30]"
+      [rows]="pageSize"
+      [paginator]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+     
+    >
+      >
+      <ng-template pTemplate="caption">
+        <div class="flex align-items-center justify-content-between">
+          <h5 class="m-0">Manage Prospects</h5>
+          <div>
+            <span class="p-input-icon-left" style="margin-right: 15px;">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (keyup)="applyFilter($event)"
+                placeholder="Search..."
+              />
+  
+            </span>
+            
+            <mat-form-field >
+              <mat-label>search by</mat-label>
+              <mat-select [(ngModel)]="selectedOption">
+                <mat-option value="email">
+                  Email
+                </mat-option>
+                <mat-option value="firstname">
+                  Firstname
+                </mat-option>
+                <mat-option value="lastname">
+                  Lastname
+                </mat-option>
+                <mat-option value="labels">
+                  Labels
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+         
+          
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th
+            pSortableColumn="firstname"
+            style="min-width: 15rem"
+            style="width: 150px"
+          >
+            First Name <p-sortIcon field="firstname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastname" style="width: 150">
+            Last Name <p-sortIcon field="lastname"></p-sortIcon>
+          </th>
+          <th style="width: 230" pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+          <th style="width: 150px" pSortableColumn="company">Company <p-sortIcon field="company"></p-sortIcon></th>
+          <th style="width: 150px" pSortableColumn="position">Position <p-sortIcon field="position"></p-sortIcon></th>
+          <th style="width: 150px">Labels</th>
+          <th style="width: 150px">Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-prospect>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="prospect"></p-tableCheckbox>
+          </td>
+          <td>{{ prospect.firstname }}</td>
+          <td>
+            {{ prospect.lastname }}
+          </td>
+          <td class="table-email">
+            {{ prospect.email }}
+          </td>
+          <td>
+            {{ prospect.company }}
+          </td>
+          <td>
+            {{ prospect.position }}
+          </td>
+  
+          <td class="text-center" >
+            <ng-container  *ngFor="let label of prospect?.labels">
+              <mat-chip
+               style=" padding: 7px 12px;"
+              [ngStyle]="{ 'border-color': label.colorHex }"
+            >
+              {{ label.name }} 
+            </mat-chip>
+          </ng-container>
+          </td>
+          <td>
+            <button
+            (click)="editProspect(prospect)"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-text mr-2"
+            ></button>
+            <button
+            (click)="  deleteSingleProspect(prospect)"
+              pButton
+              pRipple
+              type="button"
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-text p-button-danger"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-card>
 </div>
+
+<mat-menu #userMenu1="matMenu">
+
+  <button mat-menu-item (click)="showResponsiveDialog()" >
+    <mat-icon>add</mat-icon>Add Labels
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item (click)="openRemovePopup()">
+    <mat-icon>remove</mat-icon>Remove Labels
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item (click)="deleteBulkProspects()">
+    <mat-icon>delete</mat-icon>Delete Contact
+  </button>
+
+</mat-menu>
+
+
+<p-dialog header="Add Labels" [(visible)]="displayResponsive" [breakpoints]="{'960px': '75vw'}" [style]="{width: '60vw'}"
+    [draggable]="false" [resizable]="false">
+    <p class="text-center">
+      <mat-form-field style="width:92%">
+        <mat-label>Add Labels</mat-label>
+        <mat-select multiple [formControl]="addBulklabelsForm">
+          <mat-select-trigger>
+            <mat-chip-list>
+              <mat-chip *ngFor="let label of addBulklabelsForm.value " style="color: black;" [ngStyle]="{ 'border-color': label.color }"
+                [removable]="true" (removed)="onLabelRemoved(label)" selected>
+                {{ label.name}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            </mat-chip-list>
+          </mat-select-trigger>
+          <mat-option *ngFor="let label of allLabels" [value]="{id:label.id,name:label.name,color:label.colorHex}">
+            <mat-chip [ngStyle]="{ 'border-color': label.colorHex }"> {{ label.name }}</mat-chip><span  title="This label is linked to {{label.contacts}} contacts " >{{label.contacts}}</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+   
+    </p>
+        <ng-template pTemplate="footer">
+          <p-divider type="dashed"></p-divider>
+          <button style="float:left" (click)="displayResponsive=false" icon="pi pi-times" pButton pRipple type="button" label="Cancel" class="p-button-sm p-button-outlined p-button-danger">
+          </button>
+          <button (click)="addBulkLabels()" (click)="displayResponsive=false" style="float:right" icon="pi pi-plus" pButton pRipple type="button" label="Save" class="p-button-sm p-button-outlined"></button>
+        </ng-template>
+</p-dialog>
+<p-dialog header="Remove Labels" [(visible)]="displayStyleRemoveLabels" [breakpoints]="{'960px': '75vw'}" [style]="{width: '60vw'}"
+    [draggable]="false" [resizable]="false">
+    <p class="text-center">
+      <mat-form-field style="width:92%">
+        <mat-label>Remove Labels</mat-label>
+        <mat-chip-list>
+          <mat-chip *ngFor="let label of selectedLabelsForm.value" [removable]="true"
+            (removed)="onBulkLabelRemove(label)" [selectable]="selectable" [value]="{id:label.id,color:label.colorHex}"
+            [ngStyle]="{ 'border-color': label.colorHex }" style="color: black;">
+            {{ label.name}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+    </p>
+        <ng-template pTemplate="footer">
+          <p-divider type="dashed"></p-divider>
+          <button style="float:left" (click)="displayStyleRemoveLabels=false" icon="pi pi-times" pButton pRipple type="button" label="Cancel" class="p-button-sm p-button-outlined p-button-danger">
+          </button>
+          <button (click)="removeBulkLabels()" (click)="displayStyleRemoveLabels=false" style="float:right" icon="pi pi-plus" pButton pRipple type="button" label="Save" class="p-button-sm p-button-outlined"></button>
+        </ng-template>
+</p-dialog>
+<mat-menu #userMenu="matMenu">
+
+  <button mat-menu-item (click)="openContactDialogue()">
+    <mat-icon>add</mat-icon>Add Singles
+  </button>
+
+  <mat-divider></mat-divider>
+
+  <button mat-menu-item (click)="openDialogue()">
+    <mat-icon>login</mat-icon>Import from CSV
+  </button>
+
+</mat-menu>

@@ -1,63 +1,68 @@
-<div class="container-fluid example-container">
-  <button mat-button mat-dialog-close style="float: right;">
-    close
-  </button>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!-- Checkbox Column -->
-   
 
-    <!-- construct the columns -->
-    <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef >Status</th>
-      <td mat-cell *matCellDef="let prospect"> 
-       <div class="Ccell">{{ prospect.status}}</div> 
-    </td>
-    </ng-container>
-
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef >Campaign title</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.title}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef>Sender Email</th>
-      <td mat-cell *matCellDef="let prospect"> {{ prospect.mailAccountId}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="progress">
-      <th mat-header-cell *matHeaderCellDef >Progress</th>
-      <td mat-cell *matCellDef="let prospect"> 0/{{ prospect.steps.length}}
+<p-card>
+  <p-table
+  responsiveLayout="scroll"
+    styleClass="p-datatable-sm"
+  [value]="campaigns"
+  [lazy]="true"
+  (onLazyLoad)="getCampaignsByLabel($event)"
+  [totalRecords]="totalRecords"
+  [rows]="10"
+  [paginator]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  [showCurrentPageReport]="true"
+>
+  >
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      <h5 class="m-0">Linked Outreachs</h5>
+      <span>
+        <button mat-dialog-close style="float: right;" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-text"></button>
+      </span>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th >Status</th>
+      <th>Outreach Title</th>
+      <th>Sender Email</th>
+      <th>Progress</th>
+      <th>Stats</th>
+      <th>Created At</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-outreach>
+    <tr>
+      <td >
+        <div class="Ccell">{{ outreach.status }}</div>
+      </td>
+      <td>
+        {{ outreach.title }}
+      </td>
+      <td>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png"
+          height="20px"
+          width="20px"
+        />
+        {{ outreach.mailAccountId }}
+      </td>
+      <td>
+        0/{{ outreach.steps.length }}
         <div>Messages Sent</div>
       </td>
-
-    </ng-container>
-
-    <ng-container matColumnDef="stats">
-      <th mat-header-cell *matHeaderCellDef >Stats</th>
-      <td mat-cell *matCellDef="let prospect"> 
-        <span class="dotClicked">{{ prospect.stats.numClicks}}</span>
-        <span class="dotSend" >{{prospect.stats.numEmailsSent}}</span>
-        <span class="dotOpned">{{prospect.stats.numProspectsContacted}}</span>
-        <span class="dotFailed">{{prospect.stats.numReplies}}</span>
-    </td>
-    </ng-container>
-
-    <ng-container matColumnDef="createdat">
-      <th mat-header-cell *matHeaderCellDef >Created At</th>
-      <td mat-cell *matCellDef="let prospect"> {{prospect.createdAt | date}}</td>
-    </ng-container>
-   
-
-    <!-- add a table row, if not added..rows will not be rendered inside the table -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
- 
-    
-</div>
-<div>
-  <mat-paginator #paginator [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
-  [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page">
-</mat-paginator>
-</div>
+      <td>
+        <span class="dotClicked">{{ outreach.stats.numClicks }}</span>
+        <span class="dotSend">{{ outreach.stats.numEmailsSent }}</span>
+        <span class="dotOpned">{{
+          outreach.stats.numProspectsContacted
+        }}</span>
+        <span class="dotFailed">{{ outreach.stats.numReplies }}</span>
+      </td>
+      <td>{{ outreach.createdAt | date }}</td>
+  
+    </tr>
+  </ng-template>
+</p-table>
+</p-card>

@@ -1,79 +1,14 @@
-<!-- 
-<div class="content">
-  
-    <div fxLayout="row wrap" fxLayoutGap="16px grid">
-        <div [fxFlex]="(100/gridColumn) + '%'" fxFlex.xs="100%" fxFlex.sm="33%">
-            <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
 
-                <mat-card-actions style="text-align: center;" class="mt-5">
-                    <button class="hover" mat-fab color="warn" (click)="openDialogue()">
-                        <mat-icon>add</mat-icon>
-                    </button>
-                    <span style="padding-left: 10px; font-size: 18px; font-weight: 700;">Add New User</span>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-
-        <div [fxFlex]="(100/gridColumn) + '%'" fxFlex.xs="100%" fxFlex.sm="33%" *ngFor="let userAccount of users">
-            <p-card  [style]="{'width': '18rem', 'margin-bottom': '2em'}">
-                <ng-template pTemplate="title">
-                    {{userAccount.name}}
-                </ng-template>
-                <ng-template pTemplate="content">
-                    <p>{{userAccount.email}}</p>
-                    <p>{{userAccount.company}}</p>
-                </ng-template>
-                <ng-template pTemplate="footer">
-                    <p-divider type="dashed"></p-divider>
-                    <button icon="pi pi-trash" pButton pRipple type="button" label="Delete" class="p-button-sm p-button-outlined p-button-danger">
-                    </button>
-                    <button style="float:right" icon="pi pi-check" pButton pRipple type="button" label="Select" class="p-button-sm p-button-outlined"></button>
-                </ng-template>
-                </p-card> -->
-
-            <!-- <mat-card class="mat-elevation-z5 card" style="width: 100%; height: 100%; border-radius: 15px;">
-
-                <div class="row">
-                    <mat-card-title>{{userAccount.parentUserEmail}}</mat-card-title>
-                    <mat-card-subtitle>{{userAccount.email}}</mat-card-subtitle>
-                    <div class="col-sm-3">
-                        <ngx-avatar size="80" textSizeRatio="1.4">
-
-                        </ngx-avatar>
-
-                    </div>
-
-                   
-
-                    <div class="row" style="padding-top: 15px;">
-                        <div class="col-sm-6">
-                            <button mat-mini-fab color="warn" (click)="deleteProfile()">
-                                <mat-icon>delete_outline </mat-icon>
-                            </button>
-                            <button style="float: right ;" mat-mini-fab color="primary" mat-dialog-close
-                                (click)="saveUserAccount(userAccount)">
-                                <mat-icon>arrow_forward</mat-icon>
-                            </button>
-                        </div>
-                     
-                    </div>
-
-                </div>
-
-            </mat-card> -->
-<!-- 
-        </div>
-    </div>
-
-</div> -->
-
-<div class="grid">
+<div class="grid" >
     <div class="col-12 md:col-4 lg:col-3">
-        <p-card class="card_add">
+        <p-card header="Add Useraccount">
             <ng-template pTemplate="content" >
-                <div class="add">
-                    <button   icon="pi pi-check" pButton pRipple type="button" label="Select" class="p-button-sm p-button-outlined"></button>
-
+                <div class="grid " style="margin-top: 25px;">
+                    <div class="col-12 text-center">
+                        <div>
+                            <button (click)="openDialogue()" pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded p-button-secondary p-button-outlined p-button-lg"></button>
+                        </div>
+                    </div>
                 </div>
 
             </ng-template>

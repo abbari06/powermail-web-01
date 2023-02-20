@@ -1,8 +1,138 @@
 <div *ngIf="loader" class="loader">
-    <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
-    </mat-progress-spinner>
+  <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+<p-card header="Manage Subscription and Billing">
+  <ng-template pTemplate="content" style="padding: 1rem 0 !important">
+    <div class="manage_billing">
+      We are partnering with stripe to manage your billing securely and safely.
+    </div>
+  </ng-template>
+</p-card>
+
+<div class="mt-2">
+  <p-card>
+    <ng-template pTemplate="content">
+      <div class="row text-center">
+        <div class="col-sm-3">
+          <div>
+            <span class="sub-title">Active Plan:</span>
+            Default Plan
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div>
+            <span class="sub-title">Total Days Left:</span>
+            12
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div>
+            <span class="sub-title"> Totol outstanding: </span>
+            5$
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div>
+            <span class="sub-title"> Reneval Date: </span>
+            <span>13-08-2022</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-card>
+</div>
+
+<div class="mt-2">
+  <div class="grid">
+    <div class="lg:col-4 col-12">
+      <p-card header="Default Plan">
+        <ng-template pTemplate="content">
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-divider type="dashed"></p-divider>
+          <div class="text-center">
+            <button
+            icon="pi pi-check"
+            pButton
+            pRipple
+            type="button"
+            label="Subscribe"
+            class="p-button-sm p-button-outlined"
+          ></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="lg:col-4 col-12">
+      <p-card header="Silver Plan">
+        <ng-template pTemplate="content">
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-divider type="dashed"></p-divider>
+          <div class="text-center">
+            <button
+            icon="pi pi-check"
+            pButton
+            pRipple
+            type="button"
+            label="Subscribe"
+            class="p-button-sm p-button-outlined"
+          ></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
+    <div class="lg:col-4 col-12">
+      <p-card header="Gold Plan">
+        <ng-template pTemplate="content">
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+          <p>This card has divider and indeterminate progress as footer</p>
+        </ng-template>
+        <ng-template pTemplate="footer">
+          <p-divider type="dashed"></p-divider>
+          <div class="text-center">
+            <button
+            icon="pi pi-check"
+            pButton
+            pRipple
+            type="button"
+            label="Subscribe"
+            class="p-button-sm p-button-outlined"
+          ></button>
+          </div>
+        </ng-template>
+      </p-card>
+    </div>
   </div>
-<div class="main">
+</div>
+
+<div class="mt-3 pb-2">
+  <p-card>
+    <ng-template pTemplate="title"
+    >Manage Billing
+    <span style="float: right">
+      <button
+      (click)="manageBilling()"
+      icon="pi pi-arrow-right"
+      pButton
+      pRipple
+      type="button"
+      label="Manage"
+      class="p-button-sm p-button-outlined"
+    ></button>
+    </span>
+  </ng-template>
+  </p-card>
+</div>
+<!-- <div class="main">
   <mat-toolbar class="sub-navbar">
     <div class="container">
       <div class="row">
@@ -129,4 +259,4 @@
         </mat-card>
       </div>
     </div>
-  </div>
+  </div> -->

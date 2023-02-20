@@ -84,10 +84,8 @@ export class StepTwoComponent implements OnInit {
     next:(res:any)=>{
       console.log(res);
       this.AddCampaignFormTwo.controls['schedule'].setValue(res.schedule)
-      console.log("sdjkfhasdkfh",this.AddCampaignFormTwo.value);
       
       this.selectedLabels.setValue(res.labels)
-      console.log(this.selectedLabels.value);
       this.onLabelSelect(this.selectedLabels.value);
       this.outreachService.payload.campaign.title=res.title;
       this.outreachService.payload.campaign.description=res.description;
@@ -149,21 +147,17 @@ export class StepTwoComponent implements OnInit {
   }
   label:any;
   onLabelSelect(data){
-    console.log("brrrrrrrrrrrrrr",data);
     
     if(data.value){
      this.label=data.value;
-     console.log("ist",this.label);
      
     }
     if(!data.value){
       this.label=data;
-      console.log("seccond",this.label)
     }
     if(this.label.length!=0){
     this.outreachService.getProspectesByLabels(this.user.id,this.userAccount.id,this.label,this.currentPage,this.pageSize,this.orderBy).subscribe({
       next: (res: any) => {
-        console.log("resssssss",res);
         this.dataSource.data = res.content;
         if(res.numberOfElements>=0){
         this.availableProspectes=res.totalElements
@@ -185,15 +179,13 @@ export class StepTwoComponent implements OnInit {
   paged=false;
   pageChanged(event: PageEvent) {
     this.paged=true;
-    console.log({ event });
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.onLabelSelect(this.label);
   }
   open(content) {
-    console.log(content);
     
-    this.modalService.open(content, {size:'xl' , backdrop:'static'})
+    this.modalService.open(content, {size:'lg' , backdrop:'static'})
   }
   
   private getDismissReason(reason: any): string {

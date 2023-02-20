@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { OutreachService } from 'src/app/core/services/outreach/outreach.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-step-one',
   templateUrl: './step-one.component.html',
   styleUrls: ['./step-one.component.scss'],
+  encapsulation:ViewEncapsulation.None
 })
 export class StepOneComponent implements OnInit {
   user = {

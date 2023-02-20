@@ -49,6 +49,7 @@ export class AllSchedulesComponent implements OnInit {
   userAccount = {
     id: undefined,
   };
+  totalRecords:any;
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -81,9 +82,10 @@ export class AllSchedulesComponent implements OnInit {
       .listAllSchedules(this.user.id, this.userAccount.id)
       .subscribe({
         next: (res: any) => {
-          console.log(res);
           this.dataSource.data = res;
-          console.log(this.dataSource);
+          console.log(res);
+          
+          this.totalRecords = res.length
         },
         error: (error: any) => {
           alert(error);

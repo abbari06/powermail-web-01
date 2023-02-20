@@ -24,22 +24,159 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'contacts', component: ContactsListComponent },
-      { path: 'prospects', component: ProspectsLabelsListComponent },
-      { path: 'outreach',
-       
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+        data: {
+          title: 'Home',
+          breadcrumb: [
+            {
+              label: 'Home',
+              url: 'dashboard',
+            },
+
+            {
+              label: 'Dashboard',
+              url: '',
+            },
+          ],
+        },
+      },
+      {
+        path: 'contacts',
+        component: ContactsListComponent,
+        data: {
+          title: 'Home',
+          breadcrumb: [
+            {
+              label: 'Home',
+              url: 'dashboard',
+            },
+
+            {
+              label: 'Contacts',
+              url: '',
+            },
+          ],
+        },
+      },
+      {
+        path: 'prospects',
+        component: ProspectsLabelsListComponent,
+        data: {
+          title: 'Home',
+          breadcrumb: [
+            {
+              label: 'Home',
+              url: 'dashboard',
+            },
+
+            {
+              label: 'Labels',
+              url: '',
+            },
+          ],
+        },
+      },
+      {
+        path: 'outreach',
+
         children: [
           { path: '', component: OutreachListComponent },
           {
             path: 'editcampaign',
             component: EditCampaignComponent,
+
             children: [
-              { path: 'settings', component: CampaignSettingsComponent },
-              { path: 'messages', component: CampaignMessagesComponent },
-              { path: 'prospects', component: CampaignProspectsComponent },
-              { path: 'stats', component: CampaignStatsComponent },
-              { path: '', redirectTo:'messages',pathMatch:'full'},
+              {
+                path: 'settings',
+                component: CampaignSettingsComponent,
+                data: {
+                  title: 'Home',
+                  breadcrumb: [
+                    {
+                      label: 'Home',
+                      url: 'dashboard',
+                    },
+
+                    {
+                      label: 'Outreachs',
+                      url: 'outreach',
+                    },
+                    {
+                      label: 'Edit Outeach',
+                      url: '',
+                    },
+                  ],
+                },
+              },
+              {
+                path: 'messages',
+                component: CampaignMessagesComponent,
+                data: {
+                  title: 'Home',
+                  breadcrumb: [
+                    {
+                      label: 'Home',
+                      url: 'dashboard',
+                    },
+
+                    {
+                      label: 'Outreachs',
+                      url: 'outreach',
+                    },
+                    {
+                      label: 'Edit Outeach',
+                      url: '',
+                    },
+                  ],
+                },
+              },
+              {
+                path: 'prospects',
+                component: CampaignProspectsComponent,
+                data: {
+                  title: 'Home',
+                  breadcrumb: [
+                    {
+                      label: 'Home',
+                      url: 'dashboard',
+                    },
+
+                    {
+                      label: 'Outreachs',
+                      url: 'outreach',
+                    },
+                    {
+                      label: 'Edit Outeach',
+                      url: '',
+                    },
+                  ],
+                },
+              },
+              {
+                path: 'stats',
+                component: CampaignStatsComponent,
+                data: {
+                  title: 'Home',
+                  breadcrumb: [
+                    {
+                      label: 'Home',
+                      url: 'dashboard',
+                    },
+
+                    {
+                      label: 'Outreachs',
+                      url: 'outreach',
+                    },
+                    {
+                      label: 'Edit Outeach',
+                      url: '',
+                    },
+                  ],
+                },
+              },
+              { path: '', redirectTo: 'messages', pathMatch: 'full' },
             ],
           },
 
@@ -47,7 +184,28 @@ const routes: Routes = [
             path: 'addcampaign',
             component: WizardStepperComponent,
             children: [
-              { path: 'stepone', component: StepOneComponent },
+              {
+                path: 'stepone',
+                component: StepOneComponent,
+                data: {
+                  title: 'Home',
+                  breadcrumb: [
+                    {
+                      label: 'Home',
+                      url: 'dashboard',
+                    },
+
+                    {
+                      label: 'Outreachs',
+                      url: 'outreach',
+                    },
+                    {
+                      label: 'New Outreach',
+                      url: '',
+                    },
+                  ],
+                },
+              },
               { path: 'steptwo', component: StepTwoComponent },
               { path: 'stepthree', component: StepThreeComponent },
               { path: 'stepfour', component: StepFourComponent },
@@ -55,22 +213,111 @@ const routes: Routes = [
             ],
           },
         ],
+        data: {
+          title: 'Home',
+          breadcrumb: [
+            {
+              label: 'Home',
+              url: 'dashboard',
+            },
+
+            {
+              label: 'Outreachs',
+              url: '',
+            },
+          ],
+        },
       },
       {
         path: 'settings',
         children: [
-          { path: 'mailaccounts', component: MailAccountsComponent },
+          {
+            path: 'mailaccounts',
+            component: MailAccountsComponent,
+            data: {
+              title: 'Home',
+              breadcrumb: [
+                {
+                  label: 'Home',
+                  url: 'dashboard',
+                },
+
+                {
+                  label: 'Settings',
+                  url: '',
+                },
+                {
+                  label: 'Mail-Accounts',
+                  url: '',
+                },
+              ],
+            },
+          },
           {
             path: 'schedules',
             component: AllSchedulesComponent,
+            data: {
+              title: 'Home',
+              breadcrumb: [
+                {
+                  label: 'Home',
+                  url: 'dashboard',
+                },
+
+                {
+                  label: 'Settings',
+                  url: '',
+                },
+                {
+                  label: 'Schedules',
+                  url: '',
+                },
+              ],
+            },
           },
           {
             path: 'profile',
             component: ProfileComponent,
+            data: {
+              title: 'Home',
+              breadcrumb: [
+                {
+                  label: 'Home',
+                  url: 'dashboard',
+                },
+
+                {
+                  label: 'Settings',
+                  url: '',
+                },
+                {
+                  label: 'Profile',
+                  url: '',
+                },
+              ],
+            },
           },
           {
             path: 'billing',
             component: BillingComponent,
+            data: {
+              title: 'Home',
+              breadcrumb: [
+                {
+                  label: 'Home',
+                  url: 'dashboard',
+                },
+
+                {
+                  label: 'Settings',
+                  url: '',
+                },
+                {
+                  label: 'Billing',
+                  url: '',
+                },
+              ],
+            },
           },
         ],
       },
