@@ -9,7 +9,7 @@ export class ColorPickerComponent {
   @Input() heading: string | undefined;
   @Input() color: string | undefined;
   @Output() event: EventEmitter<string> = new EventEmitter<string>();
-
+@Input()labelName:string | undefined;
   public show = false;
   public defaultColors: string[] = [
     '#ffffff',

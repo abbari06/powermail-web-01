@@ -5,7 +5,7 @@
             <p class="style-value">{{ color }}</p>
         </div>
 
-        <div class="circle" [ngStyle]="{'border-color': color}"></div>
+        <div class="circle" [ngStyle]="{'border-color': color}">{{labelName}}</div>
     </div>
 
     <div *ngIf="show" class="opened">

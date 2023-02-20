@@ -50,6 +50,7 @@
             </mat-form-field>
       
             <app-color-picker
+            [labelName]="AddLabelForm.get('name')?.value"
               [color]="backgroundColor"
               [heading]="'Select Label Color'"
               (event)="setColor('background', $event)"

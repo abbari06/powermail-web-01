@@ -34,9 +34,10 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {DialogModule} from 'primeng/dialog';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {BadgeModule} from 'primeng/badge';
+import { FooterComponent } from './layouts/footer/footer.component';
 
 @NgModule({
-  declarations: [SidebarComponent, TopMenuComponent , Time24to12Format],
+  declarations: [SidebarComponent, TopMenuComponent , Time24to12Format, FooterComponent],
   imports: [
     CommonModule,
     AngularMaterialModule,
@@ -106,7 +107,8 @@ import {BadgeModule} from 'primeng/badge';
     InputNumberModule,
     DialogModule,
     MultiSelectModule,
-    BadgeModule
+    BadgeModule,
+    FooterComponent
   ],
 })
 export class SharedModule {}

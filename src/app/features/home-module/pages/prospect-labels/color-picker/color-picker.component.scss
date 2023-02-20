@@ -8,7 +8,6 @@
     border-radius: $radius;
     display: flex;
     cursor: pointer;
-    border: 1px solid #df0031;
     .info {
       width: calc(100% - 40px); //40px is $size
       p.style {
@@ -28,13 +27,15 @@
   .circle {
     $size: 40px;
     height: $size;
-    //   width: $size;
-    width: 150px;
+    min-width: 100px;
     box-sizing: border-box;
     border-radius: 4px;
     cursor: pointer;
     border: 1px solid #dadada;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 14%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .opened {

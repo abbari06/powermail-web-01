@@ -1,21 +1,22 @@
-
-   
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar">
-    <!-- <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button> -->
-    <h1 class="example-app-name"> <img class="logo" src="../../../assets/powermail.svg" alt="" > Powermail-web</h1>
+    <h1 class="example-app-name">
+      <img class="logo" src="../../../assets/powermail.svg" alt="" />
+      Powermail-web
+    </h1>
     <span class="spacer"></span>
     <span class="profile-container">
-      <button mat-button [matMenuTriggerFor]="menu" class="2 d-flex align-items-center">
-        <mat-icon>person</mat-icon> {{firstName}}&nbsp;{{lastName}}
+      <button
+        mat-button
+        [matMenuTriggerFor]="menu"
+        class="2 d-flex align-items-center"
+      >
+        <mat-icon>person</mat-icon> {{ firstName }}&nbsp;{{ lastName }}
         <mat-icon class="user-image-icon ml-1">keyboard_arrow_down</mat-icon>
       </button>
-      
     </span>
 
-    <mat-menu #menu="matMenu" >
+    <mat-menu #menu="matMenu">
       <button mat-button (click)="logOut()">
         <mat-icon>exit_to_app</mat-icon>
         Logout
@@ -23,7 +24,11 @@
       <div>
         <button mat-button>
           <mat-icon>live_help </mat-icon>
-          <a href="https://sheikhnaveed17.github.io/powermail/index.html" target="_blank">Need Help</a>
+          <a
+            href="https://sheikhnaveed17.github.io/powermail/index.html"
+            target="_blank"
+            >Need Help</a
+          >
         </button>
       </div>
       <div>
@@ -34,53 +39,71 @@
     </mat-menu>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches"
-      [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [opened]="!mobileQuery.matches"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
       <mat-nav-list>
         <app-sidebar></app-sidebar>
-
       </mat-nav-list>
     </mat-sidenav>
 
- 
-    <mat-sidenav-content >
-      <div class=" main-content mt-3 ">
+    <mat-sidenav-content class="content">
         <div class="loader">
-          <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate" *ngIf="spinnerService.visibility | async">
+          <mat-progress-spinner
+            [diameter]="35"
+            color="primary"
+            mode="indeterminate"
+            *ngIf="spinnerService.visibility | async"
+          >
           </mat-progress-spinner>
-          </div>
-          <div *ngIf="showNotifications" [ngSwitch]="bannerType" class="notification">
-
-
-            <div [style.background]="notification[0]?.color" *ngSwitchCase="NOTIFICATIONS">
-          
-          
-                <div class="row p-2 pb-0">
-                  <div class="col-sm-3" style="color: white; line-height: 20px;" [innerHTML]="notification[0]?.title"></div>
-          <div class="col-sm-8"  style="color: white;" [innerHTML]="notification[0]?.message "> </div>
-          <div class="col-sm-1">
-            <p title="Close">
-              <mat-icon style="float: right; color: white; cursor: pointer;"
-                (click)="dismissNotification(notification[0]?.key)">close</mat-icon>
-            </p>
-          </div>     
-
-          
-                </div>
-          
-          
-          
+        </div>
+        <div
+          *ngIf="showNotifications"
+          [ngSwitch]="bannerType"
+          class="notification"
+        >
+          <div
+            [style.background]="notification[0]?.color"
+            *ngSwitchCase="NOTIFICATIONS"
+          >
+            <div class="row p-2 pb-0">
+              <div
+                class="col-sm-3"
+                style="color: white; line-height: 20px"
+                [innerHTML]="notification[0]?.title"
+              ></div>
+              <div
+                class="col-sm-8"
+                style="color: white"
+                [innerHTML]="notification[0]?.message"
+              ></div>
+              <div class="col-sm-1">
+                <p title="Close">
+                  <mat-icon
+                    style="float: right; color: white; cursor: pointer"
+                    (click)="dismissNotification(notification[0]?.key)"
+                    >close</mat-icon
+                  >
+                </p>
+              </div>
             </div>
-          
-          
           </div>
-          <app-ng-dynamic-breadcrumb style="padding: 0!important;" bgColor="transparent" fontSize="8"></app-ng-dynamic-breadcrumb>
-        <router-outlet>
-          
-        </router-outlet>
-      </div>
+        </div>
+        <app-ng-dynamic-breadcrumb
+          style="padding: 0 !important"
+          bgColor="transparent"
+          fontSize="8"
+        ></app-ng-dynamic-breadcrumb>
+        <router-outlet> </router-outlet>
+        <app-footer></app-footer>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-

@@ -5,12 +5,10 @@ html,
 body {
   height: 100%;
   font-size: 14px;
+    background-color: var(--background-color)!important;
+
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: var(--background-color)!important;
-}
+
 :root.custom-bread-crumb[_ngcontent-nym-c202] {
   padding:0px;
   list-style: none;
@@ -18,103 +16,27 @@ body {
 // theme colors
 
 :root {
-  --background-color: #f5f7fa;
+  --background-content: #f5f7fa;
+  --background-color: #eeeff2;
   --background: rgba(238, 239, 242, 1) 28%, rgba(217, 217, 242, 1) 43%,
     rgba(199, 229, 232, 1) 66%, rgba(0, 212, 255, 1) 100%;
   --color: #495057;
 }
 
-.edit {
-  color: var(--color);
-}
-// table {
-//   width: 100%;
-// }
+
 
 /* Importing Bootstrap SCSS file. */
 @import "~bootstrap/scss/bootstrap";
 @import '~quill/dist/quill.bubble.css'; 
-.sub-header {
-  height: 60px !important;
-}
 
 
 
 
-// .mat-header-cell,
-// .mat-cell {
-//   min-width: 80px;
-//   box-sizing: border-box;
-// }
-
-// th.mat-header-cell,
-// td.mat-cell,
-// td.mat-footer-cell {
-//   padding: 0;
-//   border-bottom-width: 1px;
-//   border-bottom-style: solid;
-//   font-size: small;
-// }
-
-// .mat-header-row,
-// .mat-row {
-//   min-width: 100%;
-// }
-
-// @media (max-width: 1200px) {
-//   .mat-header-row,
-//   .mat-row {
-//     min-width: 100%;
-//   }
-// }
-
-// @media (max-width: 992px) {
-//   .mat-header-row,
-//   .mat-row {
-//     min-width: 100%;
-//   }
-// }
-
-
-// @media  (max-width: 599px) {
-//  .mat-chip-list{
-//   //flex: 0 0 28% !important;
-//   width: 28% !important;
-//   overflow: auto;
-//   }
-// }
-.mat-column-labels{
-
-  flex: 0 0 28% !important;
-  width: 28% !important;
-  overflow: auto;
-}
 .loader {
   position: fixed;
   left: 50%;
   top: 50%;
 
-}
-table {
-  width: 100%;
-}
-
-.example-container {
-  overflow: auto;
-  // font-size: 14px;
-}
-
-.mat-header-cell,
-.mat-footer-cell,
-.mat-cell {
-  min-width: 80px;
-  box-sizing: border-box;
-}
-
-.mat-header-row,
-.mat-footer-row,
-.mat-row {
-  min-width: 900px; /* 24 columns, 80px each */
 }
 
 
